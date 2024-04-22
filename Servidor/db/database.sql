@@ -8,6 +8,3 @@ CREATE TABLE usuario(
     password VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (id)
 )
-
-INSERT INTO usuario  VALUES
-    (1, 'jhon', 'jhon123');
