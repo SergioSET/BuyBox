@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-    title: 'Dashboard - Open PRO',
+    title: 'Dashboard - Pedidos',
     description: 'Page description',
 }
 
@@ -31,8 +31,9 @@ export default function Dashboard() {
                                 <th>Nombre pedido</th>
                                 <th>Descripción</th>
                                 <th>Estado de pedido</th>
-                                <th>Fecha de pedido</th>
-                                <th>Dirreción de salida</th>
+                                <th>Fecha de salida de pedido</th>
+                                <td>Dirreción de salida</td>
+                                <th>Dirreción de entrega</th>
                                 <th>Costo de pedido</th>
                                 <th>Acciones</th>
                             </tr>
@@ -44,8 +45,9 @@ export default function Dashboard() {
                                 <td>Sofa C324</td>
                                 <td>Articulo inmueble de alta calidad, delicado y de gran dimensión</td>
                                 <td>Estado de pedido</td>
-                                <td>Fecha de pedido</td>
+                                <td>Fecha de salida de pedido</td>
                                 <td>Dirreción de salida</td>
+                                <td>Dirreción de entrega</td>
                                 <td>Costo de pedido</td>
                                 <td>
                                     {/* Buttons to edit and delete the pedido */}
