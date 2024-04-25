@@ -18,6 +18,15 @@ export const createUsuario = async (req, res) => {
     const { name, password } = req.body;
 
     try {
+        // Verificar si el usuario ya existe
+        const [existingUsers] = await pool.query('SELECT id FROM usuario WHERE name = ?', [name]);
+
+        // Si ya existe un usuario con ese nombre, enviar un código de error
+        if (existingUsers.length > 0) {
+            return res.status(400).send({ message: 'El usuario ya existe' });
+        }
+
+        // Si el usuario no existe, continuar con la creación
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const [rows] = await pool.query('INSERT INTO usuario (name, password) VALUES (?, ?)', [name, hashedPassword]);
@@ -31,6 +40,7 @@ export const createUsuario = async (req, res) => {
         res.status(500).send({ message: 'Error al crear usuario' });
     }
 };
+
 
 export const deleteUsuario = (req, res) => res.send('Eliminando usuario')
 
