@@ -84,5 +84,15 @@ export const loginUsuario = async (req, res) => {
         console.error('Error al iniciar sesión:', error);
         res.status(500).send({ message: 'Error al iniciar sesión' });
     }
-};
+}
+
+export const logoutUsuario = async (req, res) => {
+    try {
+      res.clearCookie('myTokenName');
+      return res.json({ message: 'Logged out successfully' });
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+      res.status(500).send({ message: 'Error al cerrar sesión' });
+    }
+  };
 
