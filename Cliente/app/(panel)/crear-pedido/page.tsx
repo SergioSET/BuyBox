@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from "next/link";
+import { confirmAlert } from 'react-confirm-alert';
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function CrearPedido() {
     const [nombrePedido, setNombrePedido] = useState('');
@@ -31,23 +33,43 @@ export default function CrearPedido() {
     }
 
     const handleGuardarPedido = () => {
-        const costosRepartidora = {
-            1: 0.98,
-            2: 1.20,
-            3: 1.01,
-            4: 0.98,
-            5: 0.87,
-            6: 0.75,
+        const costosRepartidora: { [key: number]: number } = {
+            1: 0.05,  // Costo base más bajo
+            2: 0.06,
+            3: 0.055,
+            4: 0.05,
+            5: 0.045,
+            6: 0.04,   // Costo base más alto
         }
 
-        const costoEnvio = costosRepartidora[repartidora] * distancia;
-        const volumen = largo * ancho * alto;
-        const costoVolumen = volumen / 5000;
-        const costoTotal = costoEnvio + costoVolumen;
+        const costoRepartidora = costosRepartidora[Number(repartidora)];
+        const costoDimensiones = 5000 + (largo * ancho * alto * costoRepartidora);  // Ajuste del costo base
+        const costoDistancia = 5000 + distancia * (costoRepartidora * 10);  // Ajuste del costo base
+        const costoPeso = 5000 + peso * (costoRepartidora * 10);  // Ajuste del costo base
+        const costoTotal = costoDimensiones + costoDistancia + costoPeso;  // Suma de costos en lugar de multiplicación
 
+        confirmAlert({
+            title: 'Confirmar guardar pedido',
+            message: `¿Estás seguro de guardar el pedido con un costo total de $${costoTotal}?`,
+            buttons: [
+                {
+                    label: 'Sí',
+                    onClick: () => {
+                        // Lógica para guardar pedido
+                        // alert('Pedido guardado exitosamente');
+                        alert('Esta función no está implementada');
+                        // handleLimpiarCampos();
+                    }
+                },
+                {
+                    label: 'No',
+                    // onClick: () => {
+                    //     alert('Pedido no guardado');
+                    // }
+                }
+            ]
+        });
     }
-
-    'use client';
 
     return (
         <section className="relative">
