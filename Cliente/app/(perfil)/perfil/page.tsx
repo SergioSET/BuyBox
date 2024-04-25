@@ -71,11 +71,13 @@ const MyPage = () => {
       <hr />
       <img src=".\images\User-Profile-PNG-Image.png" alt="Perfil" style={{ width: '300px', height: '250px', borderRadius: '50%', margin: '0 auto', display: 'block' }} />
       <hr />
-      <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>{data}</h1>
+      <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Usuario: {data}</h1>
       <hr />
       <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Email: </h1>
       <hr />
       <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Dirección:</h1>
+      <hr />
+      <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Cambio de contraseña</h1>
       <hr />
       </div>
     </div>
