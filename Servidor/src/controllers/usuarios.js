@@ -1,4 +1,6 @@
 import { pool } from "../db.js"
+import jwt from 'jsonwebtoken'
+import {serialize} from 'cookie'
 import bcrypt from 'bcrypt';
 
 
@@ -51,8 +53,21 @@ export const loginUsuario = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).send({ message: 'Contraseña incorrecta' });
         }
+        const token = jwt.sign({
+            exp: Math.floor(Date.now()/1000) + 60 * 60 * 24 * 30,
+            user: name
+        },'secret')
 
+        const serialized = serialize('myTokenName', token, {
+            httpOnly: true,
+            sameSite: 'none',
+            maxAge: 1000 * 60 * 60 * 24 * 30,
+            path: '/'
+        })
+        res.setHeader('Set-Cookie',serialized)
+        return res.json('login succesfully')
         res.send({ message: 'Inicio de sesión exitoso' });
+
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
         res.status(500).send({ message: 'Error al iniciar sesión' });
