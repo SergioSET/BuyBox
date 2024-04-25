@@ -57,6 +57,7 @@ export const loginUsuario = async (req, res) => {
         }
 
         const user = rows[0];
+        
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
@@ -66,19 +67,18 @@ export const loginUsuario = async (req, res) => {
         
         const token = jwt.sign({
             exp: Math.floor(Date.now()/1000) + 60 * 60 * 24 * 30,
-            user: name
+            user: user.id
         },'secret')
 
         const serialized = serialize('myTokenName', token, {
             httpOnly: false,
             sameSite: 'none',
             maxAge: 1000 * 60 * 60 * 24 * 30,
-            path: '/inicio'
+            path: '/'
         })
-        res.setHeader('Set-Cookie',serialized)
-        return res.json('login succesfully')
-        console.log()
-        res.send({ message: 'Inicio de sesión exitoso' });
+
+       
+        return res.json({ message: 'login successfully', token: serialized });
 
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
