@@ -22,6 +22,7 @@ export default function SignIn() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, password }),
+        credentials: 'include',
       });
 
       if (response.ok) {

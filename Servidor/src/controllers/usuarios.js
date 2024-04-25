@@ -53,19 +53,21 @@ export const loginUsuario = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).send({ message: 'Contraseña incorrecta' });
         }
+        
         const token = jwt.sign({
             exp: Math.floor(Date.now()/1000) + 60 * 60 * 24 * 30,
             user: name
         },'secret')
 
         const serialized = serialize('myTokenName', token, {
-            httpOnly: true,
+            httpOnly: false,
             sameSite: 'none',
             maxAge: 1000 * 60 * 60 * 24 * 30,
-            path: '/'
+            path: '/inicio'
         })
         res.setHeader('Set-Cookie',serialized)
         return res.json('login succesfully')
+        console.log()
         res.send({ message: 'Inicio de sesión exitoso' });
 
     } catch (error) {
