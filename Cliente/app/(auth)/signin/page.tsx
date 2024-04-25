@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
 import Link from 'next/link';
-
+const apiurl = process.env.NEXT_PUBLIC_API_URL
 export default function SignIn() {
 
   const router = useRouter()
@@ -16,7 +16,7 @@ export default function SignIn() {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch(apiurl + 'api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
