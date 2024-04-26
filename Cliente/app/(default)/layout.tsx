@@ -1,39 +1,24 @@
-'use client'
-
-import { useEffect } from 'react'
-
-import AOS from 'aos'
-import 'aos/dist/aos.css'
-
 import PageIllustration from '@/components/page-illustration'
-import Footer from '@/components/ui/footer'
+import Header from '@/components/ui/header'
 
-export default function DefaultLayout({
+export const metadata = {
+  title: 'Perfil - BuyBox',
+  description: 'Perfil',
+}
+
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode
-}) {  
-
-  useEffect(() => {
-    AOS.init({
-      once: true,
-      disable: 'phone',
-      duration: 600,
-      easing: 'ease-out-sine',
-    })
-  })
-
+}) {
   return (
-    <>
-      <main className="grow">
+    <main className="grow">
 
-        <PageIllustration />
+        <Header/>
+      <PageIllustration />
 
-        {children}
+      {children}
 
-      </main>
-
-      <Footer />
-    </>
+    </main>
   )
 }

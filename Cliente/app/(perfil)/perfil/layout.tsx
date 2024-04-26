@@ -1,4 +1,5 @@
 import PageIllustration from '@/components/page-illustration'
+import Header from '@/components/ui/header-profile'
 
 export const metadata = {
   title: 'Perfil - BuyBox',
@@ -13,6 +14,7 @@ export default function AuthLayout({
   return (
     <main className="grow">
 
+      <Header/>
       <PageIllustration />
 
       {children}
