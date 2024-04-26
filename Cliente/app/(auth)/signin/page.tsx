@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
 import Link from 'next/link';
-
+const apiurl = process.env.NEXT_PUBLIC_API_URL
 export default function SignIn() {
 
   const router = useRouter()
@@ -14,18 +14,24 @@ export default function SignIn() {
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-
+  
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch(apiurl + 'api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, password }),
       });
-
+      const data = await response.json();
       if (response.ok) {
-        router.push('/inicio');
+        const token = data.token;
+      // Extract the value of myTokenName from the token
+      const myTokenNameValue = token.split('myTokenName=')[1].split(';')[0];
+      document.cookie = 'token='+myTokenNameValue+'; path=/'; 
+        
+      router.push('/perfil');// Puedes agregar más atributos como 'expires' y 'secure' si es necesario
+        
       } else {
         const data = await response.json();
         setError(data.message);
