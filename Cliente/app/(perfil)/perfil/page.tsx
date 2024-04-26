@@ -91,7 +91,7 @@ const MyPage = () => {
       <hr />
       <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Cambio de contraseña</h1>
       <hr />
-      <button onClick={handleLogout}>Cerrar sesión</button>
+      <button onClick={handleLogout} className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">Cerrar sesión</button>
       </div>
     </div>
   )}
