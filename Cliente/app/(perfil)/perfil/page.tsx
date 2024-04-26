@@ -61,6 +61,18 @@ const MyPage = () => {
     });
   }, []);
 
+  const deleteCookie = () => {
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  };
+
+  // Función para manejar el evento de clic del botón de cerrar sesión
+  const handleLogout = () => {
+    deleteCookie();
+    // Redirigir al usuario a la página de inicio de sesión o a cualquier otra página que desees
+    window.location.href = '/';
+  };
+
+
   return (
     <div>
   {error && <p>Error: {error}</p>}
@@ -79,6 +91,7 @@ const MyPage = () => {
       <hr />
       <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Cambio de contraseña</h1>
       <hr />
+      <button onClick={handleLogout}>Cerrar sesión</button>
       </div>
     </div>
   )}

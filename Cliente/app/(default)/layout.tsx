@@ -6,6 +6,7 @@ export const metadata = {
   description: 'Perfil',
 }
 
+
 export default function AuthLayout({
   children,
 }: {

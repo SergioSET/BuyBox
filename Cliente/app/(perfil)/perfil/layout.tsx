@@ -1,5 +1,5 @@
 import PageIllustration from '@/components/page-illustration'
-import Header from '@/components/ui/header-profile'
+import Header from '@/components/ui/header-logged-in'
 
 export const metadata = {
   title: 'Perfil - BuyBox',
