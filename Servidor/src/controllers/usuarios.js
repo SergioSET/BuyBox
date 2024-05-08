@@ -46,7 +46,7 @@ export const deleteUsuario = (req, res) => res.send('Eliminando usuario')
 
 export const updateUsuario = async (req, res) => {
     const { id } = req.params;
-    const { name, password } = req.body;
+    const { name, password, direccion, email } = req.body;
 
     try {
         // Verificar si el usuario existe
@@ -60,7 +60,7 @@ export const updateUsuario = async (req, res) => {
         // Si el usuario existe, actualizar sus datos
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await pool.query('UPDATE usuario SET name = ?, password = ? WHERE id = ?', [name, hashedPassword, id]);
+        await pool.query('UPDATE usuario SET name = ?, password = ?, direccion = ?, email=? WHERE id = ?', [name, hashedPassword,direccion,email, id]);
 
         res.json({ message: 'Usuario actualizado exitosamente' });
     } catch (error) {
