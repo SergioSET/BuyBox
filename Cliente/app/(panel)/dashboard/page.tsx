@@ -27,12 +27,10 @@ export default function Dashboard() {
                         {/* Table header */}
                         <thead>
                             <tr>
-                                <th>Id de pedido</th>
-                                <th>Nombre pedido</th>
+                                <th>Tracking</th>
                                 <th>Descripción</th>
                                 <th>Estado de pedido</th>
-                                <th>Fecha de salida de pedido</th>
-                                <td>Dirreción de salida</td>
+                                <th>Fecha de entrega del pedido</th>
                                 <th>Dirreción de entrega</th>
                                 <th>Costo de pedido</th>
                                 <th>Acciones</th>
@@ -41,14 +39,12 @@ export default function Dashboard() {
                         {/* Table body */}
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>Sofa C324</td>
+                                <td>1234567890</td>
                                 <td>Articulo inmueble de alta calidad, delicado y de gran dimensión</td>
-                                <td>Estado de pedido</td>
-                                <td>Fecha de salida de pedido</td>
-                                <td>Dirreción de salida</td>
-                                <td>Dirreción de entrega</td>
-                                <td>Costo de pedido</td>
+                                <td>En camino</td>
+                                <td>27/05/2024</td>
+                                <td>Calle 72#21G-102</td>
+                                <td>$12.829</td>
                                 <td>
                                     {/* Buttons to edit and delete the pedido */}
                                     <button className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2">Editar</button>

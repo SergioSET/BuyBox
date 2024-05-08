@@ -6,28 +6,24 @@ import { confirmAlert } from 'react-confirm-alert';
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function CrearPedido() {
-    const [nombrePedido, setNombrePedido] = useState('');
+    const [tracking, setTracking] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [repartidora, setRepartidora] = useState('0');
     const [peso, setPeso] = useState(0);
     const [largo, setLargo] = useState(0);
     const [ancho, setAncho] = useState(0);
     const [alto, setAlto] = useState(0);
-    const [fechaPedido, setFechaPedido] = useState('');
-    const [direccionSalida, setDireccionSalida] = useState('');
     const [direccionEntrega, setDireccionEntrega] = useState('');
     const [distancia, setDistancia] = useState(0);
 
     const handleLimpiarCampos = () => {
-        setNombrePedido('');
+        setTracking('');
         setDescripcion('');
         setRepartidora('0');
         setPeso(0);
         setLargo(0);
         setAncho(0);
         setAlto(0);
-        setFechaPedido('');
-        setDireccionSalida('');
         setDireccionEntrega('');
         setDistancia(0);
     }
@@ -80,10 +76,10 @@ export default function CrearPedido() {
                             <h1 className="h1 mb-3">Crear Pedido</h1>
                             <form action="" className="grid grid-cols-3 gap-6">
                                 <div className="mb-4">
-                                    <label htmlFor="nombrePedido" className="block text-sm font-bold mb-2">
-                                        Nombre pedido
+                                    <label htmlFor="tracking" className="block text-sm font-bold mb-2">
+                                        Tracking
                                     </label>
-                                    <input type="text" id="nombrePedido" value={nombrePedido} onChange={(e) => setNombrePedido(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                    <input type="text" id="tracking" value={tracking} onChange={(e) => setTracking(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                                 </div>
 
                                 <div className="mb-4">
@@ -131,20 +127,6 @@ export default function CrearPedido() {
                                         <input type="number" id="dimensiones" value={alto} onChange={(e) => setAlto(Number(e.target.value))} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="0" step="1" />
                                         <label className="w-full">cm</label>
                                     </div>
-                                </div>
-
-                                <div className="mb-4">
-                                    <label htmlFor="fechaPedido" className="block  text-sm font-bold mb-2">
-                                        Fecha de salida de pedido
-                                    </label>
-                                    <input type="date" id="fechaPedido" value={fechaPedido} onChange={(e) => setFechaPedido(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                                </div>
-
-                                <div className="mb-4">
-                                    <label htmlFor="direccionSalida" className="block  text-sm font-bold mb-2">
-                                        Dirección de salida
-                                    </label>
-                                    <input type="text" id="direccionSalida" value={direccionSalida} onChange={(e) => setDireccionSalida(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                                 </div>
 
                                 <div className="mb-4">
