@@ -47,6 +47,8 @@ export const deleteUsuario = (req, res) => res.send('Eliminando usuario')
 export const updateUsuario = async (req, res) => {
     const { id } = req.params;
     const { name, password, direccion, email } = req.body;
+    console.log(name)
+    console.log(password)
 
     try {
         // Verificar si el usuario existe
@@ -56,12 +58,21 @@ export const updateUsuario = async (req, res) => {
         if (existingUsers.length === 0) {
             return res.status(404).send({ message: 'Usuario no encontrado' });
         }
-
-        // Si el usuario existe, actualizar sus datos
+        
+        if(password== ''){
+            await pool.query('UPDATE usuario SET name = ?, direccion = ?, email=? WHERE id = ?', [name,direccion,email, id]);
+            
+        }else{
+            // Si el usuario existe, actualizar sus datos
         const hashedPassword = await bcrypt.hash(password, 10);
+
+        
 
         await pool.query('UPDATE usuario SET name = ?, password = ?, direccion = ?, email=? WHERE id = ?', [name, hashedPassword,direccion,email, id]);
 
+
+        }
+        
         res.json({ message: 'Usuario actualizado exitosamente' });
     } catch (error) {
         console.error('Error al actualizar usuario:', error);
