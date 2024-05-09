@@ -160,11 +160,11 @@
         <hr />
         <img src=".\images\User-Profile-PNG-Image.png" alt="Perfil" style={{ width: '300px', height: '250px', borderRadius: '50%', margin: '0 auto', display: 'block' }} />
         <hr />
-        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Usuario: <input  type='text'  value={data}  onChange={(e) => setData(e.target.value)} style={{ color: 'black' }}/> </h1>
+        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Usuario: <input type='text' value={data} onChange={(e) => setData(e.target.value)} className="input-field bg-slate-700"/> </h1>
         <hr />
-        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Email: <input  type='email'  value={email}  onChange={(e) => setEmail(e.target.value)} style={{ color: 'black' }}/></h1>
+        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Email: <input  type='email'  value={email}  onChange={(e) => setEmail(e.target.value)} className="input-field bg-slate-700"/></h1>
         <hr />
-        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Dirección: <input  type='text'  value={direccion}  onChange={(e) => setDireccion(e.target.value)} style={{ color: 'black' }}/></h1>
+        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Dirección: <input  type='text'  value={direccion}  onChange={(e) => setDireccion(e.target.value)} className="input-field bg-slate-700"/></h1>
         <hr />
         <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>
             Contraseña Antigua: 
@@ -172,11 +172,11 @@
               type='password' 
               value={oldPassword} 
               onChange={(e) => setOldPassword(e.target.value)} 
-              style={{ color: 'black' }}
+              className="input-field bg-slate-700"
             />
           </h1>
           <hr />
-          <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Quieres cambiar la contraseña? <input  type='checkbox' onChange={(e) => setChange(e.target.checked)} style={{ color: 'black' }}/></h1>
+          <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Quieres cambiar la contraseña? <input  type='checkbox' onChange={(e) => setChange(e.target.checked)} className="input-field bg-slate-700"/></h1>
         <hr />
         {change && (
             <>
@@ -185,7 +185,7 @@
                 <input 
                   type='password' 
                   onChange={(e) => setPassword(e.target.value)} 
-                  style={{ color: 'black' }}
+                  className="input-field bg-slate-700"
                 />
               </h1>
               <hr />
@@ -195,7 +195,7 @@
                   type='password' 
                   value={confirmPassword} 
                   onChange={(e) => setConfirmPassword(e.target.value)} 
-                  style={{ color: 'black' }}
+                  className="input-field bg-slate-700"
                 />
               </h1>
               <hr />
