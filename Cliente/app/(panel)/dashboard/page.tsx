@@ -1,4 +1,6 @@
 import Link from "next/link";
+import React from 'react';
+import './page.css'; 
 
 export const metadata = {
     title: 'Dashboard - Pedidos',
@@ -33,9 +35,7 @@ export default function Dashboard() {
                         </div>
 
                     </div>
-                    {/* Table component */}
-                    <table id="myTable" className="w-full">
-                        {/* Table header */}
+                    <table className="tabla-con-divisiones">
                         <thead>
                             <tr>
                                 <th>Id de pedido</th>
@@ -49,21 +49,20 @@ export default function Dashboard() {
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        {/* Table body */}
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>Sofa C324</td>
+                                <td className="align-middle text-center">1</td>
+                                <td className="align-middle text-center">Sofa C324</td>
                                 <td>Articulo inmueble de alta calidad, delicado y de gran dimensión</td>
-                                <td>Estado de pedido</td>
-                                <td>Fecha de salida de pedido</td>
-                                <td>Dirección de salida</td>
-                                <td>Dirección de entrega</td>
-                                <td>Costo de pedido</td>
+                                <td className="align-middle text-center">Estado de pedido</td>
+                                <td className="align-middle text-center">Fecha de salida de pedido</td>
+                                <td className="align-middle text-center">Dirección de salida</td>
+                                <td className="align-middle text-center">Dirección de entrega</td>
+                                <td className="align-middle text-center">Costo de pedido</td>
                                 <td>
                                     {/* Buttons to edit and delete the pedido */}
-                                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2">Editar</button>
-                                    <button className="px-4 py-2 bg-red-500 text-white rounded-md">Eliminar</button>
+                                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
+                                    <button className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
                                 </td>
                             </tr>
                             {/* Add more rows here */}
