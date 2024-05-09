@@ -9,6 +9,11 @@ export default function Dashboard() {
     const [userId, setUserId] = useState(0);
     const [error, setError] = useState<string | null>(null);
 
+    const handleCerrarSesion = () => {
+        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        window.location.href = '/';
+    }
+
     useEffect(() => {
         const getCookie = (): string | null => {
             const name = 'token=';
@@ -93,6 +98,9 @@ export default function Dashboard() {
                         <Link href="/perfil" className="px-4 py-2 btn-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md ml-6 mb-3">
                             Perfil
                         </Link>
+                        <button className="px-4 py-2 btn-sm text-white bg-red-500 hover:bg-red-600 rounded-md ml-6 mb-3" onClick={handleCerrarSesion}>
+                            Cerrar Sesión
+                        </button>
                     </div>
 
                     <div className="flex justify-between items-center mb-8">
