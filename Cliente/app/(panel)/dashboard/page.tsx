@@ -1,13 +1,93 @@
-import Link from "next/link";
-import React from 'react';
-import './page.css'; 
+'use client';
 
-export const metadata = {
-    title: 'Dashboard - Pedidos',
-    description: 'Page description',
-}
+import Link from "next/link";
+import React, { useEffect, useState } from 'react';
+import './page.css';
 
 export default function Dashboard() {
+    const [orders, setOrders] = useState([]);
+    const [userId, setUserId] = useState(0);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleCerrarSesion = () => {
+        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        window.location.href = '/';
+    }
+
+    useEffect(() => {
+        const getCookie = (): string | null => {
+            const name = 'token=';
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i];
+
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1);
+                }
+
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+
+            return null; // Retorna null si no se encuentra la cookie
+        };
+
+        // Obtener el valor del token de la cookie
+        const token = getCookie();
+
+        if (!token) {
+            setError('Token not found');
+            return;
+        }
+
+        // Extraer el ID del token (por ejemplo, si el token es en formato JWT)
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const userId = payload.user; // Suponiendo que el ID del usuario está en la propiedad 'user' del payload
+
+        // Realizar la solicitud fetch a la API con el ID extraído
+        fetch(`http://localhost:3000/api/usuarios/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Opcional, dependiendo de cómo manejes la autenticación en tu API
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setUserId(data.id);
+            })
+            .catch(error => {
+                setError(error.message);
+            });
+
+        fetch(`http://localhost:3000/order/index/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setOrders(data);
+            })
+            .catch(error => {
+                setError(error.message);
+            });
+    }, []);
+
     return (
         <section className="relative">
 
@@ -18,6 +98,9 @@ export default function Dashboard() {
                         <Link href="/perfil" className="px-4 py-2 btn-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md ml-6 mb-3">
                             Perfil
                         </Link>
+                        <button className="px-4 py-2 btn-sm text-white bg-red-500 hover:bg-red-600 rounded-md ml-6 mb-3" onClick={handleCerrarSesion}>
+                            Cerrar Sesión
+                        </button>
                     </div>
 
                     <div className="flex justify-between items-center mb-8">
@@ -35,35 +118,40 @@ export default function Dashboard() {
                         </div>
 
                     </div>
-                    <table className="tabla-con-divisiones">
-                        <thead>
-                            <tr>
-                                <th>Tracking</th>
-                                <th>Descripción</th>
-                                <th>Estado de pedido</th>
-                                <th>Fecha de entrega del pedido</th>
-                                <th>Dirreción de entrega</th>
-                                <th>Costo de pedido</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="align-middle text-center">1234567890</td>
-                                <td className="align-middle text-center">Articulo inmueble de alta calidad, delicado y de gran dimensión</td>
-                                <td className="align-middle text-center">En camino</td>
-                                <td className="align-middle text-center">27/05/2024</td>
-                                <td className="align-middle text-center">Calle 72#21G-102</td>
-                                <td className="align-middle text-center">$12.829</td>
-                                <td>
-                                    {/* Buttons to edit and delete the pedido */}
-                                    <button className="px-4 py-2 btn-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md ml-6 mb-3">Editar</button>
-                                    <button className="px-4 py-2 btn-sm bg-red-600 hover:bg-red-700 text-white rounded-md ml-4">Eliminar</button>
-                                </td>
-                            </tr>
-                            {/* Add more rows here */}
-                        </tbody>
-                    </table>
+
+                    {orders.length === 0 ? (
+                        <p>No hay pedidos disponibles.</p>
+                    ) : (
+                        <table className="tabla-con-divisiones">
+                            <thead>
+                                <tr>
+                                    <th>Tracking</th>
+                                    <th>Descripción</th>
+                                    <th>Estado de pedido</th>
+                                    <th>Fecha de entrega del pedido</th>
+                                    <th>Dirreción de entrega</th>
+                                    <th>Costo de pedido</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map((order: { tracking_number: string, description: string, status: string, shipping_date: string, shipping_address: string, cost: string }, index: number) => (
+                                    <tr key={index}>
+                                        <td className="align-middle text-center">{order.tracking_number}</td>
+                                        <td className="align-middle text-center">{order.description}</td>
+                                        <td className="align-middle text-center">{order.status}</td>
+                                        <td className="align-middle text-center">{order.shipping_date}</td>
+                                        <td className="align-middle text-center">{order.shipping_address}</td>
+                                        <td className="align-middle text-center">{order.cost} COP</td>
+                                        <td>
+                                            <button className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
+                                            <button className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
                 </div>
             </div>
         </section>

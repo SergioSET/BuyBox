@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import { confirmAlert } from 'react-confirm-alert';
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { useRouter } from 'next/navigation'
 
 export default function CrearPedido() {
+    const router = useRouter()
     const [tracking, setTracking] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [repartidora, setRepartidora] = useState('0');
@@ -15,6 +17,64 @@ export default function CrearPedido() {
     const [alto, setAlto] = useState(0);
     const [direccionEntrega, setDireccionEntrega] = useState('');
     const [distancia, setDistancia] = useState(0);
+    const [userId, setUserId] = useState(0);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const getCookie = (): string | null => {
+            const name = 'token=';
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i];
+
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1);
+                }
+
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+
+            return null; // Retorna null si no se encuentra la cookie
+        };
+
+        // Obtener el valor del token de la cookie
+        const token = getCookie();
+
+        if (!token) {
+            setError('Token not found');
+            return;
+        }
+
+        // Extraer el ID del token (por ejemplo, si el token es en formato JWT)
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const userId = payload.user; // Suponiendo que el ID del usuario está en la propiedad 'user' del payload
+
+        // Realizar la solicitud fetch a la API con el ID extraído
+        fetch(`http://localhost:3000/api/usuarios/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Opcional, dependiendo de cómo manejes la autenticación en tu API
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setUserId(data.id);
+            })
+            .catch(error => {
+                setError(error.message);
+            });
+    }, []);
+
 
     const handleLimpiarCampos = () => {
         setTracking('');
@@ -26,6 +86,28 @@ export default function CrearPedido() {
         setAlto(0);
         setDireccionEntrega('');
         setDistancia(0);
+    }
+
+    const handleSubmit = async (costoTotal: number) => {
+        const response = await fetch('http://localhost:3000/order/create/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId,
+                tracking,
+                descripcion,
+                direccionEntrega,
+                costoTotal
+            }),
+        });
+
+        if (response.ok) {
+            router.push('/dashboard');
+        } else {
+            alert('Error al guardar el pedido');
+        }
     }
 
     const handleGuardarPedido = () => {
@@ -42,7 +124,7 @@ export default function CrearPedido() {
         const costoDimensiones = 5000 + (largo * ancho * alto * costoRepartidora);  // Ajuste del costo base
         const costoDistancia = 5000 + distancia * (costoRepartidora * 10);  // Ajuste del costo base
         const costoPeso = 5000 + peso * (costoRepartidora * 10);  // Ajuste del costo base
-        const costoTotal = costoDimensiones + costoDistancia + costoPeso;  // Suma de costos en lugar de multiplicación
+        const costoTotal = Math.floor(costoDimensiones + costoDistancia + costoPeso);  // Suma de costos en lugar de multiplicación
 
         confirmAlert({
             title: 'Confirmar guardar pedido',
@@ -51,10 +133,7 @@ export default function CrearPedido() {
                 {
                     label: 'Sí',
                     onClick: () => {
-                        // Lógica para guardar pedido
-                        // alert('Pedido guardado exitosamente');
-                        alert('Esta función no está implementada');
-                        // handleLimpiarCampos();
+                        handleSubmit(costoTotal);
                     }
                 },
                 {
