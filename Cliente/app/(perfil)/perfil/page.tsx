@@ -12,6 +12,8 @@
     const [direccion, setDireccion] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [change, setChange] = useState(false);
+
 
     const [error, setError] = useState<string | null>(null);
 
@@ -65,7 +67,6 @@
       })
       .then(data => {
         setId(data.id);
-        setPassword(data.password);
         setEmail(data.email);
         setDireccion(data.direccion);
         setData(data.name);
@@ -89,10 +90,6 @@
     //   window.location.href = '/';
     // };
     const handleSave = () => {
-      if (!oldPassword || !confirmPassword) {
-        setError('Por favor, ingresa tu contraseña antigua y la nueva contraseña.');
-        return;
-      }
   
       // Compara el hash de la contraseña antigua con el hash almacenado
       if (!bcrypt.compareSync(oldPassword, passwordI)) {
@@ -100,10 +97,11 @@
         return;
       }
   
-      if (password !== confirmPassword) {
+      if (password !== confirmPassword && password!='' && confirmPassword!='') {
         setError('Las nuevas contraseñas no coinciden.');
         return;
       }
+      console.log(password)
       const userData = {
         "name": data,
         "email": email,
@@ -178,24 +176,31 @@
             />
           </h1>
           <hr />
-          <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>
-            Nueva Contraseña: 
-            <input 
-              type='password' 
-              onChange={(e) => setPassword(e.target.value)} 
-              style={{ color: 'black' }}
-            />
-          </h1>
-          <hr />
-          <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>
-            Confirmar Nueva Contraseña: 
-            <input 
-              type='password' 
-              value={confirmPassword} 
-              onChange={(e) => setConfirmPassword(e.target.value)} 
-              style={{ color: 'black' }}
-            />
-          </h1>
+          <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Quieres cambiar la contraseña? <input  type='checkbox' onChange={(e) => setChange(e.target.checked)} style={{ color: 'black' }}/></h1>
+        <hr />
+        {change && (
+            <>
+              <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>
+                Nueva Contraseña: 
+                <input 
+                  type='password' 
+                  onChange={(e) => setPassword(e.target.value)} 
+                  style={{ color: 'black' }}
+                />
+              </h1>
+              <hr />
+              <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>
+                Confirmar Nueva Contraseña: 
+                <input 
+                  type='password' 
+                  value={confirmPassword} 
+                  onChange={(e) => setConfirmPassword(e.target.value)} 
+                  style={{ color: 'black' }}
+                />
+              </h1>
+              <hr />
+            </>
+          )}
         {/* <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Contraseña: <input  type='password'  value={password}  onChange={(e) => setPassword(e.target.value)} style={{ color: 'black' }} onFocus={() => setPassword('')} onBlur={() => {
     if (password === '') {
       setPassword(passwordI) // Restaura el valor inicial si el campo está vacío al salir
