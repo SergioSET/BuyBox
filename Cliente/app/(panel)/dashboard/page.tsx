@@ -43,8 +43,8 @@ export default function Dashboard() {
                                 <th>Descripción</th>
                                 <th>Estado de pedido</th>
                                 <th>Fecha de salida de pedido</th>
-                                <td>Dirreción de salida</td>
-                                <th>Dirreción de entrega</th>
+                                <th>Dirección de salida</th>
+                                <th>Dirección de entrega</th>
                                 <th>Costo de pedido</th>
                                 <th>Acciones</th>
                             </tr>
@@ -57,8 +57,8 @@ export default function Dashboard() {
                                 <td>Articulo inmueble de alta calidad, delicado y de gran dimensión</td>
                                 <td>Estado de pedido</td>
                                 <td>Fecha de salida de pedido</td>
-                                <td>Dirreción de salida</td>
-                                <td>Dirreción de entrega</td>
+                                <td>Dirección de salida</td>
+                                <td>Dirección de entrega</td>
                                 <td>Costo de pedido</td>
                                 <td>
                                     {/* Buttons to edit and delete the pedido */}
