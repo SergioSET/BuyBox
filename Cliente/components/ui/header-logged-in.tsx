@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import MobileMenu from './mobile-menu'
-import Logo from '/images/logo.png';
 
 export default function Header() {
   return (
@@ -10,29 +9,17 @@ export default function Header() {
           {/* Site branding */}
           <div className="shrink-0 mr-4">
             {/* Logo */}
-            <Link href="#" className="block" aria-label="Cruip">
-            <img className="w-7 h-7 " src={Logo.src} alt="Descripción de la imagen" />
-
+            <Link href="/" className="block" aria-label="Cruip">
+              
             </Link>
+            
           </div>
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex md:grow">
             {/* Desktop sign in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
-              <li>
-                <Link
-                  href="/signin"
-                  className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
-                >
-                  Iniciar sesión
-                </Link>
-              </li>
-              <li>
-                <Link href="/signup" className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">
-                  Registro
-                </Link>
-              </li>
+              
             </ul>
           </nav>
 

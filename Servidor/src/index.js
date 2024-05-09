@@ -8,7 +8,8 @@ const app = express()
 app.use(cors({
     origin: 'http://localhost:3001', // Permitir solicitudes desde este origen
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+    allowedHeaders: ['Content-Type', 'Authorization', 'Set-Cookie' ],
+    credentials: true, // Encabezados permitidos
   }));
 
 app.listen(3000)
