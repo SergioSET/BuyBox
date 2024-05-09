@@ -48,13 +48,13 @@ export default function SignUp() {
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="username">
-                    Username
+                    Usuario
                   </label>
                   <input
                     id="name"
                     type="text"
                     className="form-input w-full text-gray-300"
-                    placeholder="Username"
+                    placeholder="Usuario"
                     required
                     value={name}
                     onChange={(e) => setUsername(e.target.value)}
@@ -64,13 +64,13 @@ export default function SignUp() {
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="password">
-                    Password
+                    Contraseña
                   </label>
                   <input
                     id="password"
                     type="password"
                     className="form-input w-full text-gray-300"
-                    placeholder="Password (at least 10 characters)"
+                    placeholder="Contraseña (Al menos 10 caracteres)"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -82,10 +82,10 @@ export default function SignUp() {
                   <div className="flex justify-between">
                     <label className="flex items-center">
                       <input type="checkbox" className="form-checkbox" />
-                      <span className="text-gray-400 ml-2">Keep me signed in</span>
+                      <span className="text-gray-400 ml-2">Recuérdame</span>
                     </label>
                     <Link href="/reset-password" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">
-                      Forgot Password?
+                      ¿Olvidaste la contraseña?
                     </Link>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ export default function SignUp() {
               <div className="flex flex-wrap -mx-3 mt-6">
                 <div className="w-full px-3">
                   <button type="submit" className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">
-                    Sign in
+                    Registrate
                   </button>
                 </div>
               </div>
@@ -102,7 +102,7 @@ export default function SignUp() {
             <div className="text-gray-400 text-center mt-6">
               Ya tienes una cuenta?{' '}
               <Link href="/signin" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">
-                Sign In
+                Inicia sesión
               </Link>
             </div>
           </div>

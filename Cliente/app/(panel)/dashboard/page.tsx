@@ -15,7 +15,7 @@ export default function Dashboard() {
 
                 <div className="pt-32 pb-12 md:pt-40 md:pb-20">
                     <div className="mr-1 py-4 px-1">
-                        <Link href="/perfil" className="px-4 py-2 bg-blue-500 text-white rounded-md">
+                        <Link href="/perfil" className="px-4 py-2 btn-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md ml-6 mb-3">
                             Perfil
                         </Link>
                     </div>
@@ -29,7 +29,7 @@ export default function Dashboard() {
 
                         <div>
                             {/* Button to create a new pedido */}
-                            <Link href="/crear-pedido" className="px-4 py-2 bg-blue-500 text-white rounded-md">
+                            <Link href="/crear-pedido" className="px-4 py-2 btn-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md ml-6 mb-3">
                                 Crear Pedido
                             </Link>
                         </div>
@@ -57,8 +57,8 @@ export default function Dashboard() {
                                 <td className="align-middle text-center">$12.829</td>
                                 <td>
                                     {/* Buttons to edit and delete the pedido */}
-                                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
-                                    <button className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
+                                    <button className="px-4 py-2 btn-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md ml-6 mb-3">Editar</button>
+                                    <button className="px-4 py-2 btn-sm bg-red-600 hover:bg-red-700 text-white rounded-md ml-4">Eliminar</button>
                                 </td>
                             </tr>
                             {/* Add more rows here */}
