@@ -30,7 +30,7 @@ export default function SignIn() {
       const myTokenNameValue = token.split('myTokenName=')[1].split(';')[0];
       document.cookie = 'token='+myTokenNameValue+'; path=/'; 
         
-      router.push('/perfil');// Puedes agregar más atributos como 'expires' y 'secure' si es necesario
+      router.push('/dashboard');// Puedes agregar más atributos como 'expires' y 'secure' si es necesario
         
       } else {
         const data = await response.json();
