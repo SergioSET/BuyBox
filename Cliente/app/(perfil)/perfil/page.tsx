@@ -207,8 +207,8 @@
             className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-1 md-1" 
             style={{ 
                 marginBottom: '10px', 
-                marginTop: '20px', // Agrega un margen superior
-                display: 'block', // Centra el botón
+                marginTop: '20px', 
+                display: 'block', 
                 marginLeft: 'auto', 
                 marginRight: 'auto' 
             }}
