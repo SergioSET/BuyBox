@@ -44,7 +44,42 @@ export const createUsuario = async (req, res) => {
 
 export const deleteUsuario = (req, res) => res.send('Eliminando usuario')
 
-export const updateUsuario = (req, res) => res.send('Actualizando usuario')
+export const updateUsuario = async (req, res) => {
+    const { id } = req.params;
+    const { name, password, direccion, email } = req.body;
+    console.log(name)
+    console.log(password)
+
+    try {
+        // Verificar si el usuario existe
+        const [existingUsers] = await pool.query('SELECT id FROM usuario WHERE id = ?', [id]);
+
+        // Si no existe un usuario con ese ID, enviar un código de error
+        if (existingUsers.length === 0) {
+            return res.status(404).send({ message: 'Usuario no encontrado' });
+        }
+        
+        if(password== ''){
+            await pool.query('UPDATE usuario SET name = ?, direccion = ?, email=? WHERE id = ?', [name,direccion,email, id]);
+            
+        }else{
+            // Si el usuario existe, actualizar sus datos
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        
+
+        await pool.query('UPDATE usuario SET name = ?, password = ?, direccion = ?, email=? WHERE id = ?', [name, hashedPassword,direccion,email, id]);
+
+
+        }
+        
+        res.json({ message: 'Usuario actualizado exitosamente' });
+    } catch (error) {
+        console.error('Error al actualizar usuario:', error);
+        res.status(500).send({ message: 'Error al actualizar usuario' });
+    }
+};
+
 
 export const loginUsuario = async (req, res) => {
     const { name, password } = req.body;
