@@ -152,72 +152,35 @@
     };
 
     return (
-      <div>
+      <div style={{ background: '#1a1a1a', color: 'white', padding: '20px', borderRadius: '10px', maxWidth: '500px', margin: '0 auto' }}>
     {error && <p>Error: {error}</p>}
-    <div className="profile-container">
-        <div className="profile-info">
-        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Bienvenido a tu perfil {titulo}</h1>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h1>Bienvenido a tu perfil {titulo}</h1>
+        <img src=".\images\User-Profile-PNG-Image.png" alt="Perfil" style={{ width: '200px', height: 'auto', borderRadius: '50%', margin: '20px 0' }} />
         <hr />
-        <img src=".\images\User-Profile-PNG-Image.png" alt="Perfil" style={{ width: '300px', height: '250px', borderRadius: '50%', margin: '0 auto', display: 'block' }} />
-        <hr />
-        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Usuario: <input type='text' value={data} onChange={(e) => setData(e.target.value)} className="input-field bg-slate-700"/> </h1>
-        <hr />
-        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Email: <input  type='email'  value={email}  onChange={(e) => setEmail(e.target.value)} className="input-field bg-slate-700"/></h1>
-        <hr />
-        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Dirección: <input  type='text'  value={direccion}  onChange={(e) => setDireccion(e.target.value)} className="input-field bg-slate-700"/></h1>
-        <hr />
-        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>
-            Contraseña Antigua: 
-            <input 
-              type='password' 
-              value={oldPassword} 
-              onChange={(e) => setOldPassword(e.target.value)} 
-              className="input-field bg-slate-700"
-            />
-        </h1>
-        <hr />
-        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Quieres cambiar la contraseña? <input  type='checkbox' onChange={(e) => setChange(e.target.checked)} className="input-field bg-slate-700"/></h1>
-        <hr />
+        <label>Usuario:</label>
+        <input type='text' value={data} onChange={(e) => setData(e.target.value)} className="input-field" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '8px 0', width: '80%' }} />
+        <label>Email:</label>
+        <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} className="input-field" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '8px 0', width: '80%' }} />
+        <label>Dirección:</label>
+        <input type='text' value={direccion} onChange={(e) => setDireccion(e.target.value)} className="input-field" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '8px 0', width: '80%' }} />
+        <label>Contraseña Antigua:</label>
+        <input type='password' value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} className="input-field" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '8px 0', width: '80%' }} />
+        <label>¿Quieres cambiar la contraseña?</label>
+        <input type='checkbox' onChange={(e) => setChange(e.target.checked)} className="input-field" style={{ margin: '8px 0', width: 'auto', width: '05%' }} />
         {change && (
             <>
-              <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>
-                Nueva Contraseña: 
-                <input 
-                  type='password' 
-                  onChange={(e) => setPassword(e.target.value)} 
-                  className="input-field bg-slate-700"
-                />
-              </h1>
-              <hr />
-              <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>
-                Confirmar Nueva Contraseña: 
-                <input 
-                  type='password' 
-                  value={confirmPassword} 
-                  onChange={(e) => setConfirmPassword(e.target.value)} 
-                  className="input-field bg-slate-700"
-                />
-              </h1>
-              <hr />
+                <label>Nueva Contraseña:</label>
+                <input type='password' onChange={(e) => setPassword(e.target.value)} className="input-field" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '8px 0', width: '80%' }} />
+                <label>Confirmar Nueva Contraseña:</label>
+                <input type='password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input-field" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '8px 0', width: '80%' }} />
             </>
-          )}
-        <hr />
-        <button 
-            onClick={handleSave} 
-            className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-1 md-1" 
-            style={{ 
-                marginBottom: '10px', 
-                marginTop: '20px', 
-                display: 'block', 
-                marginLeft: 'auto', 
-                marginRight: 'auto' 
-            }}
-        >
+        )}
+        <button onClick={handleSave} className="btn-sm text-white bg-purple-600 hover:bg-purple-700" style={{ display: 'block', width: '100%', padding: '10px 0', fontSize: '1.5rem', marginTop: '20px' }}>
             Guardar
         </button>
-        </div>
-      </div>
-  </div>
+    </div>
+</div>
     );
   };
 
