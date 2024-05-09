@@ -38,27 +38,23 @@ export default function Dashboard() {
                     <table className="tabla-con-divisiones">
                         <thead>
                             <tr>
-                                <th>Id de pedido</th>
-                                <th>Nombre pedido</th>
+                                <th>Tracking</th>
                                 <th>Descripción</th>
                                 <th>Estado de pedido</th>
-                                <th>Fecha de salida de pedido</th>
-                                <th>Dirección de salida</th>
-                                <th>Dirección de entrega</th>
+                                <th>Fecha de entrega del pedido</th>
+                                <th>Dirreción de entrega</th>
                                 <th>Costo de pedido</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td className="align-middle text-center">1</td>
-                                <td className="align-middle text-center">Sofa C324</td>
-                                <td>Articulo inmueble de alta calidad, delicado y de gran dimensión</td>
-                                <td className="align-middle text-center">Estado de pedido</td>
-                                <td className="align-middle text-center">Fecha de salida de pedido</td>
-                                <td className="align-middle text-center">Dirección de salida</td>
-                                <td className="align-middle text-center">Dirección de entrega</td>
-                                <td className="align-middle text-center">Costo de pedido</td>
+                                <td className="align-middle text-center">1234567890</td>
+                                <td className="align-middle text-center">Articulo inmueble de alta calidad, delicado y de gran dimensión</td>
+                                <td className="align-middle text-center">En camino</td>
+                                <td className="align-middle text-center">27/05/2024</td>
+                                <td className="align-middle text-center">Calle 72#21G-102</td>
+                                <td className="align-middle text-center">$12.829</td>
                                 <td>
                                     {/* Buttons to edit and delete the pedido */}
                                     <button className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
