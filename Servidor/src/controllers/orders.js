@@ -20,10 +20,9 @@ export const createOrder = async (req, res) => {
 }
 
 export const indexOrder = async (req, res) => {
-    const id_usuario = req.body.id_usuario;
-
     try {
-        const [rows] = await pool.query('SELECT * FROM orden WHERE id_usuario = ?', [id_usuario]);
+        const [rows] = await pool.query('SELECT * FROM orden WHERE id_usuario = ?', [req.params.id]);
+        console.log(rows);
         res.send(rows);
     } catch (error) {
         console.error('Error al obtener ordenes:', error);
