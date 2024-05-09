@@ -8,19 +8,30 @@ export const metadata = {
 export default function Dashboard() {
     return (
         <section className="relative">
+
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
+
                 <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+                    <div className="mr-1 py-4 px-1">
+                        <Link href="/perfil" className="px-4 py-2 bg-blue-500 text-white rounded-md">
+                            Perfil
+                        </Link>
+                    </div>
+
                     <div className="flex justify-between items-center mb-8">
+
                         <div className="flex items-center">
                             {/* Filter component */}
                             <input type="text" placeholder="Filter" className="px-4 py-2 border border-gray-300 rounded-md" />
                         </div>
+
                         <div>
                             {/* Button to create a new pedido */}
                             <Link href="/crear-pedido" className="px-4 py-2 bg-blue-500 text-white rounded-md">
                                 Crear Pedido
                             </Link>
                         </div>
+
                     </div>
                     {/* Table component */}
                     <table id="myTable" className="w-full">
