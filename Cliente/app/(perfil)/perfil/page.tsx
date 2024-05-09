@@ -154,19 +154,19 @@
     return (
       <div>
     {error && <p>Error: {error}</p>}
-      <div className="profile-container">
+    <div className="profile-container">
         <div className="profile-info">
         <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Bienvenido a tu perfil {titulo}</h1>
         <hr />
         <img src=".\images\User-Profile-PNG-Image.png" alt="Perfil" style={{ width: '300px', height: '250px', borderRadius: '50%', margin: '0 auto', display: 'block' }} />
         <hr />
-        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Usuario: <input type='text' value={data} onChange={(e) => setData(e.target.value)} className="input-field bg-slate-700"/> </h1>
+        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Usuario: <input type='text' value={data} onChange={(e) => setData(e.target.value)} className="input-field bg-slate-700"/> </h1>
         <hr />
-        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Email: <input  type='email'  value={email}  onChange={(e) => setEmail(e.target.value)} className="input-field bg-slate-700"/></h1>
+        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Email: <input  type='email'  value={email}  onChange={(e) => setEmail(e.target.value)} className="input-field bg-slate-700"/></h1>
         <hr />
-        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Dirección: <input  type='text'  value={direccion}  onChange={(e) => setDireccion(e.target.value)} className="input-field bg-slate-700"/></h1>
+        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Dirección: <input  type='text'  value={direccion}  onChange={(e) => setDireccion(e.target.value)} className="input-field bg-slate-700"/></h1>
         <hr />
-        <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>
+        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>
             Contraseña Antigua: 
             <input 
               type='password' 
@@ -174,13 +174,13 @@
               onChange={(e) => setOldPassword(e.target.value)} 
               className="input-field bg-slate-700"
             />
-          </h1>
-          <hr />
-          <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Quieres cambiar la contraseña? <input  type='checkbox' onChange={(e) => setChange(e.target.checked)} className="input-field bg-slate-700"/></h1>
+        </h1>
+        <hr />
+        <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>Quieres cambiar la contraseña? <input  type='checkbox' onChange={(e) => setChange(e.target.checked)} className="input-field bg-slate-700"/></h1>
         <hr />
         {change && (
             <>
-              <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>
+              <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>
                 Nueva Contraseña: 
                 <input 
                   type='password' 
@@ -189,7 +189,7 @@
                 />
               </h1>
               <hr />
-              <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>
+              <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>
                 Confirmar Nueva Contraseña: 
                 <input 
                   type='password' 
@@ -201,11 +201,6 @@
               <hr />
             </>
           )}
-        {/* <h1 style={{ textAlign: 'left', fontSize: '2rem' }}>Contraseña: <input  type='password'  value={password}  onChange={(e) => setPassword(e.target.value)} style={{ color: 'black' }} onFocus={() => setPassword('')} onBlur={() => {
-    if (password === '') {
-      setPassword(passwordI) // Restaura el valor inicial si el campo está vacío al salir
-    }
-  }}/></h1> */}
         <hr />
         <button onClick={handleSave} className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-1 md-1" style={{ marginBottom: '10px' }}>Guardar</button>
         </div>
