@@ -1,6 +1,7 @@
   'use client';
   import { useEffect, useState } from 'react';
   import bcrypt from 'bcryptjs';
+  import Link from "next/link";
 
   const MyPage = () => {
     const [id, setId] = useState('');
@@ -152,8 +153,11 @@
     };
 
     return (
+      
       <div style={{ background: '#1a1a1a', color: 'white', padding: '20px', borderRadius: '10px', maxWidth: '500px', margin: '0 auto' }}>
+        
     {error && <p>Error: {error}</p>}
+    
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <h1>Bienvenido a tu perfil {titulo}</h1>
         <img src=".\images\User-Profile-PNG-Image.png" alt="Perfil" style={{ width: '200px', height: 'auto', borderRadius: '50%', margin: '20px 0' }} />
@@ -176,11 +180,19 @@
                 <input type='password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input-field" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '8px 0', width: '80%' }} />
             </>
         )}
-        <button onClick={handleSave} className="btn-sm text-white bg-purple-600 hover:bg-purple-700" style={{ display: 'block', width: '100%', padding: '10px 0', fontSize: '1.5rem', marginTop: '20px' }}>
+        <button onClick={handleSave} className="btn-sm text-white bg-purple-600 hover:bg-purple-700" style={{ display: 'block', width: '60%', padding: '10px 0', fontSize: '1.5rem', marginTop: '20px' }}>
             Guardar
         </button>
+        
+        <div className="mr-1 py-4 px-1 justify-start">
+                        <Link href="/dashboard" className="btn-sm text-white bg-purple-600 hover:bg-purple-700">
+                            Volver
+                        </Link>
+                    </div>
     </div>
+    
 </div>
+
     );
   };
 
