@@ -5,7 +5,8 @@ import  imagehome from '/images/PLUH.png';
 
 export default function Hero() {
   return (
-    <section>
+    <section style={{backgroundImage: `url(${imagehome.src})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundPositionY: 'bottom', marginTop: '86px', position: 'relative', zIndex: '1'}}>
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
 
         {/* Illustration behind hero content */}
@@ -31,7 +32,6 @@ export default function Hero() {
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
             </div>
           </div>
-          <img src={imagehome.src} width={1920} height={1080} alt="Logo de la empresa" />
         </div>
       </div>
     </section>
