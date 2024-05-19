@@ -5,7 +5,7 @@ import  imagehome from '/images/PLUH.png';
 
 export default function Hero() {
   return (
-<section style={{backgroundImage: `url(${imagehome.src})`, backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', backgroundPosition: 'center', backgroundPositionY: 'bottom', marginTop: '86px', position: 'relative', zIndex: '1'}}>
+<section style={{backgroundImage: `url(${imagehome.src})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', marginTop: '75px', height: '100vh', position: 'relative', zIndex: '1'}}>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
 
