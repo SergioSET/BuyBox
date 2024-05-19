@@ -13,7 +13,7 @@ export default function Hero() {
         <div className="absolute left-0 bottom-0 -ml-20 hidden lg:block pointer-events-none" aria-hidden="true" data-aos="fade-up" data-aos-delay="400">
           <svg className="max-w-full" width="564" height="552" viewBox="0 0 564 552" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="illustration-02" x1="-3.766" y1="300.204" x2="284.352" y2="577.921" gradientUnits="userSpaceOnUse">
+              <linearGradient  x1="-3.766" y1="300.204" x2="284.352" y2="577.921" gradientUnits="userSpaceOnUse">
                 <stop stopColor="#5D5DFF" stopOpacity=".01" />
                 <stop offset="1" stopColor="#5D5DFF" stopOpacity=".32" />
               </linearGradient>
@@ -27,8 +27,8 @@ export default function Hero() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h1 mb-4" data-aos="fade-up">¡TU CASILLERO INTERNACIONAL!</h1>
-            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">"¡Explora el Mundo de las Compras en Línea con Tu Casillero Internacional! Tu solución confiable para recibir paquetes de cualquier parte del mundo de manera rápida y segura. ¡Compra sin fronteras y sin preocupaciones con nosotros!</p>
+            <h1 className="h1 mb-4" data-aos="fade-up"></h1>
+            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200"></p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
             </div>
           </div>
