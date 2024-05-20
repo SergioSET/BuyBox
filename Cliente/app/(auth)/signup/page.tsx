@@ -44,7 +44,7 @@ export default function SignUp() {
           </div>
           <div className="flex max-w-4xl mx-auto">
             <div className="w-1/2 hidden md:block">
-              <img src="/path-to-your-image.jpg" alt="Imagen de registro" className="object-cover h-full w-full" />
+              <img src="/images/locker_register.png" alt="Imagen de registro" className="object-cover h-full w-full" />
             </div>
             <div className="w-full md:w-1/2">
               <form onSubmit={handleSubmit}>
