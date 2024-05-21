@@ -39,17 +39,16 @@ export default function SignUp() {
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h1 className="h1">Bienvenido al registro.</h1>
-          </div>
+         
           <div className="flex max-w-4xl mx-auto">
-            <div className="w-1/2 hidden md:block">
-              <img src="/images/locker_register.png" alt="Imagen de registro" className="object-cover h-full w-full" />
+            <div className="w-1/2 hidden md:block ">
+              <img src="/images/register.jpeg" alt="Imagen de registro" className="object-cover h-full w-full" />
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 bg-gray-800 p-6 rounded-lg">
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-wrap -mx-3 mb-4">
-                  <div className="w-full px-3">
+                  <div className="w-full px-3 ">
+                  <h1 className="h1 text-center ">Registro</h1>
                     <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="username">
                       Usuario
                     </label>
@@ -83,10 +82,7 @@ export default function SignUp() {
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full px-3">
                     <div className="flex justify-between">
-                      <label className="flex items-center">
-                        <input type="checkbox" className="form-checkbox" />
-                        <span className="text-gray-400 ml-2">Recuérdame</span>
-                      </label>
+                
                     </div>
                   </div>
                 </div>
