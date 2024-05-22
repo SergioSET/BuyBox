@@ -92,6 +92,7 @@ export const loginUsuario = async (req, res) => {
         }
 
         const user = rows[0];
+        // console.log(user)
         
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -113,7 +114,7 @@ export const loginUsuario = async (req, res) => {
         })
 
        
-        return res.json({ message: 'login successfully', token: serialized });
+        return res.json({ message: 'login successfully', token: serialized, admin: user.admin});
 
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
