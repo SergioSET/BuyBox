@@ -52,6 +52,7 @@ export default function UsersTable() {
           <TableHeaderCell>Rol</TableHeaderCell>
           <TableHeaderCell>Fecha creación</TableHeaderCell>
           <TableHeaderCell>Fecha actualización</TableHeaderCell>
+          <TableHeaderCell>Acciones</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -72,6 +73,10 @@ export default function UsersTable() {
             </TableCell>
             <TableCell>
               <Text>{user.updated_at}</Text>
+            </TableCell>
+            <TableCell>
+              <button className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
+              <button className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
             </TableCell>
             {/* <TableCell>
               <Text>
