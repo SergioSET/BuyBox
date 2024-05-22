@@ -14,10 +14,11 @@ export default function Home() {
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Title>Administrador</Title>
-      <Text>Bienvenido al panel de administrador, desde aquí podrá realizar todas sus funciones.</Text>
+      <Title>Usuarios</Title>
+      <Text>Aquí podrás administrador los atributos de todos los usuarios.</Text>
       <Search />
       <Card className="mt-6">
+        <UsersTable />
       </Card>
     </main>
   );
