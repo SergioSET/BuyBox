@@ -29,8 +29,12 @@ export default function SignIn() {
       // Extract the value of myTokenName from the token
       const myTokenNameValue = token.split('myTokenName=')[1].split(';')[0];
       document.cookie = 'token='+myTokenNameValue+'; path=/'; 
-      
-      router.push('/dashboard');// Puedes agregar más atributos como 'expires' y 'secure' si es necesario
+
+      if (data.admin === 1) {
+        router.push('/dashboard-admin');// Puedes agregar más atributos como 'expires' y 'secure' si es necesario
+      } else {
+        router.push('/dashboard-user');// Puedes agregar más atributos como 'expires' y 'secure' si es necesario
+      }
         
       } else {
         const data = await response.json();
