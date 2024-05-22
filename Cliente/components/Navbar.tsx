@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard-admin"}
+  { name: "Dashboard", href: "/dashboard-admin"},
   { name: "Pedidos", href: "/orders-admin" },
   { name: "Usuarios", href: "/users-admin" },
 ];
