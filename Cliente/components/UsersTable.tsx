@@ -1,3 +1,5 @@
+'use client';
+
 import { User } from "@prisma/client";
 import {
   Table,
@@ -8,19 +10,48 @@ import {
   TableRow,
   Text,
 } from "@tremor/react";
+import React, { useEffect, useState } from 'react';
 
 type Props = {
   users?: User[];
 };
 
-export default function UsersTable({ users }: Props) {
+
+export default function UsersTable() {
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/usuarios`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setUsers(data);
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+  });
+
   return (
     <Table>
       <TableHead>
         <TableRow>
-          <TableHeaderCell>Name</TableHeaderCell>
-          <TableHeaderCell>Email</TableHeaderCell>
-          <TableHeaderCell>Created At</TableHeaderCell>
+          <TableHeaderCell>Nombre</TableHeaderCell>
+          <TableHeaderCell>Correo</TableHeaderCell>
+          <TableHeaderCell>Dirección</TableHeaderCell>
+          <TableHeaderCell>Rol</TableHeaderCell>
+          <TableHeaderCell>Fecha creación</TableHeaderCell>
+          <TableHeaderCell>Fecha actualización</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -28,13 +59,25 @@ export default function UsersTable({ users }: Props) {
           <TableRow key={user.id}>
             <TableCell>{user.name}</TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{user.email ?? 'Sin correo'}</Text>
             </TableCell>
             <TableCell>
+              <Text>{user.direccion ?? 'Sin dirección'}</Text>
+            </TableCell>
+            <TableCell>
+              {user.admin === 1 ? "Administrador" : "Usuario"}
+            </TableCell>
+            <TableCell>
+              <Text>{user.created_at}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{user.updated_at}</Text>
+            </TableCell>
+            {/* <TableCell>
               <Text>
                 {new Intl.DateTimeFormat("en-US").format(user.createdAt)}
               </Text>
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         ))}
       </TableBody>

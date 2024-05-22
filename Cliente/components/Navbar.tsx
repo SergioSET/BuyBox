@@ -11,8 +11,8 @@ import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 
 const navigation = [
-  { name: "Users", href: "/crear-pedido" },
-  { name: "Analytics", href: "/dashboard" },
+  { name: "Pedidos", href: "/orders-admin" },
+  { name: "Usuarios", href: "/users-admin" },
 ];
 
 function classNames(...classes: string[]) {
