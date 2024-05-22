@@ -26,3 +26,5 @@ CREATE TABLE orden(
     PRIMARY KEY (id),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
+
+INSERT INTO usuario (name, password, admin) VALUES ('superadmin', '$2b$10$M88KU2aAUsMS0yEQJuspVe/SM1XBq72gXOf4DNWdCZ7Vod3mfRl5O', 1);
