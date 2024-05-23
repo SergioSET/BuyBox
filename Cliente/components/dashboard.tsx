@@ -90,17 +90,17 @@ export default function Dashboard() {
 
     return (
         <section className="relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+            <div className="bg-gray-800 p-6 rounded-lg">
                 <div className="flex justify-between items-center mb-8">
-                    <div className="text-lg font-semibold">Lista de Pedidos</div>
+                    <div className="text-lg font-semibold text-white">Lista de Pedidos</div>
                     <div className="flex items-center">
-                        {/* Filter component */}
                         <input type="text" placeholder="Filter" className="px-4 py-2 border border-gray-300 rounded-md" />
                     </div>
                 </div>
                 {orders.length === 0 ? (
-                    <p>No hay pedidos disponibles.</p>
+                    <p className="text-white">No hay pedidos disponibles.</p>
                 ) : (
                     <table className="tabla-con-divisiones w-full border-collapse">
                         <thead>
@@ -134,6 +134,7 @@ export default function Dashboard() {
                 )}
             </div>
         </div>
-    </section>
+    </div>
+</section>
     )
 }
