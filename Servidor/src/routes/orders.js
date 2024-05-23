@@ -6,6 +6,7 @@ const router = Router()
 
 router.post ('/order/create', createOrder)
 
-router.get('/order/index/:id', indexOrder)
+router.get('/order/index/:id?', indexOrder)
+
 
 export default router;

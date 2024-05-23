@@ -21,8 +21,36 @@ export const createOrder = async (req, res) => {
 
 export const indexOrder = async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM orden WHERE id_usuario = ?', [req.params.id]);
-        console.log(rows);
+        const { id } = req.params;
+        const { status } = req.query;
+        let query = `
+            SELECT 
+                name, tracking_number, description, status, shipping_date, shipping_address, cost, 
+                orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, 
+                orden.id_usuario AS IdUsuario 
+            FROM orden 
+            INNER JOIN usuario ON orden.id_usuario = usuario.id
+        `;
+        const params = [];
+
+        // Si hay un id en los parámetros, se busca por nombre usando LIKE
+        if (id) {
+            query += ' WHERE name LIKE ?';
+            params.push(`${id}%`);
+
+            // Si también hay un filtro de estado, se agrega a la consulta
+            if (status) {
+                query += ' AND status = ?';
+                console.log(status)
+                params.push(status);
+            }
+        } else if (status) {
+            // Si no hay id pero hay un filtro de estado, se agrega la condición de estado
+            query += ' WHERE status = ?';
+            params.push(status);
+        }
+
+        const [rows] = await pool.query(query, params);
         res.send(rows);
     } catch (error) {
         console.error('Error al obtener ordenes:', error);
