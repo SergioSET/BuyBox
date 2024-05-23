@@ -10,9 +10,11 @@ import {
   Text,
 } from "@tremor/react";
 import React, { useEffect, useState, ChangeEvent } from 'react';
+import { useRouter } from 'next/navigation'
 
 export default function OrdersTable() {
     
+  const router = useRouter()
   const [users, setUsers] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState('');
@@ -58,6 +60,10 @@ export default function OrdersTable() {
   const handleStatusChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setStatusFilter(event.target.value);
   };
+
+  const handleEdit = (id: number) => {
+    router.push('/order-edit-admin/' + id);
+  }
 
   return (
     <div>
@@ -133,6 +139,9 @@ export default function OrdersTable() {
               </TableCell>
               <TableCell>
                 <Text>{user.cost ?? 'Sin costo'}</Text>
+              </TableCell>
+              <TableCell>
+              <button onClick={() => handleEdit(user.orderId)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
               </TableCell>
               {/* <TableCell>
                 <Text>
