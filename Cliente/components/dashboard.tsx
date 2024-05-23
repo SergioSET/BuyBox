@@ -89,19 +89,12 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <section className="relative">
+        <section className="relative ">
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="max-w-6xl  mx-auto px-4 sm:px-6">
 
                 <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-                    <div className="mr-1 py-4 px-1">
-                        <Link href="/perfil" className="px-4 py-2 btn-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md ml-6 mb-3">
-                            Perfil
-                        </Link>
-                        <button className="px-4 py-2 btn-sm text-white bg-red-500 hover:bg-red-600 rounded-md ml-6 mb-3" onClick={handleCerrarSesion}>
-                            Cerrar Sesión
-                        </button>
-                    </div>
+                
 
                     <div className="flex justify-between items-center mb-8">
 
@@ -110,12 +103,7 @@ export default function Dashboard() {
                             <input type="text" placeholder="Filter" className="px-4 py-2 border border-gray-300 rounded-md" />
                         </div>
 
-                        <div>
-                            {/* Button to create a new pedido */}
-                            <Link href="/crear-pedido" className="px-4 py-2 btn-sm text-white bg-blue-600 hover:bg-blue-700 rounded-md ml-6 mb-3">
-                                Crear Pedido
-                            </Link>
-                        </div>
+                
 
                     </div>
 

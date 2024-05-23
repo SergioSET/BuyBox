@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from "next/link";
 
-const Navbar_admin = ({ toggleOrdersTable }) => {
+const Navbar_admin = ({ loadOrdersTable }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCerrarSesion = () => {
@@ -18,7 +18,7 @@ const Navbar_admin = ({ toggleOrdersTable }) => {
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
       <div className="flex items-center">
         <h1 className="text-white mr-4">Dashboard</h1>
-        <button className="text-white mr-4" onClick={toggleOrdersTable}>Pedidos</button>
+        <button className="text-white mr-4" onClick={loadOrdersTable}>Pedidos</button>
         <button className="text-white mr-4">Usuarios</button>
       </div>
       <div className="flex items-center">
@@ -26,7 +26,7 @@ const Navbar_admin = ({ toggleOrdersTable }) => {
         <div className="relative">
           <button className="text-white" onClick={toggleMenu}>Menu</button>
           {menuOpen && (
-            <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg">
+            <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10">
               <Link href="/perfil" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left">
                 Perfil
               </Link>

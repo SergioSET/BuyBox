@@ -12,13 +12,15 @@ const OrdersTable = dynamic(() => import('@/components/OrdersTable'), {
 export default function Dashboard_Admin() {
   const [showOrdersTable, setShowOrdersTable] = useState(false);
 
-  const toggleOrdersTable = () => {
-    setShowOrdersTable(prev => !prev);
+  const loadOrdersTable = () => {
+    if (!showOrdersTable) {
+      setShowOrdersTable(true);
+    }
   };
 
   return (
     <>
-      <Navbar_admin toggleOrdersTable={toggleOrdersTable} />
+      <Navbar_admin loadOrdersTable={loadOrdersTable} />
       {showOrdersTable && <OrdersTable />}
     </>
   );
