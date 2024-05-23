@@ -1,19 +1,10 @@
-// UsersTable.tsx
 'use client';
 
 import { User } from "@prisma/client";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-  Text,
-} from "@tremor/react";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import UserEdit from './user-edit';
+import './page.css'; // Asegúrate de importar el CSS
 
 type Props = {
   users?: User[];
@@ -80,49 +71,54 @@ export default function UsersTable() {
   }, []);
 
   return (
-    <div>
+    <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
       {editingUser ? (
         <UserEdit user={editingUser} onSave={handleSave} />
       ) : (
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeaderCell>Nombre</TableHeaderCell>
-              <TableHeaderCell>Correo</TableHeaderCell>
-              <TableHeaderCell>Dirección</TableHeaderCell>
-              <TableHeaderCell>Rol</TableHeaderCell>
-              <TableHeaderCell>Fecha creación</TableHeaderCell>
-              <TableHeaderCell>Fecha actualización</TableHeaderCell>
-              <TableHeaderCell>Acciones</TableHeaderCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users?.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>
-                  <Text>{user.email ?? 'Sin correo'}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{user.direccion ?? 'Sin dirección'}</Text>
-                </TableCell>
-                <TableCell>
-                  {user.admin === 1 ? "Administrador" : "Usuario"}
-                </TableCell>
-                <TableCell>
-                  <Text>{user.created_at}</Text>
-                </TableCell>
-                <TableCell>
-                  <Text>{user.updated_at}</Text>
-                </TableCell>
-                <TableCell>
-                  <button onClick={() => handleEdit(user)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
-                  <button onClick={() => handleDelete(user.id, user.name)} className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <div className="bg-gray-800 p-6 rounded-lg">
+          <div className="flex justify-between items-center mb-8">
+            <div className="text-lg font-semibold text-white">Lista de Usuarios</div>
+          </div>
+          <table className="tabla-con-divisiones w-full border-collapse">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Dirección</th>
+                <th>Rol</th>
+                <th>Fecha creación</th>
+                <th>Fecha actualización</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users?.map((user) => (
+                <tr key={user.id}>
+                  <td className="align-middle text-center">{user.name}</td>
+                  <td className="align-middle text-center">
+                    <span>{user.email ?? 'Sin correo'}</span>
+                  </td>
+                  <td className="align-middle text-center">
+                    <span>{user.direccion ?? 'Sin dirección'}</span>
+                  </td>
+                  <td className="align-middle text-center">
+                    {user.admin === 1 ? "Administrador" : "Usuario"}
+                  </td>
+                  <td className="align-middle text-center">
+                    <span>{user.created_at}</span>
+                  </td>
+                  <td className="align-middle text-center">
+                    <span>{user.updated_at}</span>
+                  </td>
+                  <td className="flex justify-center">
+                    <button onClick={() => handleEdit(user)} className="px-4 py-2 bg-blue-500 text-white rounded-md mx-1">Editar</button>
+                    <button onClick={() => handleDelete(user.id, user.name)} className="px-4 py-2 bg-red-500 text-white rounded-md mx-1">Eliminar</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
