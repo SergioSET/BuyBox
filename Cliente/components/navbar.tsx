@@ -17,7 +17,7 @@ const Navbar = ({ hideDashboard }) => {
   return (
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
       <div className="flex items-center">
-        <h1 className="text-white mr-4">Dashboard</h1>
+        <h1 className="text-white mr-4">BuyBox</h1>
         <button className="text-white mr-4" onClick={hideDashboard}>Crear Pedido</button>
 
       </div>
