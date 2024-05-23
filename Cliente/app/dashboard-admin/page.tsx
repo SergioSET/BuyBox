@@ -1,27 +1,29 @@
+// page.tsx
 'use client'
 import React, { useState } from 'react';
-import dynamic from 'next/dynamic';
 import Navbar_admin from '@/components/navbar-admin';
+import UsersTable from '@/components/UsersTable';
+import OrdersTable from '@/components/OrdersTable';
 
-// Cargar OrdersTable dinámicamente
-// const OrdersTable = dynamic(() => import('@/components/OrdersTable'), {
-//   loading: () => <p>Loading...</p>,
-//   ssr: false
-// });
+export default function AdminPage() {
+  const [activeComponent, setActiveComponent] = useState(null);
 
-export default function Dashboard_Admin() {
-  const [showOrdersTable, setShowOrdersTable] = useState(false);
+  const handleUsersClick = () => {
+    setActiveComponent('UsersTable');
+  };
 
-  const loadOrdersTable = () => {
-    if (!showOrdersTable) {
-      setShowOrdersTable(true);
-    }
+  const handleOrdersClick = () => {
+    setActiveComponent('OrdersTable');
   };
 
   return (
     <>
-      <Navbar_admin loadOrdersTable={loadOrdersTable} />
-      {/* {showOrdersTable && <OrdersTable />} */}
+      <Navbar_admin onUsersClick={handleUsersClick} onOrdersClick={handleOrdersClick} />
+      <div>
+        {/* Renderizado condicional del componente activo */}
+        {activeComponent === 'UsersTable' && <UsersTable />}
+        {activeComponent === 'OrdersTable' && <OrdersTable />}
+      </div>
     </>
   );
 }

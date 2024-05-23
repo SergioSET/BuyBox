@@ -1,14 +1,14 @@
-'use client'
+// Navbar_admin.js
 import React, { useState } from 'react';
 import Link from "next/link";
 
-const Navbar_admin = ({ loadOrdersTable }) => {
+const Navbar_admin = ({ onUsersClick, onOrdersClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCerrarSesion = () => {
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     window.location.href = '/';
-  }
+  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -18,8 +18,8 @@ const Navbar_admin = ({ loadOrdersTable }) => {
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
       <div className="flex items-center">
         <h1 className="text-white mr-4">Dashboard</h1>
-        <button className="text-white mr-4" onClick={loadOrdersTable}>Pedidos</button>
-        <button className="text-white mr-4">Usuarios</button>
+        <button className="text-white mr-4" onClick={onOrdersClick}>Pedidos</button>
+        <button className="text-white mr-4" onClick={onUsersClick}>Usuarios</button>
       </div>
       <div className="flex items-center">
         <p className="text-white mr-4"></p>
