@@ -185,7 +185,7 @@
         </button>
         
         <div className="mr-1 py-4 px-1 justify-start">
-                        <Link href="/dashboard" className="btn-sm text-white bg-purple-600 hover:bg-purple-700">
+                        <Link href="/dashboard-admin" className="btn-sm text-white bg-purple-600 hover:bg-purple-700">
                             Volver
                         </Link>
                     </div>

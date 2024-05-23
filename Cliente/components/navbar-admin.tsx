@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from "next/link";
+import Logo from '/images/logo.png';
 
 const Navbar_admin = ({ onUsersClick, onOrdersClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,15 +17,15 @@ const Navbar_admin = ({ onUsersClick, onOrdersClick }) => {
   return (
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
       <div className="flex items-center">
-        <h1 className="text-white mr-4">Dashboard</h1>
-        <button className="text-white mr-4" onClick={onOrdersClick}>Pedidos</button>
-        <button className="text-white mr-4" onClick={onUsersClick}>Usuarios</button>
+        <img src={Logo.src} alt="Logo" className="h-8 mr-4" /> {/* Agrega tu logo aquí */}
+        <h1 className="text-white text-2xl font-bold">Admin Dashboard</h1> {/* Mejora el título */}
       </div>
       <div className="flex items-center">
-        <p className="text-white mr-4"></p>
         <div className="relative">
-          <button className="text-white" onClick={toggleMenu}>
-            ☰ {/* Icono de menú en formato Unicode */}
+          <button className="text-white mr-4 px-4 py-2 rounded transition duration-300 hover:bg-gray-700" onClick={onOrdersClick}>Pedidos</button>
+          <button className="text-white mr-4 px-4 py-2 rounded transition duration-300 hover:bg-gray-700" onClick={onUsersClick}>Usuarios</button>
+          <button className="text-white px-4 py-2 rounded transition duration-300 hover:bg-gray-700" onClick={toggleMenu}>
+          Menú ☰ 
           </button>
           {menuOpen && (
             <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10">
