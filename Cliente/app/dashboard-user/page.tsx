@@ -1,29 +1,24 @@
-// AdminPage.tsx
 'use client'
 import React, { useState } from 'react';
-import Navbar_admin from '@/components/navbar-admin';
-import UsersTable from '@/components/UsersTable';
-import OrdersTable from '@/components/OrdersTable';
+import Navbar from '@/components/navbar-user';
+import Dashboard from '@/components/dashboard';
+import CrearPedido from '@/components/crear-pedido';
 
-export default function AdminPage() {
-  const [activeComponent, setActiveComponent] = useState(null);
+export default function Dashboard_usuario() {
+  const [isDashboardVisible, setIsDashboardVisible] = useState(true);
 
-  const handleUsersClick = () => {
-    setActiveComponent('UsersTable');
+  const hideDashboard = () => {
+    setIsDashboardVisible(false);
   };
 
-  const handleOrdersClick = () => {
-    setActiveComponent('OrdersTable');
+  const handleShowDashboard = () => {
+    setIsDashboardVisible(true);
   };
 
   return (
     <>
-      <Navbar_admin onUsersClick={handleUsersClick} onOrdersClick={handleOrdersClick} />
-      <div>
-        {/* Renderizado condicional del componente activo */}
-        {activeComponent === 'UsersTable' && <UsersTable />}
-        {activeComponent === 'OrdersTable' && <OrdersTable />}
-      </div>
+      <Navbar hideDashboard={hideDashboard} />
+      {isDashboardVisible ? <Dashboard /> : <CrearPedido showDashboard={handleShowDashboard} />}
     </>
   );
 }
