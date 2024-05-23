@@ -39,7 +39,8 @@ export default function UsersTable() {
           return response.json();
         })
         .then(data => {
-          setUsers(data);
+          console.log('User deleted successfully:', data);
+          router.push('/users-admin');
         })
         .catch(error => {
           setError(error.message);

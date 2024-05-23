@@ -15,7 +15,7 @@ export const getUsuario = async (req, res) => {
 } 
 
 export const createUsuario = async (req, res) => {
-    const { name, password } = req.body;
+    const { name, password, admin, email, direccion } = req.body;
 
     try {
         // Verificar si el usuario ya existe
@@ -29,7 +29,7 @@ export const createUsuario = async (req, res) => {
         // Si el usuario no existe, continuar con la creación
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const [rows] = await pool.query('INSERT INTO usuario (name, password) VALUES (?, ?)', [name, hashedPassword]);
+        const [rows] = await pool.query ('INSERT INTO usuario (name, password, admin, email, direccion) VALUES (?, ?, ?, ?, ?)', [name, hashedPassword, admin, email, direccion]);
 
         res.send({
             id: rows.insertId,
