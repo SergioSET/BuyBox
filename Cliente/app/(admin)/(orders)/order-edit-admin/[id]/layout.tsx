@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Admin - Dashboard',
+  title: 'Admin - Pedidos',
 }
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
       <Suspense>
-          <Navbar/>
+          <Navbar />
         </Suspense>
         {children}
       </body>

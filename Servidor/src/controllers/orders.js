@@ -25,7 +25,7 @@ export const indexOrder = async (req, res) => {
         const { status } = req.query;
         let query = `
             SELECT 
-                name, tracking_number, description, status, shipping_date, shipping_address, cost, 
+                orden.id AS orderId, name, tracking_number, description, status, shipping_date, shipping_address, cost, 
                 orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, 
                 orden.id_usuario AS IdUsuario 
             FROM orden 
@@ -57,3 +57,51 @@ export const indexOrder = async (req, res) => {
         res.status(500).send({ message: 'Error al obtener ordenes' });
     }
 }
+
+export const indexOrderById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        let query = `
+            SELECT 
+                orden.id AS orderId, name, tracking_number, description, status, shipping_date, shipping_address, cost, 
+                orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, 
+                orden.id_usuario AS IdUsuario 
+            FROM orden 
+            INNER JOIN usuario ON orden.id_usuario = usuario.id
+        `;
+        const params = [];
+
+        // Si hay un id en los parámetros, se busca por nombre usando LIKE
+        if (id) {
+            query += ' WHERE orden.id = ?';
+            params.push(`${id}`);
+        }
+        const [rows] = await pool.query(query, params);
+        res.send(rows);
+    } catch (error) {
+        console.error('Error al obtener ordenes:', error);
+        res.status(500).send({ message: 'Error al obtener ordenes' });
+    }
+}
+
+
+export const updateOrder = async (req, res) => {
+    const { id } = req.params;
+    const { shipping_address, status } = req.body;
+  
+    try {
+      const query = 'UPDATE orden SET shipping_address = ?, status = ? WHERE id = ?';
+      const [result] = await pool.query(query, [shipping_address, status, id]);
+  
+      if (result.affectedRows === 0) {
+        res.status(404).send({ message: 'Orden no encontrada' });
+        return;
+      }
+  
+      res.send({ status: 'Orden actualizada' });
+    } catch (error) {
+      console.error('Error al actualizar la orden:', error);
+      res.status(500).send({ message: 'Error al actualizar la orden' });
+    }
+  };
+
