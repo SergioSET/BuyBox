@@ -11,6 +11,7 @@ import {
   Text,
 } from "@tremor/react";
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'
 
 type Props = {
   users?: User[];
@@ -18,8 +19,39 @@ type Props = {
 
 
 export default function UsersTable() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter()
+
+  const handleDelete = (id: number, name: String) => {
+
+    if (window.confirm("¿Estás seguro que deseas borrar el usuario " + name + "?")) {
+      fetch(`http://localhost:3000/api/usuarios/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('User deleted successfully:', data);
+          router.push('/users-admin');
+        })
+        .catch(error => {
+          setError(error.message);
+        });
+    }
+  };
+
+  const handleEdit = (id: number) => {
+    router.push('/user-edit-admin/' + id);
+  }
+
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/usuarios`, {
@@ -75,14 +107,9 @@ export default function UsersTable() {
               <Text>{user.updated_at}</Text>
             </TableCell>
             <TableCell>
-              <button className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
-              <button className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
+              <button onClick={() => handleEdit(user.id)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
+              <button onClick={() => handleDelete(user.id, user.name)} className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
             </TableCell>
-            {/* <TableCell>
-              <Text>
-                {new Intl.DateTimeFormat("en-US").format(user.createdAt)}
-              </Text>
-            </TableCell> */}
           </TableRow>
         ))}
       </TableBody>

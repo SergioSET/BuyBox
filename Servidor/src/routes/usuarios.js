@@ -12,7 +12,7 @@ router.get('/usuarios/:id', getUsuario)
 
 router.post('/usuarios', createUsuario)
 
-router.delete('/usuarios', deleteUsuario)
+router.delete('/usuarios/:id', deleteUsuario)
 
 router.put('/usuarios/:id', updateUsuario)
 
