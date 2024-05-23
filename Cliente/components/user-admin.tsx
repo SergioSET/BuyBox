@@ -10,7 +10,7 @@ type Props = {
   };
 };
 
-export default function Home() {
+export default function User_Admin() {
   const router = useRouter()
 
   const handleCreate = () => {

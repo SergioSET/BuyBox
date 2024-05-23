@@ -46,6 +46,8 @@ export default function Dashboard() {
         // Extraer el ID del token (por ejemplo, si el token es en formato JWT)
         const payload = JSON.parse(atob(token.split('.')[1]));
         const userId = payload.user; // Suponiendo que el ID del usuario está en la propiedad 'user' del payload
+        const userName = payload.username;
+        console.log(payload)
 
         // Realizar la solicitud fetch a la API con el ID extraído
         fetch(`http://localhost:3000/api/usuarios/${userId}`, {
@@ -68,7 +70,7 @@ export default function Dashboard() {
                 setError(error.message);
             });
 
-        fetch(`http://localhost:3000/order/indexId/${userId}`, {
+        fetch(`http://localhost:3000/order/index/${userName}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
