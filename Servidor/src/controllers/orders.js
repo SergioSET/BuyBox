@@ -21,8 +21,31 @@ export const createOrder = async (req, res) => {
 
 export const indexOrder = async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM orden WHERE id_usuario = ?', [req.params.id]);
-        console.log(rows);
+        const { id } = req.params;
+        let query;
+        let params;
+
+        query = 'SELECT name, tracking_number, description, status, shipping_date, shipping_address, cost, orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, orden.id_usuario AS IdUsuario FROM orden INNER JOIN usuario ON orden.id_usuario = usuario.id'
+        params = [id];
+
+        const [rows] = await pool.query(query, params);
+        res.send(rows);
+    } catch (error) {
+        console.error('Error al obtener ordenes:', error);
+        res.status(500).send({ message: 'Error al obtener ordenes' });
+    }
+}
+
+export const indexOrderByid = async (req, res) => {
+    try {
+        const { id } = req.params;
+        let query;
+        let params;
+
+        query = 'SELECT name, tracking_number, description, status, shipping_date, shipping_address, cost, orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, orden.id_usuario AS IdUsuario FROM orden INNER JOIN usuario ON orden.id_usuario = usuario.id WHERE orden.id_usuario = ?'
+        params = [id];
+
+        const [rows] = await pool.query(query, params);
         res.send(rows);
     } catch (error) {
         console.error('Error al obtener ordenes:', error);
