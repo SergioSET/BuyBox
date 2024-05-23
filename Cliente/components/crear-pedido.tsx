@@ -95,7 +95,7 @@ export default function CrearPedido({ showDashboard }) {
         });
 
         if (response.ok) {
-            showDashboard();
+            showDashboard(); // Este es el prop que recibes del componente padre
         } else {
             alert('Error al guardar el pedido');
         }

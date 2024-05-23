@@ -68,7 +68,7 @@ export default function Dashboard() {
                 setError(error.message);
             });
 
-        fetch(`http://localhost:3000/order/index/${userId}`, {
+        fetch(`http://localhost:3000/order/indexId/${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
