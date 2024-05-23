@@ -5,6 +5,7 @@ import Navbar_admin from '@/components/navbar-admin';
 import UsersTable from '@/components/UsersTable';
 import OrdersTable from '@/components/OrdersTable';
 
+
 export default function AdminPage() {
   const [activeComponent, setActiveComponent] = useState(null);
 

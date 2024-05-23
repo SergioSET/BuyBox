@@ -1,47 +1,37 @@
+// user-edit.tsx
 "use client";
 import { Card, Text, Title, TextInput, Button } from "@tremor/react";
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation'
 
-export default function User_Edit() {
-  const { id } = useParams();
-  const [user, setUser] = useState({ name: '', email: '' });
-  const router = useRouter()
+type Props = {
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    direccion: string;
+    admin: number;
+  };
+  onSave: (user: any) => void;
+};
+
+export default function UserEdit({ user: initialUser, onSave }: Props) {
+  const [user, setUser] = useState(initialUser);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/usuarios/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setUser(data);
-      })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-      });
-  }, [id]);
+    setUser(initialUser);
+  }, [initialUser]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setUser(prevState => ({
+    setUser((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log(user);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/api/usuarios/${id}`, {
+    fetch(`http://localhost:3000/api/usuarios/${user.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -54,11 +44,10 @@ export default function User_Edit() {
         }
         return response.json();
       })
-      .then(data => {
-        router.push('/users-admin');
-        console.log('User updated successfully:', data);
+      .then((data) => {
+        onSave(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('There has been a problem with your fetch operation:', error);
       });
   };
