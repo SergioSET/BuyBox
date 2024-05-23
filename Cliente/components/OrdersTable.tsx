@@ -11,9 +11,11 @@ import {
   Text,
 } from "@tremor/react";
 import React, { useEffect, useState, ChangeEvent } from 'react';
-import './page.css'; // Asegúrate de importar el CSS
+import { useRouter } from 'next/navigation'
 
 export default function OrdersTable() {
+    
+  const router = useRouter()
   const [users, setUsers] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState('');
@@ -59,6 +61,10 @@ export default function OrdersTable() {
     setStatusFilter(event.target.value);
   };
 
+  const handleEdit = (id: number) => {
+    router.push('/order-edit-admin/' + id);
+  }
+
   return (
     <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
       <div className="bg-gray-800 p-6 rounded-lg">
@@ -93,7 +99,6 @@ export default function OrdersTable() {
             </div>
           </div>
         </div>
-
         <table className="tabla-con-divisiones w-full border-collapse">
           <thead>
             <tr>
