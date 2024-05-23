@@ -4,51 +4,41 @@ body {
 
 .tabla-con-divisiones {
     width: 100%;
-    border-spacing: 0; /* Eliminar espaciado entre celdas */
-    margin-top: 16px; /* Margen superior para la tabla */
+    border-spacing: 0px; /* Eliminar espaciado */
+    background-color: #1e1e1e; /* Fondo de la tabla */
+    text-align: center; /* Centrar todo el contenido de la tabla */
 }
 
-.tabla-con-divisiones th,
-.tabla-con-divisiones td {
-    border: none;
-    padding: 16px;
-    background-color: #2d2d2d;
-    color: #ffffff;
-    text-align: center; /* Alineación centrada del texto */
-}
-
-.tabla-con-divisiones th {
-    background-color: #000000;
+.tabla-con-divisiones th, .tabla-con-divisiones td {
+    border: none; /* Eliminar bordes */
+    padding: 16px; /* Padding */
+    background-color: transparent; /* Hacer transparentes para que el contenedor de la fila sea visible */
 }
 
 .tabla-con-divisiones tr {
     background-color: #2d2d2d; /* Fondo de la fila */
     border-radius: 8px; /* Bordes redondeados */
-    margin-bottom: 24px; /* Aumentar la separación visual entre filas */
-    box-shadow: 0 4px 10px rgba(73, 63, 63, 0.5); /* Aumentar la sombra para mejor separabilidad */
-    overflow: hidden; /* Asegura que el contenido se mantenga dentro de los bordes redondeados */
+    margin-bottom: 80px; /* Aumenta el espacio entre filas */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5); /* Shadows */
 }
 
-.tabla-con-divisiones th:first-child,
-.tabla-con-divisiones td:first-child {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+.tabla-con-divisiones th {
+    background-color: #000000;
+    color: #ffffff; 
+    text-align: center; 
 }
 
-.tabla-con-divisiones th:last-child,
-.tabla-con-divisiones td:last-child {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+.tabla-con-divisiones td {
+    color: #ffffff; 
 }
 
 /* Ajustes para el input de filtro */
 input[type="text"] {
-    background-color: #333333; /* Fondo del input */
+    background-color: #333333; 
     color: #ffffff; /* Color del texto del input */
     border: 1px solid #555555; /* Borde del input */
     border-radius: 8px; /* Bordes redondeados */
-    padding: 8px 16px; /* Padding del input */
-    margin-left: auto; /* Alinear a la derecha */
+    text-align: center; /* Centrar texto */
 }
 
 input[type="text"]::placeholder {
@@ -60,5 +50,5 @@ input[type="text"]::placeholder {
     background-color: #2d2d2d; /* Fondo gris oscuro */
     padding: 24px; /* Padding del contenedor */
     border-radius: 8px; /* Bordes redondeados */
-    margin-top: 24px; /* Margen superior para separación */
+    text-align: center; /* Centrar texto dentro del contenedor */
 }
