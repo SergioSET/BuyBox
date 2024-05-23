@@ -89,59 +89,51 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <section className="relative ">
-
-            <div className="max-w-6xl  mx-auto px-4 sm:px-6">
-
-                <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-                
-
-                    <div className="flex justify-between items-center mb-8">
-
-                        <div className="flex items-center">
-                            {/* Filter component */}
-                            <input type="text" placeholder="Filter" className="px-4 py-2 border border-gray-300 rounded-md" />
-                        </div>
-
-                
-
+        <section className="relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+                <div className="flex justify-between items-center mb-8">
+                    <div className="text-lg font-semibold">Lista de Pedidos</div>
+                    <div className="flex items-center">
+                        {/* Filter component */}
+                        <input type="text" placeholder="Filter" className="px-4 py-2 border border-gray-300 rounded-md" />
                     </div>
-
-                    {orders.length === 0 ? (
-                        <p>No hay pedidos disponibles.</p>
-                    ) : (
-                        <table className="tabla-con-divisiones">
-                            <thead>
-                                <tr>
-                                    <th>Tracking</th>
-                                    <th>Descripción</th>
-                                    <th>Estado de pedido</th>
-                                    <th>Fecha de entrega del pedido</th>
-                                    <th>Dirreción de entrega</th>
-                                    <th>Costo de pedido</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {orders.map((order: { tracking_number: string, description: string, status: string, shipping_date: string, shipping_address: string, cost: string }, index: number) => (
-                                    <tr key={index}>
-                                        <td className="align-middle text-center">{order.tracking_number}</td>
-                                        <td className="align-middle text-center">{order.description}</td>
-                                        <td className="align-middle text-center">{order.status}</td>
-                                        <td className="align-middle text-center">{order.shipping_date}</td>
-                                        <td className="align-middle text-center">{order.shipping_address}</td>
-                                        <td className="align-middle text-center">{order.cost} COP</td>
-                                        <td>
-                                            <button className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
-                                            <button className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    )}
                 </div>
+                {orders.length === 0 ? (
+                    <p>No hay pedidos disponibles.</p>
+                ) : (
+                    <table className="tabla-con-divisiones w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th>Tracking</th>
+                                <th>Descripción</th>
+                                <th>Estado de pedido</th>
+                                <th>Fecha de entrega del pedido</th>
+                                <th>Dirección de entrega</th>
+                                <th>Costo de pedido</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {orders.map((order, index) => (
+                                <tr key={index}>
+                                    <td className="align-middle text-center">{order.tracking_number}</td>
+                                    <td className="align-middle text-center">{order.description}</td>
+                                    <td className="align-middle text-center">{order.status}</td>
+                                    <td className="align-middle text-center">{order.shipping_date}</td>
+                                    <td className="align-middle text-center">{order.shipping_address}</td>
+                                    <td className="align-middle text-center">{order.cost} COP</td>
+                                    <td className="flex justify-center">
+                                        <button className="px-4 py-2 bg-blue-500 text-white rounded-md mx-1">Editar</button>
+                                        <button className="px-4 py-2 bg-red-500 text-white rounded-md mx-1">Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
             </div>
-        </section>
+        </div>
+    </section>
     )
 }
