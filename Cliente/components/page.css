@@ -1,19 +1,64 @@
-.tabla-con-divisiones {
-    width: 100%;
-    border-collapse: collapse;
+body {
+    background-color: #121212; /* Fondo oscuro */
 }
 
-.tabla-con-divisiones th, .tabla-con-divisiones td {
-    border: 1px solid #dddddd; /* Añadir bordes */
-    padding: 8px;
+.tabla-con-divisiones {
+    width: 100%;
+    border-spacing: 0; /* Eliminar espaciado entre celdas */
+    margin-top: 16px; /* Margen superior para la tabla */
+}
+
+.tabla-con-divisiones th,
+.tabla-con-divisiones td {
+    border: none;
+    padding: 16px;
+    background-color: #2d2d2d;
+    color: #ffffff;
+    text-align: center; /* Alineación centrada del texto */
 }
 
 .tabla-con-divisiones th {
     background-color: #000000;
-    text-align: left;
 }
-.contenedor {
-    display: flex;
-    justify-content: center; /* Alineación horizontal al centro */
-    align-items: center; /* Alineación vertical al centro */
+
+.tabla-con-divisiones tr {
+    background-color: #2d2d2d; /* Fondo de la fila */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 24px; /* Aumentar la separación visual entre filas */
+    box-shadow: 0 4px 10px rgba(73, 63, 63, 0.5); /* Aumentar la sombra para mejor separabilidad */
+    overflow: hidden; /* Asegura que el contenido se mantenga dentro de los bordes redondeados */
+}
+
+.tabla-con-divisiones th:first-child,
+.tabla-con-divisiones td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.tabla-con-divisiones th:last-child,
+.tabla-con-divisiones td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Ajustes para el input de filtro */
+input[type="text"] {
+    background-color: #333333; /* Fondo del input */
+    color: #ffffff; /* Color del texto del input */
+    border: 1px solid #555555; /* Borde del input */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 8px 16px; /* Padding del input */
+    margin-left: auto; /* Alinear a la derecha */
+}
+
+input[type="text"]::placeholder {
+    color: #aaaaaa; /* Color del placeholder */
+}
+
+/* Contenedor gris */
+.bg-gray-800 {
+    background-color: #2d2d2d; /* Fondo gris oscuro */
+    padding: 24px; /* Padding del contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-top: 24px; /* Margen superior para separación */
 }
