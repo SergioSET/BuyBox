@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import Navbar from '@/components/navbar';
+import Navbar from '@/components/navbar-user';
 import Dashboard from '@/components/dashboard';
 import CrearPedido from '@/components/crear-pedido';
 
