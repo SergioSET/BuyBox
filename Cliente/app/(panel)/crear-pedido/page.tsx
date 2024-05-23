@@ -227,7 +227,7 @@ export default function CrearPedido() {
                         </div>
 
                         <div className="w-full flex justify-center items-center mt-5">
-                            <Link href={"/dashboard"} className="px-4  btn-sm text-white bg-blue-500 hover:bg-blue-700 rounded-md ml-6 mb-3">
+                            <Link href={"/dashboard-user"} className="px-4  btn-sm text-white bg-blue-500 hover:bg-blue-700 rounded-md ml-6 mb-3">
                                 Regresar a Pedidos
                             </Link>
 
