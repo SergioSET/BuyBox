@@ -19,7 +19,7 @@ type Props = {
 
 
 export default function UsersTable() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter()
 
