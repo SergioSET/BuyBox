@@ -1,25 +1,24 @@
-import { Card, Text, Title } from "@tremor/react";
-import Search from "@/components/Search";
-import UsersTable from "@/components/UsersTable";
+'use client'
+import React, { useState } from 'react';
+import Navbar from '@/components/navbar-user';
+import Dashboard from '@/components/dashboard';
+import CrearPedido from '@/components/crear-pedido';
 
-type Props = {
-  searchParams: {
-    q: string;
+export default function Dashboard_usuario() {
+  const [isDashboardVisible, setIsDashboardVisible] = useState(true);
+
+  const hideDashboard = () => {
+    setIsDashboardVisible(false);
   };
-};
 
-export default async function Home() {
-  
-  
+  const handleShowDashboard = () => {
+    setIsDashboardVisible(true);
+  };
 
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Title>Users</Title>
-      <Text>A table of users retrieved from our Postgres database.</Text>
-      <Search />
-      <Card className="mt-6">
-        <UsersTable  />
-      </Card>
-    </main>
+    <>
+      <Navbar hideDashboard={hideDashboard} />
+      {isDashboardVisible ? <Dashboard /> : <CrearPedido showDashboard={handleShowDashboard} />}
+    </>
   );
 }

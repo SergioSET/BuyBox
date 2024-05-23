@@ -1,13 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from "next/link";
 import { confirmAlert } from 'react-confirm-alert';
-import "react-confirm-alert/src/react-confirm-alert.css";
-import { useRouter } from 'next/navigation'
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useRouter } from 'next/navigation';
 
-export default function CrearPedido() {
-    const router = useRouter()
+export default function CrearPedido({ showDashboard }) {
+    const router = useRouter();
     const [tracking, setTracking] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [repartidora, setRepartidora] = useState('0');
@@ -25,23 +24,18 @@ export default function CrearPedido() {
             const name = 'token=';
             const decodedCookie = decodeURIComponent(document.cookie);
             const cookieArray = decodedCookie.split(';');
-
             for (let i = 0; i < cookieArray.length; i++) {
                 let cookie = cookieArray[i];
-
                 while (cookie.charAt(0) === ' ') {
                     cookie = cookie.substring(1);
                 }
-
                 if (cookie.indexOf(name) === 0) {
                     return cookie.substring(name.length, cookie.length);
                 }
             }
-
-            return null; // Retorna null si no se encuentra la cookie
+            return null;
         };
 
-        // Obtener el valor del token de la cookie
         const token = getCookie();
 
         if (!token) {
@@ -49,16 +43,14 @@ export default function CrearPedido() {
             return;
         }
 
-        // Extraer el ID del token (por ejemplo, si el token es en formato JWT)
         const payload = JSON.parse(atob(token.split('.')[1]));
-        const userId = payload.user; // Suponiendo que el ID del usuario está en la propiedad 'user' del payload
+        const userId = payload.user;
 
-        // Realizar la solicitud fetch a la API con el ID extraído
         fetch(`http://localhost:3000/api/usuarios/${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Opcional, dependiendo de cómo manejes la autenticación en tu API
+                'Authorization': `Bearer ${token}`
             },
         })
             .then(response => {
@@ -74,7 +66,6 @@ export default function CrearPedido() {
                 setError(error.message);
             });
     }, []);
-
 
     const handleLimpiarCampos = () => {
         setTracking('');
@@ -104,7 +95,7 @@ export default function CrearPedido() {
         });
 
         if (response.ok) {
-            router.push('/dashboard');
+            showDashboard(); // Este es el prop que recibes del componente padre
         } else {
             alert('Error al guardar el pedido');
         }
@@ -112,19 +103,19 @@ export default function CrearPedido() {
 
     const handleGuardarPedido = () => {
         const costosRepartidora: { [key: number]: number } = {
-            1: 0.05,  // Costo base más bajo
+            1: 0.05,
             2: 0.06,
             3: 0.055,
             4: 0.05,
             5: 0.045,
-            6: 0.04,   // Costo base más alto
+            6: 0.04,
         }
 
         const costoRepartidora = costosRepartidora[Number(repartidora)];
-        const costoDimensiones = 5000 + (largo * ancho * alto * costoRepartidora);  // Ajuste del costo base
-        const costoDistancia = 5000 + distancia * (costoRepartidora * 10);  // Ajuste del costo base
-        const costoPeso = 5000 + peso * (costoRepartidora * 10);  // Ajuste del costo base
-        const costoTotal = Math.floor(costoDimensiones + costoDistancia + costoPeso);  // Suma de costos en lugar de multiplicación
+        const costoDimensiones = 5000 + (largo * ancho * alto * costoRepartidora);
+        const costoDistancia = 5000 + distancia * (costoRepartidora * 10);
+        const costoPeso = 5000 + peso * (costoRepartidora * 10);
+        const costoTotal = Math.floor(costoDimensiones + costoDistancia + costoPeso);
 
         confirmAlert({
             title: 'Confirmar guardar pedido',
@@ -138,9 +129,6 @@ export default function CrearPedido() {
                 },
                 {
                     label: 'No',
-                    // onClick: () => {
-                    //     alert('Pedido no guardado');
-                    // }
                 }
             ]
         });
@@ -222,14 +210,13 @@ export default function CrearPedido() {
                                     <input type="number" id="distancia" value={distancia} onChange={(e) => setDistancia(Number(e.target.value))} className="shadow appearance-none border rounded w-5/6 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="0" step="1" />
                                     <label className="w-1/5 m-3">km</label>
                                 </div>
-
                             </form>
                         </div>
 
                         <div className="w-full flex justify-center items-center mt-5">
-                            <Link href={"/dashboard-user"} className="px-4  btn-sm text-white bg-blue-500 hover:bg-blue-700 rounded-md ml-6 mb-3">
+                            <button className="px-4 btn-sm text-white bg-blue-500 hover:bg-blue-700 rounded-md ml-6 mb-3" onClick={showDashboard}>
                                 Regresar a Pedidos
-                            </Link>
+                            </button>
 
                             <button className="px-4 py-2 btn-sm text-white bg-red-500 hover:bg-red-700 rounded-md ml-6 mb-3" onClick={handleLimpiarCampos}>
                                 Limpiar campos
@@ -242,6 +229,6 @@ export default function CrearPedido() {
                     </div>
                 </div>
             </div >
-        </section >
+        </section>
     )
 }

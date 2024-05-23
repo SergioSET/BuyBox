@@ -128,7 +128,8 @@ export const loginUsuario = async (req, res) => {
         
         const token = jwt.sign({
             exp: Math.floor(Date.now()/1000) + 60 * 60 * 24 * 30,
-            user: user.id
+            user: user.id,
+            username: user.name
         },'secret')
 
         const serialized = serialize('myTokenName', token, {
