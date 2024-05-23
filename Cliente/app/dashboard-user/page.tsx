@@ -8,7 +8,7 @@ export default function Dashboard_usuario() {
   return (
     <>
       <Navbar />
-      <MainContent/>
+
       <Dashboard/>
      
     </>
