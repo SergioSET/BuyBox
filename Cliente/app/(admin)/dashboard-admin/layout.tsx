@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Admin Dashboard',
+  title: 'Admin - Dashboard',
 }
 
 export default function RootLayout({
