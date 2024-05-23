@@ -110,6 +110,7 @@ export default function OrdersTable() {
               <th>Fecha de envio</th>
               <th>Direccion de envio</th>
               <th>Costo</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -136,6 +137,9 @@ export default function OrdersTable() {
                 </td>
                 <td className="align-middle text-center">
                   <Text>{user.cost ?? 'Sin costo'}</Text>
+                </td>
+                <td>
+                  <button onClick={() => handleEdit(user.orderId)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
                 </td>
               </tr>
             ))}

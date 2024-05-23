@@ -1,8 +1,7 @@
 "use client";
 import { Card, Text, Title, TextInput, Button } from "@tremor/react";
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation';
 
 export default function Home() {
   const { id } = useParams();
