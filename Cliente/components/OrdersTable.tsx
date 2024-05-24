@@ -1,8 +1,7 @@
-// OrdersTable.tsx
 'use client'
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import OrderEdit from './OrderEditAdmin'; // Importar OrderEdit
-import {   Table,   TableBody,   TableCell,   TableHead,   TableHeaderCell,   TableRow,   Text, } from "@tremor/react";
+import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Text } from "@tremor/react";
 
 export default function OrdersTable() {
   const [editingOrderId, setEditingOrderId] = useState<number | null>(null);
@@ -12,7 +11,7 @@ export default function OrdersTable() {
   const [searchValue, setSearchValue] = useState('');
   const [showOrdersTable, setShowOrdersTable] = useState(true);
 
-  useEffect(() => {
+  const fetchOrders = () => {
     let apiUrl = 'http://localhost:3000/api/order/index';
 
     // Construir la URL basada en los valores de búsqueda y filtro de estado
@@ -42,6 +41,14 @@ export default function OrdersTable() {
       .catch(error => {
         setError(error.message);
       });
+  };
+
+  useEffect(() => {
+    fetchOrders(); // Fetch orders on component mount
+
+    const intervalId = setInterval(fetchOrders, 5000); // Poll every 5 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
   }, [searchValue, statusFilter]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +67,7 @@ export default function OrdersTable() {
   const handleSave = () => {
     setEditingOrderId(null); // Resetear el ID de edición
     setShowOrdersTable(true); // Mostrar OrdersTable
+    fetchOrders(); // Fetch orders again after saving
   };
 
   return (
