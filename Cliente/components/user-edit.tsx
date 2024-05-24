@@ -17,6 +17,10 @@ type Props = {
 export default function UserEdit({ user: initialUser, onSave }: Props) {
   const [user, setUser] = useState(initialUser);
 
+  const handleVolver = () => {
+    window.location.href = '/dashboard-admin';
+  }
+
   useEffect(() => {
     setUser(initialUser);
   }, [initialUser]);
@@ -89,6 +93,7 @@ export default function UserEdit({ user: initialUser, onSave }: Props) {
             <option value="0">Usuario</option>
           </select>
           <Button type="submit" className="mt-4">Save</Button>
+          <Button onClick={handleVolver} className="mt-4">Volver</Button>
         </form>
       </Card>
     </main>

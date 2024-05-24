@@ -1,4 +1,3 @@
-'use client'
 import React, { useState } from 'react';
 import Link from "next/link";
 
@@ -17,20 +16,20 @@ const Navbar = ({ hideDashboard }) => {
   return (
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
       <div className="flex items-center">
-        <h1 className="text-white mr-4">BuyBox</h1>
-        <button className="text-white mr-4" onClick={hideDashboard}>Crear Pedido</button>
-
+        <h1 className="text-white text-2xl font-bold mr-4">BuyBox</h1> {/* Aumenté el tamaño y la negrita para el título */}
+        <button className="text-white mr-4 px-4 py-2 rounded transition duration-300 hover:bg-gray-700" onClick={hideDashboard}>Crear Pedido</button> {/* Estilo similar a los botones de navegación */}
       </div>
       <div className="flex items-center">
-        <p className="text-white mr-4"></p>
         <div className="relative">
-        <button className="text-white" onClick={toggleMenu}>Menu</button>
+          <button className="text-white px-4 py-2 rounded transition duration-300 hover:bg-gray-700" onClick={toggleMenu}> {/* Agregué estilos al botón de menú */}
+            Menu ☰ 
+          </button>
           {menuOpen && (
             <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10">
-              <Link href="/perfil" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left">
+              <Link href="/perfil" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"> {/* Ajusté el estilo del enlace de perfil */}
                 Perfil
               </Link>
-              <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left" onClick={handleCerrarSesion}>
+              <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left" onClick={handleCerrarSesion}> {/* Ajusté el estilo del botón de cerrar sesión */}
                 Cerrar Sesión
               </button>
             </div>

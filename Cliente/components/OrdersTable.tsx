@@ -1,27 +1,17 @@
-'use client';
-
-import { RotateCwIcon, SearchIcon } from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-  Text,
-} from "@tremor/react";
+'use client'
 import React, { useEffect, useState, ChangeEvent } from 'react';
-import { useRouter } from 'next/navigation'
+import OrderEdit from './OrderEditAdmin'; // Importar OrderEdit
+import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Text } from "@tremor/react";
 
 export default function OrdersTable() {
-    
-  const router = useRouter()
-  const [users, setUsers] = useState<any[]>([]);
+  const [editingOrderId, setEditingOrderId] = useState<number | null>(null);
+  const [orders, setOrders] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState('');
   const [searchValue, setSearchValue] = useState('');
+  const [showOrdersTable, setShowOrdersTable] = useState(true);
 
-  useEffect(() => {
+  const fetchOrders = () => {
     let apiUrl = 'http://localhost:3000/api/order/index';
 
     // Construir la URL basada en los valores de búsqueda y filtro de estado
@@ -46,11 +36,19 @@ export default function OrdersTable() {
         return response.json();
       })
       .then(data => {
-        setUsers(data);
+        setOrders(data);
       })
       .catch(error => {
         setError(error.message);
       });
+  };
+
+  useEffect(() => {
+    fetchOrders(); // Fetch orders on component mount
+
+    const intervalId = setInterval(fetchOrders, 5000); // Poll every 5 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
   }, [searchValue, statusFilter]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -62,89 +60,122 @@ export default function OrdersTable() {
   };
 
   const handleEdit = (id: number) => {
-    router.push('/order-edit-admin/' + id);
-  }
+    setEditingOrderId(id); // Establecer el ID del pedido que se está editando
+    setShowOrdersTable(false); // Ocultar OrdersTable
+  };
+
+  const handleDelete = (id: number) => {
+    fetch(`http://localhost:3000/api/order/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(() => {
+        fetchOrders(); // Fetch orders again after deleting
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+  };
+
+  const handleSave = () => {
+    setEditingOrderId(null); // Resetear el ID de edición
+    setShowOrdersTable(true); // Mostrar OrdersTable
+    fetchOrders(); // Fetch orders again after saving
+  };
 
   return (
     <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
       <div className="bg-gray-800 p-6 rounded-lg">
-        <div className="flex justify-between items-center mb-8">
-          <div className="text-lg font-semibold text-white">Lista de Pedidos</div>
-          <div className="flex items-center">
-            <div className="relative max-w-md">
-              <div className="rounded-md shadow-sm flex items-center">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3" aria-hidden="true">
-                  <SearchIcon className="mr-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+        {showOrdersTable && ( // Mostrar OrdersTable si showOrdersTable es verdadero
+          <div>
+            <div className="flex justify-between items-center mb-8">
+              <div className="text-lg font-semibold text-white">Lista de Pedidos</div>
+              <div className="flex items-center">
+                <div className="relative max-w-md">
+                  <div className="rounded-md shadow-sm flex items-center">
+                    <input
+                      type="text"
+                      name="search"
+                      id="search"
+                      value={searchValue}
+                      onChange={handleInputChange}
+                      className="h-10 block w-full rounded-md border border-gray-200 pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      placeholder="Buscar por nombre..."
+                      spellCheck={false}
+                    />
+                    <select
+                      value={statusFilter}
+                      onChange={handleStatusChange}
+                      className="ml-2 h-10 block rounded-md border border-gray-200 text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    >
+                      <option value="">Todos</option>
+                      <option value="En proceso">En proceso</option>
+                      <option value="Entregado">Entregado</option>
+                    </select>
+                  </div>
                 </div>
-                <input
-                  type="text"
-                  name="search"
-                  id="search"
-                  value={searchValue}
-                  onChange={handleInputChange}
-                  className="h-10 block w-full rounded-md border border-gray-200 pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  placeholder="Buscar por nombre..."
-                  spellCheck={false}
-                />
-                <select
-                  value={statusFilter}
-                  onChange={handleStatusChange}
-                  className="ml-2 h-10 block rounded-md border border-gray-200 text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                >
-                  <option value="" className="text-gray-400">Todos</option>
-                  <option value="En proceso">En proceso</option>
-                  <option value="Entregado">Entregado</option>
-                </select>
               </div>
             </div>
+            <table className="tabla-con-divisiones w-full border-collapse">
+              <thead>
+                <tr>
+                  <th>Dueño</th>
+                  <th>Tracking number</th>
+                  <th>Descripcion</th>
+                  <th>Estado</th>
+                  <th>Tracking number</th>
+                  <th>Fecha de envio</th>
+                  <th>Direccion de envio</th>
+                  <th>Costo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order.id}>
+                    <td className="align-middle text-center">{order.name}</td>
+                    <td className="align-middle text-center">
+                      <Text>{order.tracking_number ?? 'Sin correo'}</Text>
+                    </td>
+                    <td className="align-middle text-center">
+                      <Text>{order.description ?? 'Sin dirección'}</Text>
+                    </td>
+                    <td className="align-middle text-center">
+                      <Text>{order.status ?? 'Sin estado'}</Text>
+                    </td>
+                    <td className="align-middle text-center">
+                      <Text>{order.tracking_number ?? 'Sin numero'}</Text>
+                    </td>
+                    <td className="align-middle text-center">
+                      <Text>{order.shipping_date ?? 'Sin fecha'}</Text>
+                    </td>
+                    <td className="align-middle text-center">
+                      <Text>{order.shipping_address ?? 'Sin dirección'}</Text>
+                    </td>
+                    <td className="align-middle text-center">
+                      <Text>{order.cost ?? 'Sin costo'}</Text>
+                    </td>
+                    <td>
+                      <button onClick={() => handleEdit(order.orderId)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
+                      <button onClick={() => handleDelete(order.orderId)} className="px-4 py-2 bg-red-500 text-white rounded-md ml-6 mb-3">Eliminar</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </div>
-        <table className="tabla-con-divisiones w-full border-collapse">
-          <thead>
-            <tr>
-              <th>Dueño</th>
-              <th>Tracking number</th>
-              <th>Descripcion</th>
-              <th>Estado</th>
-              <th>Tracking number</th>
-              <th>Fecha de envio</th>
-              <th>Direccion de envio</th>
-              <th>Costo</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users?.map((user) => (
-              <tr key={user.id}>
-                <td className="align-middle text-center">{user.name}</td>
-                <td className="align-middle text-center">
-                  <Text>{user.tracking_number ?? 'Sin correo'}</Text>
-                </td>
-                <td className="align-middle text-center">
-                  <Text>{user.description ?? 'Sin dirección'}</Text>
-                </td>
-                <td className="align-middle text-center">
-                  <Text>{user.status ?? 'Sin estado'}</Text>
-                </td>
-                <td className="align-middle text-center">
-                  <Text>{user.tracking_number ?? 'Sin numero'}</Text>
-                </td>
-                <td className="align-middle text-center">
-                  <Text>{user.shipping_date ?? 'Sin fecha'}</Text>
-                </td>
-                <td className="align-middle text-center">
-                  <Text>{user.shipping_address ?? 'Sin dirección'}</Text>
-                </td>
-                <td className="align-middle text-center">
-                  <Text>{user.cost ?? 'Sin costo'}</Text>
-                </td>
-                <td>
-                  <button onClick={() => handleEdit(user.orderId)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        )}
+        {editingOrderId !== null && ( // Mostrar OrderEdit si editingOrderId no es nulo
+          <OrderEdit orderId={editingOrderId} onSave={handleSave} />
+        )}
       </div>
     </div>
   );

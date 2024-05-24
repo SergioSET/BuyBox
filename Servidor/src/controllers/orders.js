@@ -105,3 +105,21 @@ export const updateOrder = async (req, res) => {
     }
   };
 
+  export const deleteOrder = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const query = 'DELETE FROM orden WHERE id = ?';
+        const [result] = await pool.query(query, [id]);
+
+        if (result.affectedRows === 0) {
+            res.status(404).send({ message: 'Orden no encontrada' });
+            return;
+        }
+
+        res.send({ status: 'Orden eliminada' });
+    } catch (error) {
+        console.error('Error al eliminar la orden:', error);
+        res.status(500).send({ message: 'Error al eliminar la orden' });
+    }
+};
