@@ -9,8 +9,18 @@ interface OrderEditProps {
 }
 
 export default function OrderEdit({ orderId, onSave }: OrderEditProps) {
-  const [order, setOrder] = useState({ status: '', shipping_address: '' });
+  const [order, setOrder] = useState({});
+  const [user, setUser] = useState({});
   const router = useRouter();
+
+  const handleVolver = () => {
+    if (user.admin === 1) {
+      window.location.href = '/dashboard-admin';
+    }
+    else {
+      window.location.href = '/dashboard-user';
+    }
+  }
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/order/indexId/${orderId}`, {
@@ -32,6 +42,26 @@ export default function OrderEdit({ orderId, onSave }: OrderEditProps) {
       .catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
       });
+
+      fetch(`http://localhost:3000/api/usuarios/${order.id_usuario}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setUser(data);
+        })
+        .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
+        });
+
   }, [orderId]);
 
   const handleChange = (e) => {
@@ -89,6 +119,7 @@ export default function OrderEdit({ orderId, onSave }: OrderEditProps) {
             <option value="Entregado">Entregado</option>
           </select>
           <Button type="submit" className="mt-4">Save</Button>
+          <Button onClick={handleVolver} className="mt-4">Volver</Button>
         </form>
       </Card>
     </main>

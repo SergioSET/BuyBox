@@ -9,6 +9,15 @@ export default function Home() {
   const [user, setUser] = useState({ name: '', email: '' });
   const router = useRouter()
 
+  const handleVolver = () => {
+    if (user.admin === 1) {
+      window.location.href = '/dashboard-admin';
+    }
+    else {
+      window.location.href = '/dashboard-user';
+    }
+  }
+  
   useEffect(() => {
     fetch(`http://localhost:3000/api/usuarios/${id}`, {
       method: "GET",
@@ -100,6 +109,7 @@ export default function Home() {
             <option value="0">Usuario</option>
           </select>
           <Button type="submit" className="mt-4">Save</Button>
+          <Button onClick={handleVolver} className="mt-4">Volver</Button>
         </form>
       </Card>
     </main>

@@ -64,6 +64,27 @@ export default function OrdersTable() {
     setShowOrdersTable(false); // Ocultar OrdersTable
   };
 
+  const handleDelete = (id: number) => {
+    fetch(`http://localhost:3000/api/order/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(() => {
+        fetchOrders(); // Fetch orders again after deleting
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+  };
+
   const handleSave = () => {
     setEditingOrderId(null); // Resetear el ID de edición
     setShowOrdersTable(true); // Mostrar OrdersTable
@@ -144,6 +165,7 @@ export default function OrdersTable() {
                     </td>
                     <td>
                       <button onClick={() => handleEdit(order.orderId)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-6 mb-3">Editar</button>
+                      <button onClick={() => handleDelete(order.orderId)} className="px-4 py-2 bg-red-500 text-white rounded-md ml-6 mb-3">Eliminar</button>
                     </td>
                   </tr>
                 ))}
