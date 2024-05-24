@@ -1,17 +1,15 @@
-'use client';
-
-import { useRouter } from 'next/navigation'
+'use client'
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
 
 export default function SignUp() {
-
-  const router = useRouter()
+  const router = useRouter();
   const [name, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (event: { preventDefault: () => void; }) => {
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     try {
@@ -39,7 +37,7 @@ export default function SignUp() {
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-         
+          <Link href='/' className="absolute top-0 left-0 m-4 btn text-white bg-purple-600 hover:bg-purple-700">Atrás</Link>
           <div className="flex max-w-4xl mx-auto">
             <div className="w-1/2 hidden md:block ">
               <img src="/images/register.jpeg" alt="Imagen de registro" className="object-cover h-full w-full" />
@@ -48,7 +46,7 @@ export default function SignUp() {
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full px-3 ">
-                  <h1 className="h1 text-center ">Registro</h1>
+                    <h1 className="h1 text-center">Registro</h1>
                     <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="username">
                       Usuario
                     </label>
@@ -81,22 +79,20 @@ export default function SignUp() {
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full px-3">
-                    <div className="flex justify-between">
-                
-                    </div>
+                    <div className="flex justify-between"></div>
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mt-6">
                   <div className="w-full px-3">
                     <button type="submit" className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">
-                      Registrate
+                      Regístrate
                     </button>
                   </div>
                 </div>
                 {error && <p className="text-red-500 text-center mt-4">{error}</p>}
               </form>
               <div className="text-gray-400 text-center mt-6">
-                Ya tienes una cuenta?{' '}
+                ¿Ya tienes una cuenta?{' '}
                 <Link href="/signin" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">
                   Inicia sesión
                 </Link>
