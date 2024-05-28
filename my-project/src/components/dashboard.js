@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import './page.css';
-import OrderEdit from './OrderEditAdmin'; // Asegúrate de importar OrderEdit
 
 export default function Dashboard() {
     const [orders, setOrders] = useState([]);
@@ -195,9 +194,6 @@ export default function Dashboard() {
                                     </table>
                                 )}
                             </div>
-                        )}
-                        {editingOrderId !== null && ( // Mostrar OrderEdit si editingOrderId no es nulo
-                            <OrderEdit orderId={editingOrderId} onSave={handleSave} />
                         )}
                     </div>
                 </div>
