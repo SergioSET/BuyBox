@@ -10,25 +10,25 @@ export default function Header() {
                     {/* Site branding */}
                     <div className="shrink-0 mr-4">
                         {/* Logo */}
-                        <Link href="#" className="block" aria-label="Cruip">
+                        <Link to="#" className="block" aria-label="Cruip">
                             <img className="w-7 h-7 " src={Logo} alt="Descripción de la imagen" />
                         </Link>
                     </div>
-                    
+
                     {/* Desktop navigation */}
                     <nav className="hidden md:flex md:grow">
                         {/* Desktop sign in links */}
                         <ul className="flex grow justify-end flex-wrap items-center">
                             <li>
                                 <Link
-                                    href="/login"
+                                    to="/login"
                                     className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
                                 >
                                     Iniciar sesión
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/register" className="btn-sm text-white bg-purple-1000 hover:bg-purple-700 ml-3">
+                                <Link to="/register" className="btn-sm text-white bg-purple-1000 hover:bg-purple-700 ml-3">
                                     Registro
                                 </Link>
                             </li>

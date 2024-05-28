@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-const apiurl = process.env.NEXT_PUBLIC_API_URL;
+import Img from '../../images/login.jpg';
 
-export default function SignIn() {
+export default function Login() {
     const navigate = useNavigate();
     const [name, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +12,7 @@ export default function SignIn() {
         event.preventDefault();
 
         try {
-            const response = await fetch(apiurl + 'api/login', {
+            const response = await fetch('http://localhost:3000/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export default function SignIn() {
                 if (data.admin === 1) {
                     navigate('/dashboard-admin');
                 } else {
-                    navigate('/dashboard-user');
+                    navigate('/dashboard');
                 }
             } else {
                 const data = await response.json();
@@ -43,7 +43,7 @@ export default function SignIn() {
 
     return (
         <section className="relative">
-            <Link href='/' className="absolute top-0 left-0 m-4 btn text-white bg-purple-600 hover:bg-purple-700">Atrás</Link>
+            <Link to='/' className="absolute top-0 left-0 m-4 btn text-white bg-purple-600 hover:bg-purple-700">Atrás</Link>
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 <div className="pt-32 pb-12 md:pt-40 md:pb-20">
                     <div className="flex max-w-4xl mx-auto">
@@ -90,7 +90,7 @@ export default function SignIn() {
                                                 <span className="text-gray-400 ml-2">Recuérdame</span>
                                             </label>
                                             <Link
-                                                href="/reset-password"
+                                                to="/reset-password"
                                                 className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out"
                                             >
                                                 ¿Olvidaste la contraseña?
@@ -110,7 +110,7 @@ export default function SignIn() {
                             <div className="text-gray-400 text-center mt-6">
                                 ¿No tienes una cuenta?{' '}
                                 <Link
-                                    href="/signup"
+                                    to="/register"
                                     className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out"
                                 >
                                     Regístrate
@@ -118,7 +118,7 @@ export default function SignIn() {
                             </div>
                         </div>
                         <div className="w-1/2 hidden md:block">
-                            <img src="/images/login.jpg" alt="Imagen de inicio de sesión" className="object-cover h-full w-full" />
+                            <img src={Img} alt="Imagen de inicio de sesión" className="object-cover h-full w-full" />
                         </div>
                     </div>
                 </div>
