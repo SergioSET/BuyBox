@@ -78,7 +78,6 @@ export default function DashboardUser() {
             })
             .then(data => {
                 setOrders(data);
-                console.log(data);
             })
             .catch(error => {
                 setError(error.message);
