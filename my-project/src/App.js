@@ -6,6 +6,7 @@ import Register from './pages/homepage/register';
 import Login from './pages/homepage/login';
 import DashboardUser from './pages/user/dashboard';
 import CrearPedido from './pages/user/crear-pedido';
+import Perfil from './pages/user/perfil';
 import DashboardAdmin from './pages/admin/dashboard';
 import './css/style.css';
 
@@ -20,6 +21,7 @@ function App() {
         {/* User */}
         <Route path="/dashboard" element={<DashboardUser />} />
         <Route path="/crear-pedido" element={<CrearPedido />} />
+        <Route path="/perfil" element={<Perfil />} />
 
         {/* Admin */}
         <Route path="/dashboard-admin" element={<DashboardAdmin />} />

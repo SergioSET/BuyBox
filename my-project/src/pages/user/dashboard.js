@@ -1,14 +1,12 @@
 import Navbar from '../../components/navbar-user';
 import React, { useEffect, useState } from 'react';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { Link } from 'react-router-dom';
 import '../../css/dashboard-user.css';
 
 
 export default function DashboardUser() {
     const [orders, setOrders] = useState([]);
     const [userId, setUserId] = useState(0);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         const getCookie = () => {
@@ -35,7 +33,7 @@ export default function DashboardUser() {
         const token = getCookie();
 
         if (!token) {
-            setError('Token not found');
+            console.log('Token not found');
             return;
         }
 
@@ -61,7 +59,7 @@ export default function DashboardUser() {
                 setUserId(data.id);
             })
             .catch(error => {
-                setError(error.message);
+                console.log(error.message);
             });
 
         fetch(`http://localhost:3000/order/list/${userId}`, {
@@ -80,7 +78,7 @@ export default function DashboardUser() {
                 setOrders(data);
             })
             .catch(error => {
-                setError(error.message);
+                console.log(error.message);
             });
     }, []);
 

@@ -16,7 +16,6 @@ export default function CrearPedido() {
     const [direccionEntrega, setDireccionEntrega] = useState('');
     const [distancia, setDistancia] = useState(0);
     const [userId, setUserId] = useState(0);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         const getCookie = () => {
@@ -38,7 +37,7 @@ export default function CrearPedido() {
         const token = getCookie();
 
         if (!token) {
-            setError('Token not found');
+            console.log('Token not found');
             return;
         }
 
@@ -62,7 +61,7 @@ export default function CrearPedido() {
                 setUserId(data.id);
             })
             .catch(error => {
-                setError(error.message);
+                console.log(error.message);
             });
     }, []);
 
