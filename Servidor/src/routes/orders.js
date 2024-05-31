@@ -1,10 +1,12 @@
 import { Router } from 'express'
-import { createOrder, indexOrder, indexOrderById, updateOrder, deleteOrder } from '../controllers/orders.js';
+import { createOrder, orderList, indexOrder, indexOrderById, updateOrder, deleteOrder } from '../controllers/orders.js';
 
 
 const router = Router()
 
-router.post ('/order/create', createOrder)
+router.post('/order/create', createOrder)
+
+router.get('/order/list/:id?', orderList)
 
 router.get('/order/index/:id?', indexOrder)
 

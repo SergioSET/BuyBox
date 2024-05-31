@@ -4,7 +4,7 @@ import { getUsuarios, getUsuario, createUsuario, deleteUsuario, updateUsuario, l
 
 const router = Router()
 
-router.post ('/logout', logoutUsuario)
+router.post('/logout', logoutUsuario)
 
 router.get('/usuarios', getUsuarios)
 

@@ -1,6 +1,6 @@
 import { pool } from "../db.js"
 import jwt from 'jsonwebtoken'
-import {serialize} from 'cookie'
+import { serialize } from 'cookie'
 import bcrypt from 'bcrypt';
 
 
@@ -12,7 +12,7 @@ export const getUsuarios = async (req, res) => {
 export const getUsuario = async (req, res) => {
     const [rows] = await pool.query('SELECT * FROM  usuario WHERE id = ?', [req.params.id])
     res.json(rows[0])
-} 
+}
 
 export const createUsuario = async (req, res) => {
     const { name, password, admin, email, direccion } = req.body;
@@ -29,7 +29,7 @@ export const createUsuario = async (req, res) => {
         // Si el usuario no existe, continuar con la creación
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const [rows] = await pool.query ('INSERT INTO usuario (name, password, admin, email, direccion) VALUES (?, ?, ?, ?, ?)', [name, hashedPassword, admin, email, direccion]);
+        const [rows] = await pool.query('INSERT INTO usuario (name, password, admin, email, direccion) VALUES (?, ?, ?, ?, ?)', [name, hashedPassword, admin, email, direccion]);
 
         res.send({
             id: rows.insertId,
@@ -83,21 +83,21 @@ export const updateUsuario = async (req, res) => {
         if (existingUsers.length === 0) {
             return res.status(404).send({ message: 'Usuario no encontrado' });
         }
-        
-        if(password== ''){
-            await pool.query('UPDATE usuario SET name = ?, direccion = ?, email=? WHERE id = ?', [name,direccion,email, id]);
-            
-        }else{
+
+        if (password == '') {
+            await pool.query('UPDATE usuario SET name = ?, direccion = ?, email=? WHERE id = ?', [name, direccion, email, id]);
+
+        } else {
             // Si el usuario existe, actualizar sus datos
-        const hashedPassword = await bcrypt.hash(password, 10);
+            const hashedPassword = await bcrypt.hash(password, 10);
 
-        
 
-        await pool.query('UPDATE usuario SET name = ?, password = ?, direccion = ?, email=?, admin=? WHERE id = ?', [name, hashedPassword,direccion,email,admin, id]);
+
+            await pool.query('UPDATE usuario SET name = ?, password = ?, direccion = ?, email=?, admin=? WHERE id = ?', [name, hashedPassword, direccion, email, admin, id]);
 
 
         }
-        
+
         res.json({ message: 'Usuario actualizado exitosamente' });
     } catch (error) {
         console.error('Error al actualizar usuario:', error);
@@ -118,19 +118,19 @@ export const loginUsuario = async (req, res) => {
 
         const user = rows[0];
         // console.log(user)
-        
+
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
             return res.status(401).send({ message: 'Contraseña incorrecta' });
         }
-        
+
         const token = jwt.sign({
-            exp: Math.floor(Date.now()/1000) + 60 * 60 * 24 * 30,
+            exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
             user: user.id,
             username: user.name
-        },'secret')
+        }, 'secret')
 
         const serialized = serialize('myTokenName', token, {
             httpOnly: false,
@@ -139,8 +139,8 @@ export const loginUsuario = async (req, res) => {
             path: '/'
         })
 
-       
-        return res.json({ message: 'login successfully', token: serialized, admin: user.admin});
+
+        return res.json({ message: 'login successfully', token: serialized, admin: user.admin });
 
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
@@ -150,11 +150,11 @@ export const loginUsuario = async (req, res) => {
 
 export const logoutUsuario = async (req, res) => {
     try {
-      res.clearCookie('myTokenName');
-      return res.json({ message: 'Logged out successfully' });
+        res.clearCookie('myTokenName');
+        return res.json({ message: 'Logged out successfully' });
     } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-      res.status(500).send({ message: 'Error al cerrar sesión' });
+        console.error('Error al cerrar sesión:', error);
+        res.status(500).send({ message: 'Error al cerrar sesión' });
     }
-  };
+};
 

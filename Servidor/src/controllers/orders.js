@@ -12,12 +12,25 @@ export const createOrder = async (req, res) => {
 
     try {
         const [rows] = await pool.query('INSERT INTO orden (id_usuario, tracking_number, description, status, shipping_date, shipping_address, cost) VALUES (?, ?, ?, ?, ?, ?, ?)', [userId, tracking, descripcion, status, formatted_date, direccionEntrega, costoTotal]);
-        res.send({status: 'Orden creada'})
+        res.send({ status: 'Orden creada' })
     } catch (error) {
         console.error('Error al crear orden:', error);
         res.status(500).send({ message: 'Error al crear orden' });
     }
 }
+
+export const orderList = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const query = `SELECT * FROM orden WHERE id_usuario = ?`;
+        const [rows] = await pool.query(query, [id]);
+        res.send(rows);
+    } catch (error) {
+        console.error('Error al obtener ordenes:', error);
+        res.status(500).send({ message: 'Error al obtener ordenes' });
+    }
+}
+
 
 export const indexOrder = async (req, res) => {
     try {
@@ -88,24 +101,24 @@ export const indexOrderById = async (req, res) => {
 export const updateOrder = async (req, res) => {
     const { id } = req.params;
     const { shipping_address, status } = req.body;
-  
-    try {
-      const query = 'UPDATE orden SET shipping_address = ?, status = ? WHERE id = ?';
-      const [result] = await pool.query(query, [shipping_address, status, id]);
-  
-      if (result.affectedRows === 0) {
-        res.status(404).send({ message: 'Orden no encontrada' });
-        return;
-      }
-  
-      res.send({ status: 'Orden actualizada' });
-    } catch (error) {
-      console.error('Error al actualizar la orden:', error);
-      res.status(500).send({ message: 'Error al actualizar la orden' });
-    }
-  };
 
-  export const deleteOrder = async (req, res) => {
+    try {
+        const query = 'UPDATE orden SET shipping_address = ?, status = ? WHERE id = ?';
+        const [result] = await pool.query(query, [shipping_address, status, id]);
+
+        if (result.affectedRows === 0) {
+            res.status(404).send({ message: 'Orden no encontrada' });
+            return;
+        }
+
+        res.send({ status: 'Orden actualizada' });
+    } catch (error) {
+        console.error('Error al actualizar la orden:', error);
+        res.status(500).send({ message: 'Error al actualizar la orden' });
+    }
+};
+
+export const deleteOrder = async (req, res) => {
     const { id } = req.params;
 
     try {
