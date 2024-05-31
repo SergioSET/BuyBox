@@ -26,7 +26,7 @@ export default function Login() {
                 const myTokenNameValue = token.split('myTokenName=')[1].split(';')[0];
                 document.cookie = 'token=' + myTokenNameValue + '; path=/';
 
-                if (data.admin === 1) {
+                if (data.admin === '1') {
                     navigate('/dashboard-admin');
                 } else {
                     navigate('/dashboard');

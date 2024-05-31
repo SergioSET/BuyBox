@@ -1,42 +1,16 @@
-import Navbar from '../../components/navbar-user';
 import React, { useEffect, useState } from 'react';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import '../../css/dashboard-user.css';
+import Navbar from '../../components/navbar-user';
+import token from "../../apis/getCookies";
 
 
 export default function DashboardUser() {
     const [orders, setOrders] = useState([]);
     const [userId, setUserId] = useState(0);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const getCookie = () => {
-            const name = 'token=';
-            const decodedCookie = decodeURIComponent(document.cookie);
-            const cookieArray = decodedCookie.split(';');
-
-            for (let i = 0; i < cookieArray.length; i++) {
-                let cookie = cookieArray[i];
-
-                while (cookie.charAt(0) === ' ') {
-                    cookie = cookie.substring(1);
-                }
-
-                if (cookie.indexOf(name) === 0) {
-                    return cookie.substring(name.length, cookie.length);
-                }
-            }
-
-            return null; // Retorna null si no se encuentra la cookie
-        };
-
-        // Obtener el valor del token de la cookie
-        const token = getCookie();
-
-        if (!token) {
-            console.log('Token not found');
-            return;
-        }
-
         // Extraer el ID del token (por ejemplo, si el token es en formato JWT)
         const payload = JSON.parse(atob(token.split('.')[1]));
         const userId = payload.user; // Suponiendo que el ID del usuario está en la propiedad 'user' del payload
@@ -82,6 +56,29 @@ export default function DashboardUser() {
             });
     }, []);
 
+    const handleDelete = (id, name) => {
+        if (window.confirm("¿Estás seguro que deseas borrar la orden " + name + "?")) {
+            fetch(`http://localhost:3000/api/order/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setOrders(orders.filter(order => order.id !== id));
+                })
+                .catch(error => {
+                    setError(error.message);
+                });
+        }
+    };
+
 
     return (
         <>
@@ -117,7 +114,7 @@ export default function DashboardUser() {
                                             <td className="align-middle text-center">{order.shipping_address}</td>
                                             <td className="align-middle text-center">{order.cost} COP</td>
                                             <td>
-                                                <button className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
+                                                <button onClick={() => handleDelete(order.id, order.name)} className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
                                             </td>
                                         </tr>
                                     ))}

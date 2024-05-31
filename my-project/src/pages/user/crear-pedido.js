@@ -1,8 +1,9 @@
-import Navbar from '../../components/navbar-user';
 import React, { useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/navbar-user';
+import token from "../../apis/getCookies";
 
 export default function CrearPedido() {
     const navigate = useNavigate();
@@ -18,29 +19,6 @@ export default function CrearPedido() {
     const [userId, setUserId] = useState(0);
 
     useEffect(() => {
-        const getCookie = () => {
-            const name = 'token=';
-            const decodedCookie = decodeURIComponent(document.cookie);
-            const cookieArray = decodedCookie.split(';');
-            for (let i = 0; i < cookieArray.length; i++) {
-                let cookie = cookieArray[i];
-                while (cookie.charAt(0) === ' ') {
-                    cookie = cookie.substring(1);
-                }
-                if (cookie.indexOf(name) === 0) {
-                    return cookie.substring(name.length, cookie.length);
-                }
-            }
-            return null;
-        };
-
-        const token = getCookie();
-
-        if (!token) {
-            console.log('Token not found');
-            return;
-        }
-
         const payload = JSON.parse(atob(token.split('.')[1]));
         const userId = payload.user;
 
@@ -106,6 +84,11 @@ export default function CrearPedido() {
     }
 
     const handleGuardarPedido = () => {
+        if (!tracking || !descripcion || repartidora === '0' || !peso || !largo || !ancho || !alto || !direccionEntrega || !distancia) {
+            alert('Por favor llena todos los campos');
+            return;
+        }
+
         const costosRepartidora = {
             1: 0.05,
             2: 0.06,
@@ -119,7 +102,11 @@ export default function CrearPedido() {
         const costoDimensiones = 5000 + (largo * ancho * alto * costoRepartidora);
         const costoDistancia = 5000 + distancia * (costoRepartidora * 10);
         const costoPeso = 5000 + peso * (costoRepartidora * 10);
-        const costoTotal = Math.floor(costoDimensiones + costoDistancia + costoPeso);
+        var costoTotal = Math.floor(costoDimensiones + costoDistancia + costoPeso);
+
+        costoTotal = costoTotal ? costoTotal : Math.random() * 15000;
+
+        costoTotal = costoTotal.toFixed(2);
 
         confirmAlert({
             title: 'Confirmar guardar pedido',
@@ -138,10 +125,13 @@ export default function CrearPedido() {
         });
     }
 
+    const handleVolver = () => {
+        navigate('/dashboard');
+    }
+
     return (
         <>
             <Navbar />
-
             <section className="relative">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <div className="pt-32 pb-12 md:pt-40 md:pb-20">
@@ -221,7 +211,7 @@ export default function CrearPedido() {
                             </div>
 
                             <div className="w-full flex justify-center items-center mt-5">
-                                <button className="px-4 btn-sm text-white bg-blue-500 hover:bg-blue-700 rounded-md ml-6 mb-3">
+                                <button className="px-4 btn-sm text-white bg-blue-500 hover:bg-blue-700 rounded-md ml-6 mb-3" onClick={handleVolver}>
                                     Regresar a Pedidos
                                 </button>
 

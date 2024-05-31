@@ -8,7 +8,7 @@ CREATE TABLE usuario(
     id INT(11) NOT NULL AUTO_INCREMENT,
     name VARCHAR(45) DEFAULT NULL,
     password VARCHAR(255) DEFAULT NULL,
-    admin BOOLEAN DEFAULT FALSE,
+    admin ENUM('0', '1') DEFAULT '0',
     email VARCHAR(255) DEFAULT NULL,
     direccion VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -31,4 +31,4 @@ CREATE TABLE orden(
     FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
-INSERT INTO usuario (name, password, admin) VALUES ('superadmin', '$2b$10$M88KU2aAUsMS0yEQJuspVe/SM1XBq72gXOf4DNWdCZ7Vod3mfRl5O', 1);
+INSERT INTO usuario (name, password, admin) VALUES ('superadmin', '$2b$10$M88KU2aAUsMS0yEQJuspVe/SM1XBq72gXOf4DNWdCZ7Vod3mfRl5O', '1');

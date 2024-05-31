@@ -4,7 +4,7 @@ import { createOrder, orderList, indexOrder, indexOrderById, updateOrder, delete
 
 const router = Router()
 
-router.post ('/order/create', createOrder)
+router.post('/order/create', createOrder)
 
 router.get('/order/list/:id?', orderList)
 

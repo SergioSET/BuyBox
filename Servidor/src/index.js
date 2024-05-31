@@ -7,18 +7,18 @@ import cors from "cors";
 const app = express()
 
 app.use(cors({
-    origin: 'http://localhost:3001', // Permitir solicitudes desde este origen
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-    allowedHeaders: ['Content-Type', 'Authorization', 'Set-Cookie' ],
-    credentials: true, // Encabezados permitidos
-  }));
+  origin: 'http://localhost:3001', // Permitir solicitudes desde este origen
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization', 'Set-Cookie'],
+  credentials: true, // Encabezados permitidos
+}));
 
 app.listen(3000)
 
 app.use(express.json())
 
-app.use('/api',usuariosRoutes)
-app.use('/api',ordersRoutes)
+app.use('/api', usuariosRoutes)
+app.use('/api', ordersRoutes)
 app.use(indexRoutes)
 app.use(ordersRoutes)
 

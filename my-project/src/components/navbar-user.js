@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const Navbar = ({ hideDashboard }) => {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCerrarSesion = () => {
@@ -39,5 +39,3 @@ const Navbar = ({ hideDashboard }) => {
     </nav>
   );
 };
-
-export default Navbar;
