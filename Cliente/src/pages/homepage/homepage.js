@@ -1,20 +1,19 @@
 
-import Header from '../../componentes/header';
-import Hero from '../../componentes/hero';
-import HomepageFeatures from '../../componentes/homepageFeatures';
-import Footer from '../../componentes/footer';
+import Header from '../../components/header';
+import Hero from '../../components/hero';
+import HomepageFeatures from '../../components/homepageFeatures';
+import Footer from '../../components/footer';
 
-import '../../css/style.css';
+// import '../../css/style.css';
 
 
 export default function Homepage() {
     return (
         <div>
-            <Header>
-                <Hero />
-                <HomepageFeatures />
-                <Footer />
-            </Header>
+            <Header />
+            <Hero />
+            <HomepageFeatures />
+            <Footer />
         </div>
 
     );

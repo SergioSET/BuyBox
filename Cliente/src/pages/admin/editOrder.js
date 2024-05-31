@@ -1,8 +1,7 @@
 import { Card, Text, Title, TextInput, Button } from "@tremor/react";
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import token from "../../apis/getCookies";
-
+import token from "../../apis/getCookies"
 
 export default function OrderEdit() {
     const orderId = useParams().id;

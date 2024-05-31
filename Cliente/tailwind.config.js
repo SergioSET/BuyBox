@@ -1,9 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
@@ -18,7 +16,7 @@ module.exports = {
           700: '#33363A',
           800: '#25282C',
           900: '#151719',
-        
+
         },
         purple: {
           100: '#F4F4FF',
@@ -30,8 +28,8 @@ module.exports = {
           700: '#4B4ACF',
           800: '#38379C',
           900: '#262668',
-          1000:'#292772',
-          1100:'#241f5f',
+          1000: '#292772',
+          1100: '#241f5f',
         },
       },
       spacing: {

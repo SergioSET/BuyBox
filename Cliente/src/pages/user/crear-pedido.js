@@ -3,7 +3,6 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar-user';
-import token from "../../apis/getCookies";
 
 export default function CrearPedido() {
     const navigate = useNavigate();
@@ -19,6 +18,27 @@ export default function CrearPedido() {
     const [userId, setUserId] = useState(0);
 
     useEffect(() => {
+        const getCookie = () => {
+            const name = 'token=';
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i];
+
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1);
+                }
+
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+
+            return null;
+        };
+
+        const token = getCookie();
         const payload = JSON.parse(atob(token.split('.')[1]));
         const userId = payload.user;
 
