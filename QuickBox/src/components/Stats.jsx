@@ -7,34 +7,34 @@ const Stats = () => {
           <div className="grid w-full grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-y-8">
             <div className="flex flex-col items-center">
               <h3 className="text-5xl font-extrabold leading-tight text-center text-accent-content">
-                <span>10</span>+
+                <span>2</span>+
               </h3>
               <p className="text-base font-medium leading-7 text-center text-dark-grey-600">
-              Years On The Market
+                Años en el mercado
               </p>
             </div>
             <div className="flex flex-col items-center">
               <h3 className="text-5xl font-extrabold leading-tight text-center text-accent-content">
-                $<span>12</span>m
+                $<span>1</span>m
               </h3>
               <p className="text-base font-medium leading-7 text-center text-accent-content">
-                Annual Revenue Growth
+                Crecimiento anual de ingresos
               </p>
             </div>
             <div className="flex flex-col items-center">
               <h3 className="text-5xl font-extrabold leading-tight text-center text-accent-content">
-                <span id="countto3" data-decimal="1">2600</span>k+
+                <span id="countto3" data-decimal="1">50</span>k+
               </h3>
               <p className="text-base font-medium leading-7 text-center text-accent-content">
-                Global Partners
+                Socios alrededor del mundo
               </p>
             </div>
             <div className="flex flex-col items-center">
               <h3 className="text-5xl font-extrabold leading-tight text-center text-accent-content">
-                <span id="countto4">180000</span>+
+                <span id="countto4">10</span>+
               </h3>
               <p className="text-base font-medium leading-7 text-center text-dark-grey-600 text-accent-content">
-                Daily Website Visitors
+                Visitas diarias
               </p>
             </div>
           </div>

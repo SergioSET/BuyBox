@@ -3,7 +3,7 @@ import { removeItem, updateCartAmount } from "../features/cart/cartSlice";
 
 
 const CartItem = ({ cartItem }) => {
-  const { id, title, price, image, amount, brandName, selectedSize } =
+  const { id, title, price, image, amount } =
     cartItem;
 
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const CartItem = ({ cartItem }) => {
     >
       {/* IMAGE */}
       <img
-        src={`https://${image}`}
+        src={`http://localhost:5173${image}`}
         alt={title}
         className="h-24 w-24 rounded-lg sm:h-32 sm:w-32 object-cover"
       />
@@ -24,12 +24,12 @@ const CartItem = ({ cartItem }) => {
         {/* TITLE */}
         <h3 className="capitalize font-medium text-accent-content">{title}</h3>
         {/* COMPANY */}
-        <h4 className="mt-2 capitalize text-sm text-accent-content">
+        {/* <h4 className="mt-2 capitalize text-sm text-accent-content">
           Brand: { brandName }
-        </h4>
-        <h4 className="mt-2 capitalize text-sm text-accent-content">
+        </h4> */}
+        {/* <h4 className="mt-2 capitalize text-sm text-accent-content">
           Size: { selectedSize }
-        </h4>
+        </h4> */}
       </div>
       <div className="sm:ml-12">
         {/* AMOUNT */}

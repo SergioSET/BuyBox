@@ -6,9 +6,26 @@ import axios from "axios";
 
 export const landingLoader = async () => {
   const response = await axios(
-    `http://localhost:8080/products?_page=1&_limit=8`
+    `http://localhost:3000/api/product`
   );
-  const data = response.data;
+  
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
+  const data = shuffleArray(response.data);
+
+  if (data.length === 0) {
+    throw new Error("No products found");
+  }
+
+  if (data.length > 8) {
+    products_length = 8;
+  }
 
   return { products: data };
 };
@@ -32,9 +49,9 @@ const Landing = () => {
               key={product.id}
               id={product.id}
               title={product.name}
-              image={product.imageUrl}
-              rating={product.rating}
-              price={product.price.current.value}
+              image={product.img}
+              // rating={product.rating}
+              price={product.price}
             />
           ))}
         </div>

@@ -154,17 +154,17 @@ const Header = () => {
                     to="/user-profile"
                     className="justify-between text-accent-content"
                   >
-                    Profile
+                    Perfil
                   </Link>
                 </li>
                 <li>
                   <Link to="/order-history" className="text-accent-content">
-                    Order history
+                    Casillero
                   </Link>
                 </li>
                 <li>
                   <Link to="/login" className="text-accent-content">
-                    Logout
+                    Cerrar Sesión
                   </Link>
                 </li>
               </ul>
@@ -172,10 +172,10 @@ const Header = () => {
           )} {!isLoggedIn && (
             <div className="container text-2xl navlinks-container">
               <NavLink className="text-accent-content" to="/login">
-                Login
+                Iniciar sesión
               </NavLink>
               <NavLink className="text-accent-content" to="/register">
-                Register
+                Registrarse
               </NavLink>
             </div>
           )}

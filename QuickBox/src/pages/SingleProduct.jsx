@@ -25,9 +25,11 @@ import { store } from "../store";
 export const singleProductLoader = async ({ params }) => {
   const { id } = params;
 
-  const response = await axios(`http://localhost:8080/products/${id}`);
+  const response = await axios(`http://localhost:3000/api/product/${id}`);
 
-  return { productData: response.data };
+  console.log(response.data[0]);
+
+  return { productData: response.data[0] };
 };
 
 const SingleProduct = () => {
@@ -37,7 +39,7 @@ const SingleProduct = () => {
   const { wishItems } = useSelector((state) => state.wishlist);
   const { userId } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const loginState = useSelector((state) => state.auth.isLoggedIn);
+  const loginState = useState(localStorage.getItem("isLoggedIn"));
   const [rating, setRating] = useState([
     "empty star",
     "empty star",
@@ -49,71 +51,96 @@ const SingleProduct = () => {
   const { productData } = useLoaderData();
 
   const product = {
-    id: productData?.id + size,
+    id: productData?.id,
     title: productData?.name,
-    image: productData?.imageUrl,
-    rating: productData?.rating,
-    price: productData?.price?.current?.value,
-    brandName: productData?.brandName,
-    amount: quantity,
-    selectedSize: size || productData?.availableSizes[0],
-    isInWishList:
-      wishItems.find((item) => item.id === productData?.id + size) !==
-      undefined,
+    image: productData?.img,
+    description: productData?.description,
+    // rating: productData?.rating,
+    price: productData?.price,
+    // brandName: productData?.brandName,
+    // amount: quantity,
+    // selectedSize: size || productData?.availableSizes[0],
+    // isInWishList:
+    //   wishItems.find((item) => item.id === productData?.id + size) !==
+    //   undefined,
   };
 
   for (let i = 0; i < productData?.rating; i++) {
     rating[i] = "full star";
   }
 
-  const addToWishlistHandler = async (product) => {
+  // const addToWishlistHandler = async (product) => {
+  //   try {
+  //     const getResponse = await axios.get(
+  //       `http://localhost:8080/user/${localStorage.getItem("id")}`
+  //     );
+  //     const userObj = getResponse.data;
+
+
+  //     userObj.userWishlist = userObj.userWishlist || [];
+
+  //     userObj.userWishlist.push(product);
+
+  //     const postResponse = await axios.put(
+  //       `http://localhost:8080/user/${localStorage.getItem("id")}`,
+  //       userObj
+  //     );
+
+
+  //     store.dispatch(updateWishlist({ userObj }));
+  //     toast.success("Product added to the wishlist!");
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // const removeFromWishlistHandler = async (product) => {
+  //   const getResponse = await axios.get(
+  //     `http://localhost:8080/user/${localStorage.getItem("id")}`
+  //   );
+  //   const userObj = getResponse.data;
+
+  //   userObj.userWishlist = userObj.userWishlist || [];
+
+  //   const newWishlist = userObj.userWishlist.filter(
+  //     (item) => product.id !== item.id
+  //   );
+
+  //   userObj.userWishlist = newWishlist;
+
+  //   const postResponse = await axios.put(
+  //     `http://localhost:8080/user/${localStorage.getItem("id")}`,
+  //     userObj
+  //   );
+
+
+  //   store.dispatch(removeFromWishlist({ userObj }));
+  //   toast.success("Product removed from the wishlist!");
+  // };
+
+  const addToCartHandler = () => {
+
     try {
-      const getResponse = await axios.get(
-        `http://localhost:8080/user/${localStorage.getItem("id")}`
+      const response = axios.get(
+        `http://localhost:3000/api/order/${localStorage.getItem("id")}`
       );
-      const userObj = getResponse.data;
-
-      
-      userObj.userWishlist = userObj.userWishlist || [];
-
-      userObj.userWishlist.push(product);
-
-      const postResponse = await axios.put(
-        `http://localhost:8080/user/${localStorage.getItem("id")}`,
-        userObj
-      );
-
-      
-      store.dispatch(updateWishlist({ userObj }));
-      toast.success("Product added to the wishlist!");
-    } catch (error) {
-      console.error(error);
     }
-  };
 
-  const removeFromWishlistHandler = async (product) => {
-    const getResponse = await axios.get(
-      `http://localhost:8080/user/${localStorage.getItem("id")}`
-    );
-    const userObj = getResponse.data;
 
-    userObj.userWishlist = userObj.userWishlist || [];
 
-    const newWishlist = userObj.userWishlist.filter(
-      (item) => product.id !== item.id
-    );
+    const cartItem = {
+      id: productData?.id,
+      title: productData?.name,
+      image: productData?.img,
+      price: productData?.price,
+      amount: quantity,
+      // selectedSize: size || productData?.availableSizes[0],
+    };
 
-    userObj.userWishlist = newWishlist;
+    dispatch(addToCart(cartItem));
+    toast.success("Product added to the cart!");
 
-    const postResponse = await axios.put(
-      `http://localhost:8080/user/${localStorage.getItem("id")}`,
-      userObj
-    );
-
-    
-    store.dispatch(removeFromWishlist({ userObj }));
-    toast.success("Product removed from the wishlist!");
-  };
+  }
 
   return (
     <>
@@ -121,11 +148,11 @@ const SingleProduct = () => {
       <div className="grid grid-cols-2 max-w-7xl mx-auto mt-5 max-lg:grid-cols-1 max-lg:mx-5">
         <div className="product-images flex flex-col justify-center max-lg:justify-start">
           <img
-            src={`https://${productData?.additionalImageUrls[currentImage]}`}
+            src={`http://localhost:5173${productData?.img}`}
             className="w-96 text-center border border-gray-600 cursor-pointer"
             alt={productData.name}
           />
-          <div className="other-product-images mt-1 grid grid-cols-3 w-96 gap-y-1 gap-x-2 max-sm:grid-cols-2 max-sm:w-64">
+          {/* <div className="other-product-images mt-1 grid grid-cols-3 w-96 gap-y-1 gap-x-2 max-sm:grid-cols-2 max-sm:w-64">
             {productData?.additionalImageUrls.map((imageObj, index) => (
               <img
                 src={`https://${imageObj}`}
@@ -135,26 +162,26 @@ const SingleProduct = () => {
                 className="w-32 border border-gray-600 cursor-pointer"
               />
             ))}
-          </div>
+          </div> */}
         </div>
         <div className="single-product-content flex flex-col gap-y-5 max-lg:mt-2">
           <h2 className="text-5xl max-sm:text-3xl text-accent-content">
             {productData?.name}
           </h2>
-          <SingleProductRating rating={rating} productData={productData} />
+          {/* <SingleProductRating rating={rating} productData={productData} /> */}
           <p className="text-3xl text-error">
-            ${productData?.price?.current?.value}
+            {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(productData?.price)}
           </p>
           <div className="text-xl max-sm:text-lg text-accent-content">
             {parse(productData?.description)}
           </div>
-          <div className="text-2xl">
+          {/* <div className="text-2xl">
             <SelectSize
               sizeList={productData?.availableSizes}
               size={size}
               setSize={setSize}
             />
-          </div>
+          </div> */}
           <div>
             <label htmlFor="Quantity" className="sr-only">
               {" "}
@@ -170,7 +197,7 @@ const SingleProduct = () => {
               className="btn bg-blue-600 hover:bg-blue-500 text-white"
               onClick={() => {
                 if (loginState) {
-                  dispatch(addToCart(product));
+                  addToCartHandler();
                 } else {
                   toast.error(
                     "You must be logged in to add products to the cart"
@@ -182,7 +209,7 @@ const SingleProduct = () => {
               Add to cart
             </button>
 
-            {product?.isInWishList ? (
+            {/* {product?.isInWishList ? (
               <button
                 className="btn bg-blue-600 hover:bg-blue-500 text-white"
                 onClick={() => {
@@ -214,16 +241,16 @@ const SingleProduct = () => {
                 <FaHeart className="text-xl mr-1" />
                 Add to wishlist
               </button>
-            )}
+            )} */}
           </div>
           <div className="other-product-info flex flex-col gap-x-2">
-            <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
+            {/* <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
               Brand: {productData?.brandName}
-            </div>
-            <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
+            </div> */}
+            {/* <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
               Gender: {productData?.gender}
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className={
                 productData?.isInStock
                   ? "badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2"
@@ -231,22 +258,22 @@ const SingleProduct = () => {
               }
             >
               In Stock: {productData?.isInStock ? "Yes" : "No"}
-            </div>
-            <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
+            </div> */}
+            {/* <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
               SKU: {productData?.productCode}
             </div>
             <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
               Category: {productData?.category}
-            </div>
+            </div> */}
             <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
               Production Date:{" "}
-              {productData?.productionDate?.substring(0, 10)}
+              {productData?.created_at?.substring(0, 10)}
             </div>
           </div>
         </div>
       </div>
 
-      <SingleProductReviews rating={rating} productData={productData} />
+      {/* <SingleProductReviews rating={rating} productData={productData} /> */}
     </>
   );
 };
