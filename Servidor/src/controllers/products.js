@@ -1,14 +1,15 @@
 import { pool } from "../db.js"
 
 export const createProduct = async (req, res) => {
-    const { name, img, description, price } = req.body;
+    const { name, imagen, description, price} = req.body;
+    const img = "/public/productImages/" + imagen
 
     try {
         const [rows] = await pool.query('INSERT INTO product (name, img, description, price) VALUES (?, ?, ?, ?)', [name, img, description, price]);
         res.send({ status: 'Producto creado' })
     } catch (error) {
         console.error('Error al crear producto:', error);
-        res.status(500).send({ message: 'Error al crear producto' });
+        res.status(500).send({ message: 'Error al crear  producto' });
     }
 }
 
@@ -35,10 +36,10 @@ export const indexProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { name, img, description, price } = req.body;
+    const { name, ruta, description, price } = req.body;
 
     try {
-        const [rows] = await pool.query('UPDATE product SET name = ?, img = ?, description = ?, price = ? WHERE id = ?', [name, img, description, price, id]);
+        const [rows] = await pool.query('UPDATE product SET name = ?, img = ?, description = ?, price = ? WHERE id = ?', [name, ruta, description, price, id]);
         res.send({ status: 'Producto actualizado' });
     } catch (error) {
         console.error('Error al actualizar producto:', error);
