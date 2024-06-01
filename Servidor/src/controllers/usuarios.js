@@ -15,11 +15,11 @@ export const getUsuario = async (req, res) => {
 }
 
 export const createUsuario = async (req, res) => {
-    const { name, password, admin, email, direccion } = req.body;
+    const { name, email, phone, address, password } = req.body;
 
     try {
         // Verificar si el usuario ya existe
-        const [existingUsers] = await pool.query('SELECT id FROM usuario WHERE name = ?', [name]);
+        const [existingUsers] = await pool.query('SELECT id FROM user WHERE email = ?', [email]);
 
         // Si ya existe un usuario con ese nombre, enviar un código de error
         if (existingUsers.length > 0) {
@@ -29,7 +29,7 @@ export const createUsuario = async (req, res) => {
         // Si el usuario no existe, continuar con la creación
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const [rows] = await pool.query('INSERT INTO usuario (name, password, admin, email, direccion) VALUES (?, ?, ?, ?, ?)', [name, hashedPassword, admin, email, direccion]);
+        const [rows] = await pool.query('INSERT INTO user (name, password, email, address, phone) VALUES (?, ?, ?, ?, ?)', [name, hashedPassword, email, address, phone]);
 
         res.send({
             id: rows.insertId,
@@ -47,7 +47,7 @@ export const deleteUsuario = async (req, res) => {
 
     try {
         // Verificar si el usuario existe
-        const [existingUsers] = await pool.query('SELECT id FROM usuario WHERE id = ?', [id]);
+        const [existingUsers] = await pool.query('SELECT id FROM user WHERE id = ?', [id]);
 
         // Si no existe un usuario con ese ID, enviar un código de error
         if (existingUsers.length === 0) {
@@ -55,7 +55,7 @@ export const deleteUsuario = async (req, res) => {
         }
 
         // Si el usuario existe, eliminarlo
-        await pool.query('DELETE FROM usuario WHERE id = ?', [id]);
+        await pool.query('DELETE FROM user WHERE id = ?', [id]);
 
         res.json({ message: 'Usuario eliminado exitosamente' });
     } catch (error) {
@@ -67,17 +67,11 @@ export const deleteUsuario = async (req, res) => {
 export const updateUsuario = async (req, res) => {
     const { id } = req.params;
 
-    const { name, password, admin, email, direccion } = req.body;
-    // console.log(name)
-    // console.log(admin)
-    // console.log(password)
-    // console.log(email)
-    // console.log(direccion)
-
+    const { name, email, phone, role, address, password } = req.body;
 
     try {
         // Verificar si el usuario existe
-        const [existingUsers] = await pool.query('SELECT id FROM usuario WHERE id = ?', [id]);
+        const [existingUsers] = await pool.query('SELECT id FROM user WHERE id = ?', [id]);
 
         // Si no existe un usuario con ese ID, enviar un código de error
         if (existingUsers.length === 0) {
@@ -85,20 +79,19 @@ export const updateUsuario = async (req, res) => {
         }
 
         if (password == '') {
-            await pool.query('UPDATE usuario SET name = ?, direccion = ?, email=? WHERE id = ?', [name, direccion, email, id]);
+            await pool.query('UPDATE user SET name = ?, address = ?, phone = ?, email = ? WHERE id = ?', [name, address, phone, email, id]);
 
         } else {
             // Si el usuario existe, actualizar sus datos
             const hashedPassword = await bcrypt.hash(password, 10);
 
-
-
-            await pool.query('UPDATE usuario SET name = ?, password = ?, direccion = ?, email=?, admin=? WHERE id = ?', [name, hashedPassword, direccion, email, admin, id]);
-
+            await pool.query('UPDATE user SET name = ?, password = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, hashedPassword, address, phone, email, role, id]);
 
         }
 
-        res.json({ message: 'Usuario actualizado exitosamente' });
+        const [user] = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
+
+        res.json({ message: 'Usuario actualizado exitosamente', user: user });
     } catch (error) {
         console.error('Error al actualizar usuario:', error);
         res.status(500).send({ message: 'Error al actualizar usuario' });
@@ -107,18 +100,16 @@ export const updateUsuario = async (req, res) => {
 
 
 export const loginUsuario = async (req, res) => {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-        const [rows] = await pool.query('SELECT * FROM usuario WHERE name = ?', [name]);
+        const [rows] = await pool.query('SELECT * FROM user WHERE email = ?', [email]);
 
         if (rows.length === 0) {
             return res.status(400).send({ message: 'Usuario no encontrado' });
         }
 
         const user = rows[0];
-        // console.log(user)
-
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
@@ -126,21 +117,7 @@ export const loginUsuario = async (req, res) => {
             return res.status(401).send({ message: 'Contraseña incorrecta' });
         }
 
-        const token = jwt.sign({
-            exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
-            user: user.id,
-            username: user.name
-        }, 'secret')
-
-        const serialized = serialize('myTokenName', token, {
-            httpOnly: false,
-            sameSite: 'none',
-            maxAge: 1000 * 60 * 60 * 24 * 30,
-            path: '/'
-        })
-
-
-        return res.json({ message: 'login successfully', token: serialized, admin: user.admin });
+        return res.json({ message: 'login successfully', user: user });
 
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
