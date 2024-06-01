@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getTotalCart, getCarritoPersona, addCart, deleteProdCart,updateUsuario } from '../controllers/carrito.js';
+import { getTotalCart, getCarritoPersona, addCart, deleteProdCart, updateCarrito } from '../controllers/carrito.js';
 
 
 const router = Router()
@@ -13,7 +13,7 @@ router.post('/carrito', addCart)
 
 router.delete('/carrito/:id', deleteProdCart)
 
-router.put('/carrito/:id', updateUsuario)
+router.put('/carrito/:id', updateCarrito)
 
 
 

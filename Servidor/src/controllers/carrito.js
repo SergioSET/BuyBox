@@ -10,20 +10,29 @@ export const getTotalCart = async (req, res) => {
 }
 
 export const getCarritoPersona = async (req, res) => {
+    const { id } = req.params;
 
-    const [rows] = await pool.query('SELECT * FROM  cart WHERE id_user = ?', [req.id])
-    res.json(rows[0])
+    try {
+        // const [rows] = await pool.query('SELECT * FROM cart WHERE id_user = ?', [id]);
+
+        const [rows] = await pool.query('SELECT cart.*, product.name, product.price, product.img FROM cart JOIN product ON cart.id_product = product.id WHERE id_user = ?', [id]);
+
+        res.json(rows);
+    } catch (error) {
+        console.error('Error al obtener el carrito:', error);
+        res.status(500).send({ message: 'Error al obtener el carrito' });
+    }
 }
 
 export const addCart = async (req, res) => {
-    const { id_user, id_product, quantity } = req.body;
+    const id_user = req.body.itemCart.id_user;
+    const id_product = req.body.itemCart.id_product;
+    const quantity = req.body.itemCart.quantity;
+
     try {
-        // Si el usuario no existe, continuar con la creación
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const [rows] = await pool.query('INSERT INTO cart (id_user, id_product, quantity) VALUES (?, ?, ?)', [id_user, id_product, quantity]);
 
-        const [rows] = await pool.query('INSERT INTO car (id_user, id_product, quantity) VALUES (?, ?, ?, ?, ?)', [id_user, id_product, quantity]);
-
-        res.send(id_product, ' añadido al carrito');
+        res.send({ id: rows.insertId, id_product });
     } catch (error) {
         console.error('Error añadir al carrito:', error);
         res.status(500).send({ message: 'Error al añadir al carrito' });
@@ -52,9 +61,8 @@ export const deleteProdCart = async (req, res) => {
     }
 };
 
-export const updateUsuario = async (req, res) => {
-    const { id, quantity } = req.params;
-
+export const updateCarrito = async (req, res) => {
+    const { id, quantity } = req.body;
     try {
         // Verificar si el usuario existe
         const [existingUsers] = await pool.query('SELECT id FROM cart WHERE id = ?', [id]);

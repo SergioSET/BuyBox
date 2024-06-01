@@ -27,8 +27,6 @@ export const singleProductLoader = async ({ params }) => {
 
   const response = await axios(`http://localhost:3000/api/product/${id}`);
 
-  console.log(response.data[0]);
-
   return { productData: response.data[0] };
 };
 
@@ -37,7 +35,7 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(0);
   const { wishItems } = useSelector((state) => state.wishlist);
-  const { userId } = useSelector((state) => state.auth);
+  const [userId, setUserId] = useState(JSON.parse(localStorage.getItem("user")).id || {});
   const dispatch = useDispatch();
   const loginState = useState(localStorage.getItem("isLoggedIn"));
   const [rating, setRating] = useState([
@@ -118,29 +116,33 @@ const SingleProduct = () => {
   //   toast.success("Product removed from the wishlist!");
   // };
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
 
-    try {
-      const response = axios.get(
-        `http://localhost:3000/api/order/${localStorage.getItem("id")}`
-      );
-    }
-
-
-
-    const cartItem = {
-      id: productData?.id,
-      title: productData?.name,
-      image: productData?.img,
-      price: productData?.price,
-      amount: quantity,
-      // selectedSize: size || productData?.availableSizes[0],
+    const itemCart = {
+      id_user: userId,
+      id_product: productData?.id,
+      quantity: quantity,
     };
 
-    dispatch(addToCart(cartItem));
-    toast.success("Product added to the cart!");
+    try {
+      const response = await fetch('http://localhost:3000/api/carrito', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ itemCart }),
+      });
 
+      if (response.ok) {
+        toast.success("¡Producto añadido al carrito!");
+      }
+
+    } catch (error) {
+      console.error('Error:', error
+      );
+    }
   }
+
 
   return (
     <>

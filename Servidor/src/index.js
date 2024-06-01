@@ -22,9 +22,9 @@ app.use(express.json())
 app.use('/api', usuariosRoutes)
 app.use('/api', ordersRoutes)
 app.use('/api', productsRoutes)
+app.use('/api', carritoRoutes)
 app.use(indexRoutes)
 app.use(ordersRoutes)
-app.use('/api',carritoRoutes)
 
 
 
