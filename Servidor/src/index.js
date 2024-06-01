@@ -3,6 +3,7 @@ import usuariosRoutes from "./routes/usuarios.js"
 import indexRoutes from './routes/index.js'
 import ordersRoutes from './routes/orders.js'
 import productsRoutes from './routes/products.js'
+import carritoRoutes from './routes/carrito.js'
 import cors from "cors";
 
 const app = express()
@@ -23,6 +24,8 @@ app.use('/api', ordersRoutes)
 app.use('/api', productsRoutes)
 app.use(indexRoutes)
 app.use(ordersRoutes)
+app.use('/api',carritoRoutes)
+
 
 
 console.log("Server en puerto 3000 ")
