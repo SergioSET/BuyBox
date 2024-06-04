@@ -3,7 +3,7 @@ import { removeItem, updateCartAmount } from "../features/cart/cartSlice";
 import { useEffect, useState } from "react";
 
 
-const CartItem = ({ cartItem }) => {
+const CartItem = ({ cartItem, handleRemoveItem, handleUpdateCartAmount }) => {
   const [item, setItem] = useState({});
 
 
@@ -17,48 +17,48 @@ const CartItem = ({ cartItem }) => {
     });
   }, [cartItem]);
 
-  const handleUpdateCartAmount = async (event) => {
-    setItem({
-      ...item,
-      amount: event.target.value
-    });
-    try {
-      const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id: item.id,
-          quantity: event.target.value
-        })
-      });
+  // const handleUpdateCartAmount = async (event) => {
+  //   setItem({
+  //     ...item,
+  //     amount: event.target.value
+  //   });
+  //   try {
+  //     const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         id: item.id,
+  //         quantity: event.target.value
+  //       })
+  //     });
 
-      if (!response.ok) {
-        throw new Error('Response not ok');
-      }
+  //     if (!response.ok) {
+  //       throw new Error('Response not ok');
+  //     }
 
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
-  const handleRemoveItem = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+  // const handleRemoveItem = async () => {
+  //   try {
+  //     const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
+  //       method: 'DELETE',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       }
+  //     });
 
-      if (!response.ok) {
-        throw new Error('Response not ok');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  //     if (!response.ok) {
+  //       throw new Error('Response not ok');
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   return (
     <article

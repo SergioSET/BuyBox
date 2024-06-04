@@ -33,8 +33,6 @@ const Cart = () => {
       );
 
       setTotal(subTotal);
-      console.log(subTotal);
-
       setCartItems(data);
 
     } catch (error) {
@@ -54,6 +52,49 @@ const Cart = () => {
     }
   }
 
+  const handleUpdateCartAmount = async (event) => {
+    setItem({
+      ...item,
+      amount: event.target.value
+    });
+    try {
+      const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: item.id,
+          quantity: event.target.value
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Response not ok');
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleRemoveItem = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Response not ok');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   return (
     <>
       <SectionTitle title="Cart" path="Home | Cart" />
@@ -62,7 +103,7 @@ const Cart = () => {
           <CartItemsList total={total} />
         </div>
         <div className='lg:col-span-4 lg:pl-4'>
-          <CartTotals />
+          <CartTotals total={total} />
           {loginState ? (
             <button onClick={isCartEmpty} className='btn bg-blue-600 hover:bg-blue-500 text-white btn-block mt-8'>
               order now

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CartItem from './CartItem';
 import { useSelector } from 'react-redux';
 
-const CartItemsList = () => {
+const CartItemsList = ({ handleRemoveItem, handleUpdateCartAmount }) => {
   const userId = useState(JSON.parse(localStorage.getItem("user")).id || {});
   const [cartItems, setCartItems] = useState([]);
 
@@ -47,7 +47,7 @@ const CartItemsList = () => {
   return (
     <>
       {cartItems.map((item) => {
-        return <CartItem key={item.id} cartItem={item} />;
+        return <CartItem onDelete={handleRemoveItem} onEdit={handleUpdateCartAmount} key={item.id} cartItem={item} />;
       })}
     </>
   )
