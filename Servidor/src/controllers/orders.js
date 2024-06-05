@@ -28,7 +28,20 @@ export const createOrder = async (req, res) => {
 export const orderList = async (req, res) => {
     try {
         const { id } = req.params;
-        const query = `SELECT * FROM orden WHERE id_user = ?`;
+        const query = `SELECT
+            orden.*, 
+            user.address, 
+            orden_product.id AS orden_product_id,
+            orden_product.id_product,
+            orden_product.quantity,
+            product.name AS product_name,
+            product.price AS product_price
+            FROM orden
+            JOIN user ON orden.id_user = user.id
+            JOIN orden_product ON orden.id = orden_product.id_orden
+            JOIN product ON orden_product.id_product = product.id
+            WHERE orden.id_user = ?
+        `;
         const [rows] = await pool.query(query, [id]);
         res.send(rows);
     } catch (error) {

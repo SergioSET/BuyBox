@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-// import 'react-confirm-alert/src/react-confirm-alert.css';
-// import '../../css/dashboard-user.css';
-// import Navbar from '../../components/navbar-user';
 import { useLoaderData } from 'react-router-dom';
+import '../../src/styles/dashboard-user.css';
 
 export const lockerLoader = async ({ request }) => {
     const userId = JSON.parse(localStorage.getItem("user")).id || {};
@@ -19,10 +17,8 @@ export const lockerLoader = async ({ request }) => {
         }
 
         const data = await response.json();
-        setUserId(data.id);
     } catch (error) {
         console.log(error.message);
-
     }
 
     try {
@@ -47,8 +43,7 @@ export const lockerLoader = async ({ request }) => {
 
 export default function Locker() {
     const orders = useLoaderData();
-
-    console.log(orders);
+    const [expandedOrder, setExpandedOrder] = useState(null);
 
     const handleDelete = (id, name) => {
         if (window.confirm("¿Estás seguro que deseas borrar la orden " + name + "?")) {
@@ -65,7 +60,6 @@ export default function Locker() {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     window.location.reload();
                 })
                 .catch(error => {
@@ -74,42 +68,62 @@ export default function Locker() {
         }
     };
 
+    // Agrupar órdenes por número de seguimiento
+    const groupedOrders = orders.reduce((acc, order) => {
+        if (!acc[order.tracking_number]) {
+            acc[order.tracking_number] = [];
+        }
+        acc[order.tracking_number].push(order);
+        return acc;
+    }, {});
+
     return (
         <>
             <section className="relative">
-
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
-
                     <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-
-                        {orders.length === 0 ? (
+                        {Object.keys(groupedOrders).length === 0 ? (
                             <p>No hay pedidos disponibles.</p>
                         ) : (
                             <table className="tabla-con-divisiones">
                                 <thead>
                                     <tr>
                                         <th>Tracking</th>
-                                        {/* <th>Descripción</th>
                                         <th>Estado de pedido</th>
                                         <th>Fecha de entrega del pedido</th>
-                                        <th>Dirreción de entrega</th>
+                                        <th>Dirección de entrega</th>
                                         <th>Costo de pedido</th>
-                                        <th>Acciones</th> */}
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {orders.map((order, index) => (
-                                        <tr key={index}>
-                                            <td className="align-middle text-center">{order.tracking_number}</td>
-                                            {/* <td className="align-middle text-center">{order.description}</td>
-                                            <td className="align-middle text-center">{order.status}</td>
-                                            <td className="align-middle text-center">{order.shipping_date}</td>
-                                            <td className="align-middle text-center">{order.shipping_address}</td>
-                                            <td className="align-middle text-center">{order.cost} COP</td>
-                                            <td>
-                                                <button onClick={() => handleDelete(order.id, order.name)} className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">Eliminar</button>
-                                            </td> */}
-                                        </tr>
+                                    {Object.keys(groupedOrders).map((trackingNumber, index) => (
+                                        <React.Fragment key={index}>
+                                            <tr>
+                                                <td className="align-middle text-center">{trackingNumber}</td>
+                                                <td className="align-middle text-center">{groupedOrders[trackingNumber][0].status}</td>
+                                                <td className="align-middle text-center">{groupedOrders[trackingNumber][0].shipping_date}</td>
+                                                <td className="align-middle text-center">{groupedOrders[trackingNumber][0].address || "N/A"}</td>
+                                                <td className="align-middle text-center">{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(groupedOrders[trackingNumber][0].cost)}</td>
+                                                <td>
+                                                    <button onClick={() => setExpandedOrder(expandedOrder === trackingNumber ? null : trackingNumber)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-4">
+                                                        {expandedOrder === trackingNumber ? "Cerrar" : "Ver Productos"}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {expandedOrder === trackingNumber && groupedOrders[trackingNumber].map((order, i) => (
+                                                <tr key={`expanded_${i}`}>
+                                                    <td colSpan="7">
+                                                        <div className="mt-4">
+                                                            <h3>Productos de la orden:</h3>
+                                                            <ul>
+                                                                <li>{order.product_name} - Cantidad: {order.quantity}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </React.Fragment>
                                     ))}
                                 </tbody>
                             </table>
