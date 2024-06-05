@@ -1,44 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 
 const CartTotals = ({ total }) => {
-  const { amount } = useSelector((state) => state.cart);
-  // const [total, setTotal] = useState(subTotal);
-  const userId = JSON.parse(localStorage.getItem("user")).id || {};
   const tax = total / 5;
   const shipping = 10000;
-
-  // const calculateTotal = async () => {
-  //   try {
-  //     const response = await fetch(`http://localhost:3000/api/carrito/${userId}`, {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       }
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error('Response not ok');
-  //     }
-
-  //     const data = await response.json();
-  //     let subTotal = 0;
-
-  //     data.forEach((item) => {
-  //       subTotal += item.price * item.quantity;
-  //     });
-
-  //     setTotal(subTotal);
-
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   calculateTotal();
-  // }, []);
-
 
   return (
     <div className='card bg-base-200'>

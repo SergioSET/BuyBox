@@ -25,15 +25,13 @@ const Cart = () => {
       }
 
       const data = await response.json();
+      setCartItems(data);
 
       let subTotal = 0;
       data.forEach((item) => {
         subTotal += item.price * item.quantity;
-      }
-      );
-
+      });
       setTotal(subTotal);
-      setCartItems(data);
 
     } catch (error) {
       console.error(error);
@@ -52,20 +50,27 @@ const Cart = () => {
     }
   }
 
-  const handleUpdateCartAmount = async (event) => {
-    setItem({
-      ...item,
-      amount: event.target.value
+  const handleUpdateCartAmount = async (event, itemId) => {
+    const newAmount = event.target.value;
+    setCartItems(cartItems.map(item =>
+      item.id === itemId ? { ...item, quantity: newAmount } : item
+    ));
+
+    let subTotal = 0;
+    cartItems.forEach((item) => {
+      subTotal += item.price * item.quantity;
     });
+    setTotal(subTotal);
+
     try {
-      const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
+      const response = await fetch(`http://localhost:3000/api/carrito/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          id: item.id,
-          quantity: event.target.value
+          id: itemId,
+          quantity: newAmount
         })
       });
 
@@ -78,9 +83,17 @@ const Cart = () => {
     }
   }
 
-  const handleRemoveItem = async () => {
+  const handleRemoveItem = async (itemId) => {
+    setCartItems(cartItems.filter(item => item.id !== itemId));
+
+    let subTotal = 0;
+    cartItems.forEach((item) => {
+      subTotal += item.price * item.quantity;
+    });
+    setTotal(subTotal);
+
     try {
-      const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
+      const response = await fetch(`http://localhost:3000/api/carrito/${itemId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -94,13 +107,13 @@ const Cart = () => {
       console.error(error);
     }
   }
-  
+
   return (
     <>
       <SectionTitle title="Cart" path="Home | Cart" />
       <div className='mt-8 grid gap-8 lg:grid-cols-12 max-w-7xl mx-auto px-10'>
         <div className='lg:col-span-8'>
-          <CartItemsList total={total} />
+          <CartItemsList cartItems={cartItems} handleRemoveItem={handleRemoveItem} handleUpdateCartAmount={handleUpdateCartAmount} total={total} />
         </div>
         <div className='lg:col-span-4 lg:pl-4'>
           <CartTotals total={total} />
@@ -119,4 +132,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default Cart;
