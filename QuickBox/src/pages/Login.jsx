@@ -14,10 +14,10 @@ const Login = () => {
   const loginState = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
-    if (loginState) {
+    // if (loginState) {
       localStorage.clear();
       store.dispatch(logoutUser());
-    }
+    // }
   }, []);
 
   const isValidate = () => {

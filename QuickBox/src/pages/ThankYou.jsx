@@ -59,14 +59,14 @@ const ThankYou = () => {
         </h3>
         <ul className="text-xl mt-5 text-blue-500 max-sm:text-lg">
           <li className="hover:text-blue-600 cursor-pointer">
-            <Link to="/order-history">&rarr; See order history &larr;</Link>
+            <Link to="/locker">&rarr; Ver listado de ordenes &larr;</Link>
           </li>
-          <li className="hover:text-blue-600 cursor-pointer">
+          {/* <li className="hover:text-blue-600 cursor-pointer">
             <Link to="/">&rarr; Browse more product and buy more &larr;</Link>
           </li>
           <li className="hover:text-blue-600 cursor-pointer">
             &rarr; Follow us on social media &larr;
-          </li>
+          </li> */}
         </ul>
 
         <h4 className="text-xl mt-5 max-sm:text-lg">

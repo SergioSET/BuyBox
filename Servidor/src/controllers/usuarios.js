@@ -5,12 +5,12 @@ import bcrypt from 'bcrypt';
 
 
 export const getUsuarios = async (req, res) => {
-    const [rows] = await pool.query('SELECT * FROM  usuario')
+    const [rows] = await pool.query('SELECT * FROM  user')
     res.json(rows)
 }
 
 export const getUsuario = async (req, res) => {
-    const [rows] = await pool.query('SELECT * FROM  usuario WHERE id = ?', [req.params.id])
+    const [rows] = await pool.query('SELECT * FROM  user WHERE id = ?', [req.params.id])
     res.json(rows[0])
 }
 

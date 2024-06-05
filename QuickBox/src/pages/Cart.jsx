@@ -9,6 +9,8 @@ const Cart = () => {
   const userId = JSON.parse(localStorage.getItem("user")).id || {};
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const tax = total / 5;
+  const shipping = 10000;
 
   const getCartItems = async () => {
     try {
@@ -45,12 +47,35 @@ const Cart = () => {
     if (cartItems.length === 0) {
       toast.error("Your cart is empty");
     } else {
+      try {
+        fetch(`http://localhost:3000/api/order/create/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userId: userId,
+            subtotal: total + shipping + tax,
+            cartItems: cartItems
+          })
+        });
+      } catch (error) {
+        console.error(error);
+      }
+
       navigate("/thank-you");
     }
   };
 
   const handleUpdateCartAmount = async (event, itemId) => {
-    const newAmount = parseInt(event.target.value, 10);
+    let newAmount = 0;
+    if (event.target.value < 1) {
+      event.target.value = 1;
+      newAmount = 1;
+    } else {
+      newAmount = parseInt(event.target.value, 10);
+    }
+
     const updatedCartItems = cartItems.map(item =>
       item.id === itemId ? { ...item, quantity: newAmount } : item
     );
@@ -106,28 +131,37 @@ const Cart = () => {
   return (
     <>
       <SectionTitle title="Cart" path="Home | Cart" />
-      <div className='mt-8 grid gap-8 lg:grid-cols-12 max-w-7xl mx-auto px-10'>
-        <div className='lg:col-span-8'>
-          <CartItemsList
-            cartItems={cartItems}
-            handleRemoveItem={handleRemoveItem}
-            handleUpdateCartAmount={handleUpdateCartAmount}
-            total={total}
-          />
+      {cartItems.length === 0 ? (
+        <div className='text-center mt-8'>
+          <h2 className='text-2xl font-semibold'>Your cart is empty</h2>
+          <Link to='/shop' className='btn bg-blue-600 hover:bg-blue-500 text-white mt-4'>
+            Go to products
+          </Link>
         </div>
-        <div className='lg:col-span-4 lg:pl-4'>
-          <CartTotals total={total} />
-          {loginState ? (
-            <button onClick={isCartEmpty} className='btn bg-blue-600 hover:bg-blue-500 text-white btn-block mt-8'>
-              order now
-            </button>
-          ) : (
-            <Link to='/login' className='btn bg-blue-600 hover:bg-blue-500 btn-block text-white mt-8'>
-              please login
-            </Link>
-          )}
-        </div>
-      </div>
+      ) : (
+        <div className='mt-8 grid gap-8 lg:grid-cols-12 max-w-7xl mx-auto px-10'>
+          <div className='lg:col-span-8'>
+            <CartItemsList
+              cartItems={cartItems}
+              handleRemoveItem={handleRemoveItem}
+              handleUpdateCartAmount={handleUpdateCartAmount}
+              total={total}
+            />
+          </div >
+          <div className='lg:col-span-4 lg:pl-4'>
+            <CartTotals total={total} />
+            {loginState ? (
+              <button onClick={isCartEmpty} className='btn bg-blue-600 hover:bg-blue-500 text-white btn-block mt-8'>
+                order now
+              </button>
+            ) : (
+              <Link to='/login' className='btn bg-blue-600 hover:bg-blue-500 btn-block text-white mt-8'>
+                please login
+              </Link>
+            )}
+          </div>
+        </div >
+      )}
     </>
   );
 };
