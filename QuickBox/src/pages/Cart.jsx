@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { CartItemsList, CartTotals, SectionTitle } from '../components'
+import React, { useEffect, useState } from 'react';
+import { CartItemsList, CartTotals, SectionTitle } from '../components';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 const Cart = () => {
   const navigate = useNavigate();
-  const loginState = useState(localStorage.getItem("isLoggedIn"));
-  const userId = useState(JSON.parse(localStorage.getItem("user")).id || {});
+  const loginState = localStorage.getItem("isLoggedIn");
+  const userId = JSON.parse(localStorage.getItem("user")).id || {};
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
 
@@ -36,7 +35,7 @@ const Cart = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     getCartItems();
@@ -48,19 +47,17 @@ const Cart = () => {
     } else {
       navigate("/thank-you");
     }
-  }
+  };
 
   const handleUpdateCartAmount = async (event, itemId) => {
-    const newAmount = event.target.value;
-    setCartItems(cartItems.map(item =>
+    const newAmount = parseInt(event.target.value, 10);
+    const updatedCartItems = cartItems.map(item =>
       item.id === itemId ? { ...item, quantity: newAmount } : item
-    ));
+    );
+    setCartItems(updatedCartItems);
 
-    let subTotal = 0;
-    cartItems.forEach((item) => {
-      subTotal += item.price * item.quantity;
-    });
-    setTotal(subTotal);
+    const updatedTotal = updatedCartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    setTotal(updatedTotal);
 
     try {
       const response = await fetch(`http://localhost:3000/api/carrito/${itemId}`, {
@@ -81,16 +78,14 @@ const Cart = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const handleRemoveItem = async (itemId) => {
-    setCartItems(cartItems.filter(item => item.id !== itemId));
+    const updatedCartItems = cartItems.filter(item => item.id !== itemId);
+    setCartItems(updatedCartItems);
 
-    let subTotal = 0;
-    cartItems.forEach((item) => {
-      subTotal += item.price * item.quantity;
-    });
-    setTotal(subTotal);
+    const updatedTotal = updatedCartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    setTotal(updatedTotal);
 
     try {
       const response = await fetch(`http://localhost:3000/api/carrito/${itemId}`, {
@@ -106,14 +101,19 @@ const Cart = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <>
       <SectionTitle title="Cart" path="Home | Cart" />
       <div className='mt-8 grid gap-8 lg:grid-cols-12 max-w-7xl mx-auto px-10'>
         <div className='lg:col-span-8'>
-          <CartItemsList cartItems={cartItems} handleRemoveItem={handleRemoveItem} handleUpdateCartAmount={handleUpdateCartAmount} total={total} />
+          <CartItemsList
+            cartItems={cartItems}
+            handleRemoveItem={handleRemoveItem}
+            handleUpdateCartAmount={handleUpdateCartAmount}
+            total={total}
+          />
         </div>
         <div className='lg:col-span-4 lg:pl-4'>
           <CartTotals total={total} />
@@ -129,7 +129,7 @@ const Cart = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Cart;
