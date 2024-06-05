@@ -1,57 +1,76 @@
     import React, { useState } from "react";
     import { Link, useNavigate } from "react-router-dom";
     import { SectionTitle } from "../components";
-    import { nanoid } from "nanoid";
-    import { toast } from "react-toastify";
+    import axios from 'axios';
 
-    const Register = () => {
+    const NewProduct = () => {
     const [name, setName] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [price, setPrice] = useState("");
-    const [imagen, setImagen] = useState("");   
+    const [imagen, setImagen] = useState(null);  
 
     const navigate = useNavigate();
-    
-    function obtenerUltimoSegmento(texto) {
-         // Buscar la última posición del caracter '\' en el texto
-        const ultimoIndice = texto.lastIndexOf('\\');
-        
-        // Si no se encuentra '\' en el texto, retornar el texto original
-        if (ultimoIndice === -1) {
-            return texto;
-        }
-        
-        // Devolver todo lo que está después de la última '\'
-        return texto.substring(ultimoIndice + 1);
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('descripcion', descripcion);
-        formData.append('price', price);
-        formData.append('imagen', imagen);
-        formData.append('ruta', obtenerUltimoSegmento(imagen));
-        alert(imagen)
+        
         try {
-            const response = await fetch('http://localhost:3000/api/product/create', {
-                method: 'POST',
-                body: formData,
-            
-        });
-        console.log(response)
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('descripcion', descripcion);
+            formData.append('price', price);
+            formData.append('imagen', imagen);
+            console.log(Object.fromEntries(formData.entries()));
 
-        if (response.ok) {
-            navigate('/new-product');
-        } else {
-            const data = await response.json();
-            // setError(data.message);
-        }
+            const response = await axios.post('http://localhost:3000/api/product/create', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            console.log(response.data);
+
         } catch (error) {
-        console.error('Error:', error);
-        // setError('An error occurred while signing in.');
+            console.error('Error:', error);
         }
+    }
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     // alert(name);
+    //     try {
+    //         const response = await fetch('http://localhost:3000/api/product/create', {
+    //             method: 'POST',
+    //             body: JSON.stringify({
+    //                 name: name,
+    //                 imagen: imagen,
+    //                 description: descripcion,
+    //                 price: price
+    //             }),
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+            
+    //     });
+    //     console.log(response)
+
+    //     if (response.ok) {
+    //         navigate('/new-product');
+    //     } else {
+    //         const data = await response.json();
+    //         // setError(data.message);
+    //     }
+    //     } catch (error) {
+    //     console.error('Error:', error);
+    //     // setError('An error occurred while signing in.');
+    //     }
+    // }
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        console.log("eeeeeeeeeeeeee")
+        console.log(file);
+        console.log("aaaaaaaaaaaaaa")
+        setImagen(file);
     };
+
     return (
         <>
         <SectionTitle title="Nuevo producto" />
@@ -95,8 +114,7 @@
                     type="file"
                     accept="image/*"
                     className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                    value={imagen}
-                    onChange={(e) => setImagen(e.target.value)}
+                    onChange={handleFileChange}
                     required={true}
                 />
                 
@@ -128,4 +146,4 @@
     );
     };
 
-    export default Register;
+    export default NewProduct;
