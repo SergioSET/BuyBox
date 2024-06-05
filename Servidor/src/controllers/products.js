@@ -1,17 +1,39 @@
 import { pool } from "../db.js"
+import multer from 'multer';
+
+// Configuración de multer para guardar las imágenes en una carpeta específica
+const storage = multer.diskStorage({
+    destination: '../QuickBox/Public/ProductImages',
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage }).single('imagen');
 
 export const createProduct = async (req, res) => {
-    const { name, imagen, description, price} = req.body;
-    const img = "/public/productImages/" + imagen
+    upload(req, res, async function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json({ message: 'Error al cargar la imagen' });
+        } else if (err) {
+            return res.status(500).json({ message: 'Error al cargar la imagen' });
+        }
 
-    try {
-        const [rows] = await pool.query('INSERT INTO product (name, img, description, price) VALUES (?, ?, ?, ?)', [name, img, description, price]);
-        res.send({ status: 'Producto creado' })
-    } catch (error) {
-        console.error('Error al crear producto:', error);
-        res.status(500).send({ message: 'Error al crear  producto' });
-    }
-}
+        const { name, descripcion, price } = req.body;
+        const imagen = req.file;
+        const ruta = "/public/productImages/"   + imagen.filename;
+        
+
+
+        try {
+            const [rows] = await pool.query('INSERT INTO product (name, img, description, price) VALUES (?,?, ?, ?)', [name,ruta, descripcion, price]);
+            res.send({ status: 'Producto creado' });
+        } catch (error) {
+            console.error('Error al crear producto:', error);
+            res.status(500).send({ message: 'Error al crear el producto' });
+        }
+    });
+};
 
 export const productList = async (req, res) => {
     try {

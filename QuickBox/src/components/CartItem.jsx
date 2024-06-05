@@ -1,11 +1,7 @@
-import { useDispatch } from "react-redux";
-import { removeItem, updateCartAmount } from "../features/cart/cartSlice";
 import { useEffect, useState } from "react";
 
-
-const CartItem = ({ cartItem }) => {
+const CartItem = ({ cartItem, onDelete, onEdit }) => {
   const [item, setItem] = useState({});
-
 
   useEffect(() => {
     setItem({
@@ -16,49 +12,6 @@ const CartItem = ({ cartItem }) => {
       amount: cartItem.quantity,
     });
   }, [cartItem]);
-
-  const handleUpdateCartAmount = async (event) => {
-    setItem({
-      ...item,
-      amount: event.target.value
-    });
-    try {
-      const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id: item.id,
-          quantity: event.target.value
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Response not ok');
-      }
-
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const handleRemoveItem = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/carrito/${item.id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error('Response not ok');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   return (
     <article
@@ -75,13 +28,6 @@ const CartItem = ({ cartItem }) => {
       <div className="sm:ml-16 sm:w-48">
         {/* TITLE */}
         <h3 className="capitalize font-medium text-accent-content">{item.title}</h3>
-        {/* COMPANY */}
-        {/* <h4 className="mt-2 capitalize text-sm text-accent-content">
-          Brand: { brandName }
-        </h4> */}
-        {/* <h4 className="mt-2 capitalize text-sm text-accent-content">
-          Size: { selectedSize }
-        </h4> */}
       </div>
       <div className="sm:ml-12">
         {/* AMOUNT */}
@@ -94,18 +40,17 @@ const CartItem = ({ cartItem }) => {
             id="amount"
             className="mt-2 input input-bordered input-sm w-full max-w-xs text-accent-content"
             value={item.amount}
-            onChange={(event) => handleUpdateCartAmount(event)}
+            onChange={(event) => onEdit(event, item.id)}
           />
         </div>
         {/* REMOVE */}
         <button
           className="mt-2 link link-warning link-hover text-sm text-accent-content"
-          onClick={() => handleRemoveItem()}
+          onClick={() => onDelete(item.id)}
         >
           Remover
         </button>
       </div>
-
       {/* PRICE */}
       <p className="font-medium sm:ml-auto text-accent-content">{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(item.price * item.amount)}</p>
     </article>

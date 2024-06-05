@@ -4,15 +4,21 @@ import { serialize } from 'cookie'
 import bcrypt from 'bcrypt';
 
 export const createOrder = async (req, res) => {
-    const { userId, tracking, descripcion, direccionEntrega, costoTotal } = req.body;
+    const { userId, subtotal, cartItems } = req.body;
     const shipping_date = new Date();
+
     shipping_date.setDate(shipping_date.getDate() + 7);
     const formatted_date = `${shipping_date.getDate().toString().padStart(2, '0')}/${(shipping_date.getMonth() + 1).toString().padStart(2, '0')}/${shipping_date.getFullYear()}`;
     const status = 'En proceso';
+    const tracking = Math.floor(Math.random() * 1000000000);
 
     try {
-        const [rows] = await pool.query('INSERT INTO orden (id_usuario, tracking_number, description, status, shipping_date, shipping_address, cost) VALUES (?, ?, ?, ?, ?, ?, ?)', [userId, tracking, descripcion, status, formatted_date, direccionEntrega, costoTotal]);
-        res.send({ status: 'Orden creada' })
+        const [rows] = await pool.query('INSERT INTO orden (id_user, tracking_number, cost, status, shipping_date) VALUES (?, ?, ?, ?, ?)', [userId, tracking, subtotal, status, formatted_date]);
+        cartItems.forEach(element => {
+            pool.query('INSERT INTO orden_product (id_orden, id_product, quantity) VALUES (?, ?, ?)', [rows.insertId, element.id, element.quantity]);
+        });
+        pool.query('DELETE FROM cart WHERE id_user = ?', [userId]);
+        res.send({ status: 'Orden_producto creada' });
     } catch (error) {
         console.error('Error al crear orden:', error);
         res.status(500).send({ message: 'Error al crear orden' });
@@ -22,7 +28,20 @@ export const createOrder = async (req, res) => {
 export const orderList = async (req, res) => {
     try {
         const { id } = req.params;
-        const query = `SELECT * FROM orden WHERE id_usuario = ?`;
+        const query = `SELECT
+            orden.*, 
+            user.address, 
+            orden_product.id AS orden_product_id,
+            orden_product.id_product,
+            orden_product.quantity,
+            product.name AS product_name,
+            product.price AS product_price
+            FROM orden
+            JOIN user ON orden.id_user = user.id
+            JOIN orden_product ON orden.id = orden_product.id_orden
+            JOIN product ON orden_product.id_product = product.id
+            WHERE orden.id_user = ?
+        `;
         const [rows] = await pool.query(query, [id]);
         res.send(rows);
     } catch (error) {
@@ -40,9 +59,9 @@ export const indexOrder = async (req, res) => {
             SELECT 
                 orden.id AS orderId, name, tracking_number, description, status, shipping_date, shipping_address, cost, 
                 orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, 
-                orden.id_usuario AS IdUsuario 
+                orden.id_user AS IdUsuario 
             FROM orden 
-            INNER JOIN usuario ON orden.id_usuario = usuario.id
+            INNER JOIN usuario ON orden.id_user = usuario.id
         `;
         const params = [];
 
@@ -78,9 +97,9 @@ export const indexOrderById = async (req, res) => {
             SELECT 
                 orden.id AS orderId, name, tracking_number, description, status, shipping_date, shipping_address, cost, 
                 orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, 
-                orden.id_usuario AS IdUsuario 
+                orden.id_user AS IdUsuario 
             FROM orden 
-            INNER JOIN usuario ON orden.id_usuario = usuario.id
+            INNER JOIN usuario ON orden.id_user = usuario.id
         `;
         const params = [];
 

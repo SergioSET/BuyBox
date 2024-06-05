@@ -40,7 +40,6 @@ INSERT INTO `product` (`id`, `name`, `img`, `description`, `price`, `created_at`
 CREATE TABLE orden(
     id INT(11) NOT NULL AUTO_INCREMENT,
     id_user INT(11) DEFAULT NULL,
-    id_product INT(11) DEFAULT NULL,
     tracking_number VARCHAR(45) DEFAULT NULL,
     status ENUM('En proceso', 'Enviado', 'Entregado', 'Cancelado') DEFAULT 'En proceso',
     shipping_date VARCHAR(20) DEFAULT NULL,
@@ -48,8 +47,19 @@ CREATE TABLE orden(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_user) REFERENCES user(id),
-    FOREIGN KEY (id_product) REFERENCES product(id)
+    FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE CASCADE
+);
+
+CREATE TABLE orden_product(
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    id_orden INT(11) DEFAULT NULL,
+    id_product INT(11) DEFAULT NULL,
+    quantity INT(11) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_orden) REFERENCES orden(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_product) REFERENCES product(id) ON DELETE CASCADE
 );
 
 
@@ -61,6 +71,6 @@ CREATE TABLE cart(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_user) REFERENCES user(id),
-    FOREIGN KEY (id_product) REFERENCES product(id)
+    FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_product) REFERENCES product(id) ON DELETE CASCADE
 );

@@ -1,57 +1,43 @@
     import React, { useState } from "react";
     import { Link, useNavigate } from "react-router-dom";
     import { SectionTitle } from "../components";
-    import { nanoid } from "nanoid";
+    import axios from 'axios';
     import { toast } from "react-toastify";
 
-    const Register = () => {
+    const NewProduct = () => {
     const [name, setName] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [price, setPrice] = useState("");
-    const [imagen, setImagen] = useState("");   
+    const [imagen, setImagen] = useState(null);  
 
     const navigate = useNavigate();
-    
-    function obtenerUltimoSegmento(texto) {
-         // Buscar la última posición del caracter '\' en el texto
-        const ultimoIndice = texto.lastIndexOf('\\');
-        
-        // Si no se encuentra '\' en el texto, retornar el texto original
-        if (ultimoIndice === -1) {
-            return texto;
-        }
-        
-        // Devolver todo lo que está después de la última '\'
-        return texto.substring(ultimoIndice + 1);
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('descripcion', descripcion);
-        formData.append('price', price);
-        formData.append('imagen', imagen);
-        formData.append('ruta', obtenerUltimoSegmento(imagen));
-        alert(imagen)
+        
         try {
-            const response = await fetch('http://localhost:3000/api/product/create', {
-                method: 'POST',
-                body: formData,
-            
-        });
-        console.log(response)
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('descripcion', descripcion);
+            formData.append('price', price);
+            formData.append('imagen', imagen);
 
-        if (response.ok) {
-            navigate('/new-product');
-        } else {
-            const data = await response.json();
-            // setError(data.message);
-        }
+            const response = await axios.post('http://localhost:3000/api/product/create', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            toast.success("Producto agregado con exito");
+
         } catch (error) {
-        console.error('Error:', error);
-        // setError('An error occurred while signing in.');
+            console.error('Error:', error);
         }
+    }
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setImagen(file);
     };
+
     return (
         <>
         <SectionTitle title="Nuevo producto" />
@@ -95,8 +81,7 @@
                     type="file"
                     accept="image/*"
                     className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                    value={imagen}
-                    onChange={(e) => setImagen(e.target.value)}
+                    onChange={handleFileChange}
                     required={true}
                 />
                 
@@ -104,7 +89,7 @@
                     type="submit"
                     className="transition duration-200 bg-blue-600 hover:bg-blue-500 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
                 >
-                    <span className="inline-block mr-2">Register</span>
+                    <span className="inline-block mr-2">Agregar nuevo producto</span>
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -128,4 +113,4 @@
     );
     };
 
-    export default Register;
+    export default NewProduct;

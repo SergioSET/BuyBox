@@ -98,7 +98,7 @@ const Header = () => {
             <FaHeart className="text-xl" />
           </Link> */}
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <Link to="/cart" className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -115,34 +115,13 @@ const Header = () => {
                   />
                 </svg>
               </div>
-            </label>
-            <div
-              tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg text-accent-content">
-                  {amount} Items
-                </span>
-                <span className="text-info text-accent-content">
-                  Subtotal: ${total.toFixed(2)}
-                </span>
-                <div className="card-actions">
-                  <Link
-                    to="/cart"
-                    className="btn bg-blue-600 btn-block text-white hover:bg-blue-500 text-base-content"
-                  >
-                    View cart
-                  </Link>
-                </div>
-              </div>
-            </div>
+            </Link>
           </div>
           {isLoggedIn && (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://xsgames.co/randomusers/avatar.php?g=male" />
+                  <img src="https://xsgames.co/randomusers/assets/avatars/male/60.jpg" />
                 </div>
               </label>
               <ul
