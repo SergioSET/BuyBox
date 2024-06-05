@@ -11,13 +11,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loginState = useSelector((state) => state.auth.isLoggedIn);
+  const loginState = localStorage.getItem("isLoggedIn");
 
   useEffect(() => {
-    // if (loginState) {
+    if (loginState) {
       localStorage.clear();
       store.dispatch(logoutUser());
-    // }
+    }
   }, []);
 
   const isValidate = () => {
