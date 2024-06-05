@@ -2,6 +2,7 @@
     import { Link, useNavigate } from "react-router-dom";
     import { SectionTitle } from "../components";
     import axios from 'axios';
+    import { toast } from "react-toastify";
 
     const NewProduct = () => {
     const [name, setName] = useState("");
@@ -19,7 +20,6 @@
             formData.append('descripcion', descripcion);
             formData.append('price', price);
             formData.append('imagen', imagen);
-            console.log(Object.fromEntries(formData.entries()));
 
             const response = await axios.post('http://localhost:3000/api/product/create', formData, {
                 headers: {
@@ -27,47 +27,14 @@
                 }
             });
 
-            console.log(response.data);
+            toast.success("Producto agregado con exito");
 
         } catch (error) {
             console.error('Error:', error);
         }
     }
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     // alert(name);
-    //     try {
-    //         const response = await fetch('http://localhost:3000/api/product/create', {
-    //             method: 'POST',
-    //             body: JSON.stringify({
-    //                 name: name,
-    //                 imagen: imagen,
-    //                 description: descripcion,
-    //                 price: price
-    //             }),
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-            
-    //     });
-    //     console.log(response)
-
-    //     if (response.ok) {
-    //         navigate('/new-product');
-    //     } else {
-    //         const data = await response.json();
-    //         // setError(data.message);
-    //     }
-    //     } catch (error) {
-    //     console.error('Error:', error);
-    //     // setError('An error occurred while signing in.');
-    //     }
-    // }
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        console.log("eeeeeeeeeeeeee")
-        console.log(file);
-        console.log("aaaaaaaaaaaaaa")
         setImagen(file);
     };
 

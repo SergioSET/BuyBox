@@ -1,13 +1,11 @@
 import { pool } from "../db.js"
-import fs from "fs";
-import path from "path";
 import multer from 'multer';
 
 // Configuración de multer para guardar las imágenes en una carpeta específica
 const storage = multer.diskStorage({
     destination: '../QuickBox/Public/ProductImages',
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+        cb(null, Date.now() + '-' + file.originalname);
     }
 });
 
@@ -23,7 +21,7 @@ export const createProduct = async (req, res) => {
 
         const { name, descripcion, price } = req.body;
         const imagen = req.file;
-        const ruta = "/public/productImages/"   + imagen.originalname;
+        const ruta = "/public/productImages/"   + imagen.filename;
         
 
 
