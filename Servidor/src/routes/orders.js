@@ -8,7 +8,8 @@ router.post('/order/create', createOrder)
 
 router.get('/order/list/:id?', orderList)
 
-router.get('/order/index/:id?', indexOrder)
+// router.get('/order/index/:id?', indexOrder)
+router.get('/order/index', indexOrder)
 
 router.get('/order/indexId/:id?', indexOrderById)
 

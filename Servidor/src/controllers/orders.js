@@ -54,41 +54,67 @@ export const orderList = async (req, res) => {
 export const indexOrder = async (req, res) => {
     try {
         const { id } = req.params;
-        const { status } = req.query;
-        let query = `
-            SELECT 
-                orden.id AS orderId, name, tracking_number, description, status, shipping_date, shipping_address, cost, 
-                orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, 
-                orden.id_user AS IdUsuario 
-            FROM orden 
-            INNER JOIN usuario ON orden.id_user = usuario.id
+        const query = `SELECT
+            orden.*, 
+            user.name,
+            user.address, 
+            orden_product.id AS orden_product_id,
+            orden_product.id_product,
+            orden_product.quantity,
+            product.name AS product_name,
+            product.price AS product_price
+            FROM orden
+            JOIN user ON orden.id_user = user.id
+            JOIN orden_product ON orden.id = orden_product.id_orden
+            JOIN product ON orden_product.id_product = product.id
         `;
-        const params = [];
-
-        // Si hay un id en los parámetros, se busca por nombre usando LIKE
-        if (id) {
-            query += ' WHERE name LIKE ?';
-            params.push(`${id}%`);
-
-            // Si también hay un filtro de estado, se agrega a la consulta
-            if (status) {
-                query += ' AND status = ?';
-                console.log(status)
-                params.push(status);
-            }
-        } else if (status) {
-            // Si no hay id pero hay un filtro de estado, se agrega la condición de estado
-            query += ' WHERE status = ?';
-            params.push(status);
-        }
-
-        const [rows] = await pool.query(query, params);
+        const [rows] = await pool.query(query, [id]);
         res.send(rows);
     } catch (error) {
         console.error('Error al obtener ordenes:', error);
         res.status(500).send({ message: 'Error al obtener ordenes' });
     }
 }
+
+
+// export const indexOrder = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const { status } = req.query;
+//         let query = `
+//             SELECT 
+//                 orden.id AS orderId, name, tracking_number, description, status, shipping_date, shipping_address, cost, 
+//                 orden.created_at AS ordenCreated, orden.updated_at AS ordenUpdated, 
+//                 orden.id_user AS IdUsuario 
+//             FROM orden 
+//             INNER JOIN usuario ON orden.id_user = usuario.id
+//         `;
+//         const params = [];
+
+//         // Si hay un id en los parámetros, se busca por nombre usando LIKE
+//         if (id) {
+//             query += ' WHERE name LIKE ?';
+//             params.push(`${id}%`);
+
+//             // Si también hay un filtro de estado, se agrega a la consulta
+//             if (status) {
+//                 query += ' AND status = ?';
+//                 console.log(status)
+//                 params.push(status);
+//             }
+//         } else if (status) {
+//             // Si no hay id pero hay un filtro de estado, se agrega la condición de estado
+//             query += ' WHERE status = ?';
+//             params.push(status);
+//         }
+
+//         const [rows] = await pool.query(query, params);
+//         res.send(rows);
+//     } catch (error) {
+//         console.error('Error al obtener ordenes:', error);
+//         res.status(500).send({ message: 'Error al obtener ordenes' });
+//     }
+// }
 
 export const indexOrderById = async (req, res) => {
     try {

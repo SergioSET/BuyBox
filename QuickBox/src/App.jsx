@@ -18,6 +18,8 @@ import {
   Dashboard_admin,
   ProductList,
   EditProduct,
+  OrderList,
+  EditOrder,
 } from "./pages";
 import { landingLoader } from "./pages/Landing";
 import { singleProductLoader } from "./pages/SingleProduct";
@@ -26,6 +28,7 @@ import { lockerLoader } from "./pages/Locker";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./ProtectedRoute"; // Importa el componente de protección
 import { productlistloader } from "./pages/ProductList";
+import { orderlistloader } from "./pages/OrderList";
 
 const router = createBrowserRouter([
   {
@@ -127,14 +130,15 @@ const router = createBrowserRouter([
         path: "/admin/edit-product/:id",
         element: <EditProduct />,
       },
-      // {
-      //   path: "/admin/order-list",
-      //   element: <OrderList />,
-      // },
-      // {
-      //   path: "/admin/edit-order/:id",
-      //   element: <EditOrder />,
-      // },
+      {
+        path: "/admin/order-list",
+        element: <OrderList />,
+        loader: orderlistloader
+      },
+      {
+        path: "/admin/edit-order/:id",
+        element: <EditOrder />,
+      },
       // {
       //   path: "user-list",
       //   element: <UserList />,
