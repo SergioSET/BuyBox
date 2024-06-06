@@ -58,7 +58,6 @@ const Register = () => {
         },
         body: JSON.stringify({ name, email, phone, adress, password }),
       });
-      console.log(response)
 
       if (response.ok) {
         navigate('/login');
