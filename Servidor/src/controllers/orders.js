@@ -145,11 +145,11 @@ export const indexOrderById = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     const { id } = req.params;
-    const { shipping_address, status } = req.body;
+    const { status } = req.body;
 
     try {
-        const query = 'UPDATE orden SET shipping_address = ?, status = ? WHERE id = ?';
-        const [result] = await pool.query(query, [shipping_address, status, id]);
+        const query = 'UPDATE orden SET status = ? WHERE id = ?';
+        const [result] = await pool.query(query, [status, id]);
 
         if (result.affectedRows === 0) {
             res.status(404).send({ message: 'Orden no encontrada' });

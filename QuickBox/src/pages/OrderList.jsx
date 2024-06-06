@@ -3,7 +3,6 @@ import { useLoaderData } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
 
 export const orderlistloader = async ({ request }) => {
-
     try {
         const response = await fetch(`http://localhost:3000/order/index`, {
             method: 'GET',
@@ -27,6 +26,8 @@ export const orderlistloader = async ({ request }) => {
 export default function OrderList() {
     const orders = useLoaderData();
     const [expandedOrder, setExpandedOrder] = useState(null);
+    const [status, setStatus] = useState({});
+    const [error, setError] = useState(null);
 
     const handleDelete = (id, tracking_number, name) => {
         if (window.confirm("¿Estás seguro que deseas borrar la orden " + tracking_number + " del usuario " + name + " ? ")) {
@@ -49,6 +50,31 @@ export default function OrderList() {
                     setError(error.message);
                 });
         }
+    };
+
+    const handleStatusChange = (id, newStatus) => {
+        fetch(`http://localhost:3000/api/order/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: newStatus }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setStatus(prevStatus => ({
+                    ...prevStatus,
+                    [id]: newStatus,
+                }));
+            })
+            .catch(error => {
+                setError(error.message);
+            });
     };
 
     // Agrupar órdenes por número de seguimiento
@@ -86,7 +112,17 @@ export default function OrderList() {
                                             <tr>
                                                 <td className="align-middle text-center">{groupedOrders[trackingNumber][0].name}</td>
                                                 <td className="align-middle text-center">{trackingNumber}</td>
-                                                <td className="align-middle text-center">{groupedOrders[trackingNumber][0].status}</td>
+                                                <td className="align-middle text-center">
+                                                    <select
+                                                        value={status[groupedOrders[trackingNumber][0].id] || groupedOrders[trackingNumber][0].status}
+                                                        onChange={(e) => handleStatusChange(groupedOrders[trackingNumber][0].id, e.target.value)}
+                                                    >
+                                                        <option value="Pendiente">Pendiente</option>
+                                                        <option value="Enviado">Enviado</option>
+                                                        <option value="Entregado">Entregado</option>
+                                                        <option value="Cancelado">Cancelado</option>
+                                                    </select>
+                                                </td>
                                                 <td className="align-middle text-center">{groupedOrders[trackingNumber][0].shipping_date}</td>
                                                 <td className="align-middle text-center">{groupedOrders[trackingNumber][0].address || "N/A"}</td>
                                                 <td className="align-middle text-center">{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(groupedOrders[trackingNumber][0].cost)}</td>
