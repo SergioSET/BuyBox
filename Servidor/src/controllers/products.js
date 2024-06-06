@@ -58,10 +58,10 @@ export const indexProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { name, ruta, description, price } = req.body;
+    const { name, ruta, descripcion, price } = req.body;
 
     try {
-        const [rows] = await pool.query('UPDATE product SET name = ?, img = ?, description = ?, price = ? WHERE id = ?', [name, ruta, description, price, id]);
+        const [rows] = await pool.query('UPDATE product SET name = ?, description = ?, price = ? WHERE id = ?', [name, descripcion, price, id]);
         res.send({ status: 'Producto actualizado' });
     } catch (error) {
         console.error('Error al actualizar producto:', error);
