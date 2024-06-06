@@ -1,6 +1,4 @@
 import { pool } from "../db.js"
-import jwt from 'jsonwebtoken'
-import { serialize } from 'cookie'
 import bcrypt from 'bcrypt';
 
 
@@ -15,8 +13,8 @@ export const getUsuario = async (req, res) => {
 }
 
 export const createUsuario = async (req, res) => {
-    console.log(req.body) 
-    // const { name, role, email, phone, address, password } = req.body;
+    
+    const { name, role, email, phone, address, password } = req.body;
 
 
     try {
