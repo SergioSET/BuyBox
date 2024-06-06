@@ -25,6 +25,7 @@ import { shopLoader } from "./pages/Shop";
 import { lockerLoader } from "./pages/Locker";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./ProtectedRoute"; // Importa el componente de protección
+import { productlistloader } from "./pages/ProductList";
 
 const router = createBrowserRouter([
   {
@@ -116,6 +117,7 @@ const router = createBrowserRouter([
       {
         path: "/admin/product-list",
         element: <ProductList />,
+        loader: productlistloader
       },
       {
         path: "/admin/new-product",
@@ -126,11 +128,11 @@ const router = createBrowserRouter([
         element: <EditProduct />,
       },
       // {
-      //   path: "order-list",
+      //   path: "/admin/order-list",
       //   element: <OrderList />,
       // },
       // {
-      //   path: "edit-order/:id",
+      //   path: "/admin/edit-order/:id",
       //   element: <EditOrder />,
       // },
       // {
