@@ -40,7 +40,7 @@ const Landing = () => {
       <Stats />
 
       <div className="selected-products">
-        <h2 className="text-6xl text-center my-12 max-md:text-4xl text-accent-content">
+        <h2 className="TrendingP">
           Trending Products
         </h2>
         <div className="selected-products-grid max-w-7xl mx-auto">

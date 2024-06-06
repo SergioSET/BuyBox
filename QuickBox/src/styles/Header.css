@@ -65,3 +65,54 @@
     }
 
 }
+
+.Sbarra{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.Login {
+    font-size: 18px;
+    color: lightgrey;
+    transition: color 0.3s ease; /* Transición suave de color durante 0.3 segundos */
+}
+
+.Login:hover {
+    color: #2563eb; /* Cambia el color al pasar el mouse por encima */
+}
+
+.Login1 {
+    font-size: 18px;
+    color: lightgrey;
+    transition: color 0.3s ease; /* Transición suave de color durante 0.3 segundos */
+    margin-left: 10px;
+}
+
+.Login1:hover {
+    color: #2563eb; /* Cambia el color al pasar el mouse por encima */
+}
+
+
+.NavOp {
+    font-size: 20px;
+    position: relative;
+    text-decoration: none; /* Desactiva la subrayado predeterminado */
+    color: white; /* Cambia el color del texto según lo necesites */
+}
+
+.NavOp::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #2563eb; /* Cambia el color según lo necesites */
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.NavOp:hover::after {
+    width: 100%;
+    right: 0;
+}

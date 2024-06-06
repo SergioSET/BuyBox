@@ -1,0 +1,28 @@
+.copy{
+    font-size: 14px;
+    color: gray;
+}
+
+.FooterLink {
+    font-size: 18px;
+    position: relative;
+    text-decoration: none; /* Desactiva la subrayado predeterminado */
+    color: grey; /* Cambia el color del texto según lo necesites */
+}
+
+.FooterLink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: grey; /* Cambia el color según lo necesites */
+    transition: width 0.3s ease, right 0.3s ease;
+}
+
+.FooterLink:hover::after {
+    width: 100%;
+    right: 0;
+}

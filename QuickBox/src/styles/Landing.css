@@ -1,5 +1,3 @@
-
-
 .selected-products-grid{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -30,4 +28,12 @@
     .selected-products-grid div{
         margin: 0 auto;
     }
+}
+
+.TrendingP{
+    text-align: center;
+    font-size: 45px;
+    color: white;
+    margin-bottom: 25px;
+    font-weight: bold;
 }

@@ -17,3 +17,18 @@
     max-height: 100%;
     object-fit: contain;
 }
+
+.TitleShop{
+    font-size: 60px;
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.SubtitleShop{
+    font-size: 18px;
+    text-align: center;
+    color: lightgray;
+    margin-bottom: 50px;
+}

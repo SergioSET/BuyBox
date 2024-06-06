@@ -29,7 +29,9 @@ const Shop = () => {
 
   return (
     <>
-      <SectionTitle title="Shop" path="Home | Shop" />
+      <h1 className="TitleShop">Shop</h1>
+      <h2 className="SubtitleShop">Home | Shop</h2>
+      {/* <SectionTitle title="Shop" path="Home | Shop"/> */}
       <div className="max-w-7xl mx-auto mt-5">
         {/* <Filters /> */}
         {productLoaderData.productsData.length === 0 && <h2 className="text-accent-content text-center text-4xl my-10">No products found for this filter</h2>}

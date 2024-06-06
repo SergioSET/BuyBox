@@ -9,7 +9,7 @@ const Stats = () => {
               <h3 className="text-5xl font-extrabold leading-tight text-center text-accent-content">
                 <span>2</span>+
               </h3>
-              <p className="text-base font-medium leading-7 text-center text-dark-grey-600">
+              <p className="stat">
                 Años en el mercado
               </p>
             </div>
@@ -17,7 +17,7 @@ const Stats = () => {
               <h3 className="text-5xl font-extrabold leading-tight text-center text-accent-content">
                 $<span>1</span>m
               </h3>
-              <p className="text-base font-medium leading-7 text-center text-accent-content">
+              <p className="stat">
                 Crecimiento anual de ingresos
               </p>
             </div>
@@ -25,7 +25,7 @@ const Stats = () => {
               <h3 className="text-5xl font-extrabold leading-tight text-center text-accent-content">
                 <span id="countto3" data-decimal="1">50</span>k+
               </h3>
-              <p className="text-base font-medium leading-7 text-center text-accent-content">
+              <p className="stat">
                 Socios alrededor del mundo
               </p>
             </div>
@@ -33,7 +33,7 @@ const Stats = () => {
               <h3 className="text-5xl font-extrabold leading-tight text-center text-accent-content">
                 <span id="countto4">10</span>+
               </h3>
-              <p className="text-base font-medium leading-7 text-center text-dark-grey-600 text-accent-content">
+              <p className="stat">
                 Visitas diarias
               </p>
             </div>

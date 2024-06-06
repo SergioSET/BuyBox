@@ -150,10 +150,11 @@ const Header = () => {
             </div>
           )} {!isLoggedIn && (
             <div className="container text-2xl navlinks-container">
-              <NavLink className="text-accent-content" to="/login">
+              <NavLink className="Login1" to="/login">
                 Iniciar sesión
               </NavLink>
-              <NavLink className="text-accent-content" to="/register">
+              <span className="Sbarra">/</span>
+              <NavLink className="Login" to="/register">
                 Registrarse
               </NavLink>
             </div>
@@ -227,16 +228,16 @@ const Header = () => {
         </div>
 
         <div className="container text-2xl navlinks-container">
-          <NavLink className="text-accent-content" to="/">
+          <NavLink className="NavOp" to="/">
             Página principal
           </NavLink>
-          <NavLink className="text-accent-content" to="/shop">
+          <NavLink className="NavOp" to="/shop">
             Tienda
           </NavLink>
-          <NavLink className="text-accent-content" to="/locker">
+          <NavLink className="NavOp" to="/locker">
             Casillero
           </NavLink>
-          <NavLink className="text-accent-content" to="/about-us">
+          <NavLink className="NavOp" to="/about-us">
             Acerca de nosotros
           </NavLink>
           {/* <NavLink className="text-accent-content" to="/contact">
