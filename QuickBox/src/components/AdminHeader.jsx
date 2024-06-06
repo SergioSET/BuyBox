@@ -49,7 +49,7 @@ const AdminHeader = () => {
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">150</div>
           <div className="stat-title text-sm">Users</div>
-          <button className="btn btn-primary mt-2 btn-sm">Manage</button>
+          <Link to="/admin/user-list" className="btn btn-primary mt-2 btn-sm">Manage</Link>
         </div>
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">250</div>
@@ -59,12 +59,12 @@ const AdminHeader = () => {
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">100</div>
           <div className="stat-title text-sm">Orders</div>
-          <button className="btn btn-primary mt-2 btn-sm">Manage</button>
+          <Link to="/admin/order-list" className="btn btn-primary mt-2 btn-sm">Manage</Link>
         </div>
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">24/7</div>
           <div className="stat-title text-sm">Support</div>
-          <button className="btn btn-primary mt-2 btn-sm">Chat Now</button>
+          <button className="btn btn-primary mt-2 btn-sm">Contact</button>
         </div>
       </div>
     </>

@@ -18,4 +18,5 @@ export { default as AdminLayout } from "./AdminLayout";
 export { default as Dashboard_admin } from "./Dashboard_admin";
 export { default as ProductList } from "./ProductList";
 export { default as EditProduct } from "./EditProduct";
-
+export { default as OrderList } from "./OrderList";
+export { default as EditOrder } from "./EditOrder";
