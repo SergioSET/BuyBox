@@ -19,7 +19,6 @@ import {
   ProductList,
   EditProduct,
   OrderList,
-  EditOrder,
   UserList,
   EditUser,
   NewUser,
@@ -138,10 +137,6 @@ const router = createBrowserRouter([
         path: "/admin/order-list",
         element: <OrderList />,
         loader: orderlistloader
-      },
-      {
-        path: "/admin/edit-order/:id",
-        element: <EditOrder />,
       },
       {
         path: "/admin/user-list",

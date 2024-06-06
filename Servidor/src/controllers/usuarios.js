@@ -8,14 +8,12 @@ export const getUsuarios = async (req, res) => {
 }
 
 export const getUsuario = async (req, res) => {
-    const [rows] = await pool.query('SELECT * FROM  user WHERE id = ?', [req.params.id])
+    let [rows] = await pool.query('SELECT * FROM  user WHERE id = ?', [req.params.id])
     res.json(rows[0])
 }
 
 export const createUsuario = async (req, res) => {
-    
     const { name, role, email, phone, address, password } = req.body;
-
 
     try {
         // Verificar si el usuario ya existe
@@ -79,13 +77,17 @@ export const updateUsuario = async (req, res) => {
         }
 
         if (password == '') {
-            await pool.query('UPDATE user SET name = ?, address = ?, phone = ?, email = ? WHERE id = ?', [name, address, phone, email, id]);
+            await pool.query('UPDATE user SET name = ?, role = ?, address = ?, phone = ?, email = ? WHERE id = ?', [name, role, address, phone, email, id]);
+
+        } else if (password == existingUsers.password) {
+
+            await pool.query('UPDATE user SET name = ?, role = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, role, address, phone, email, role, id]);
 
         } else {
             // Si el usuario existe, actualizar sus datos
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            await pool.query('UPDATE user SET name = ?, password = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, hashedPassword, address, phone, email, role, id]);
+            await pool.query('UPDATE user SET name = ?, password = ?, role = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, hashedPassword, role, address, phone, email, role, id]);
 
         }
 
