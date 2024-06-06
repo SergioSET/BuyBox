@@ -20,6 +20,9 @@ import {
   EditProduct,
   OrderList,
   EditOrder,
+  UserList,
+  EditUser,
+  NewUser,
 } from "./pages";
 import { landingLoader } from "./pages/Landing";
 import { singleProductLoader } from "./pages/SingleProduct";
@@ -29,6 +32,7 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./ProtectedRoute"; // Importa el componente de protección
 import { productlistloader } from "./pages/ProductList";
 import { orderlistloader } from "./pages/OrderList";
+import { userlistloader } from "./pages/UserList";
 
 const router = createBrowserRouter([
   {
@@ -139,18 +143,19 @@ const router = createBrowserRouter([
         path: "/admin/edit-order/:id",
         element: <EditOrder />,
       },
-      // {
-      //   path: "user-list",
-      //   element: <UserList />,
-      // },
-      // {
-      //   path: "new-user",
-      //   element: <NewUser />,
-      // },
-      // {
-      //   path: "edit-user/:id",
-      //   element: <EditUser />,
-      // },
+      {
+        path: "/admin/user-list",
+        element: <UserList />,
+        loader: userlistloader
+      },
+      {
+        path: "/admin/new-user",
+        element: <NewUser />,
+      },
+      {
+        path: "/admin/edit-user/:id",
+        element: <EditUser />,
+      },
       // {
       //   path: "supportChat",
       //   element: <SupportChat />,

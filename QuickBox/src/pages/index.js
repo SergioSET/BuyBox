@@ -20,3 +20,6 @@ export { default as ProductList } from "./ProductList";
 export { default as EditProduct } from "./EditProduct";
 export { default as OrderList } from "./OrderList";
 export { default as EditOrder } from "./EditOrder";
+export { default as UserList } from "./UserList";
+export { default as EditUser } from "./EditUser";
+export { default as NewUser } from "./NewUser";

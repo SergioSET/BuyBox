@@ -17,7 +17,7 @@ CREATE TABLE user(
     PRIMARY KEY (id)
 );
 INSERT INTO user (name, password, email, role) VALUES ('superadmin', '$2b$10$M88KU2aAUsMS0yEQJuspVe/SM1XBq72gXOf4DNWdCZ7Vod3mfRl5O', 'admin@admin.com', 'Admin');
-INSERT INTO user (name, password, email, role) VALUES ('Sergio', '$2b$10$M88KU2aAUsMS0yEQJuspVe/SM1XBq72gXOf4DNWdCZ7Vod3mfRl5O', 'sergio@gmail.com', 'Usuario');
+INSERT INTO user (name, password, email, role, address, phone) VALUES ('Sergio', '$2b$10$M88KU2aAUsMS0yEQJuspVe/SM1XBq72gXOf4DNWdCZ7Vod3mfRl5O', 'sergio@gmail.com', 'Usuario', 'Calle 123', '1234567');
 
 
 CREATE TABLE product(
