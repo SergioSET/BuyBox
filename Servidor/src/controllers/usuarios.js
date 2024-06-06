@@ -15,9 +15,9 @@ export const getUsuario = async (req, res) => {
 }
 
 export const createUsuario = async (req, res) => {
-    const { name, role, email, phone, address, password } = req.body;
+    console.log(req.body) 
+    // const { name, role, email, phone, address, password } = req.body;
 
-    console.log(req.body)
 
     try {
         // Verificar si el usuario ya existe

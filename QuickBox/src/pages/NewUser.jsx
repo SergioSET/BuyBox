@@ -26,12 +26,16 @@ const NewUser = () => {
             formData.append('phone', phone);
             formData.append('address', address);
 
-            console.log(formData)
-
-            const response = await fetch('http://localhost:3000/api/usuarios', {
-                method: 'POST',
-                body: formData
+            const response = await axios.post('http://localhost:3000/api/usuarios', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             });
+
+            // const response = await fetch('http://localhost:3000/api/usuarios', {
+            //     method: 'POST',
+            //     body: formData
+            // });
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
