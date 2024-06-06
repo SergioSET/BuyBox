@@ -156,10 +156,6 @@ const router = createBrowserRouter([
         path: "/admin/edit-user/:id",
         element: <EditUser />,
       },
-      // {
-      //   path: "supportChat",
-      //   element: <SupportChat />,
-      // }
     ]
   }
 ]);
