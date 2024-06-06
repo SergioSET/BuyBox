@@ -14,3 +14,8 @@ export { default as Search } from "./Search";
 export { default as ThankYou } from "./ThankYou";
 export { default as OrderHistory } from "./OrderHistory";
 export { default as NewProduct } from "./NewProduct";
+export { default as AdminLayout } from "./AdminLayout";
+export { default as Dashboard_admin } from "./Dashboard_admin";
+export { default as ProductList } from "./ProductList";
+export { default as EditProduct } from "./EditProduct";
+

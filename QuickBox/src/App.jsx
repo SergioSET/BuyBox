@@ -2,7 +2,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   About,
   Cart,
-  Contact,
   HomeLayout,
   Landing,
   Login,
@@ -10,18 +9,22 @@ import {
   Shop,
   Locker,
   SingleProduct,
-  Wishlist,
   Profile,
   Search,
   ThankYou,
   OrderHistory,
-  NewProduct
+  NewProduct,
+  AdminLayout,
+  Dashboard_admin,
+  ProductList,
+  EditProduct,
 } from "./pages";
 import { landingLoader } from "./pages/Landing";
 import { singleProductLoader } from "./pages/SingleProduct";
 import { shopLoader } from "./pages/Shop";
 import { lockerLoader } from "./pages/Locker";
 import { ToastContainer } from "react-toastify";
+import ProtectedRoute from "./ProtectedRoute"; // Importa el componente de protección
 
 const router = createBrowserRouter([
   {
@@ -37,7 +40,6 @@ const router = createBrowserRouter([
         path: "shop",
         element: <Shop />,
         loader: shopLoader
-
       },
       {
         path: "shop/product/:id",
@@ -46,7 +48,11 @@ const router = createBrowserRouter([
       },
       {
         path: "locker",
-        element: <Locker />,
+        element: (
+          <ProtectedRoute allowedRoles={['Usuario']}>
+            <Locker />
+          </ProtectedRoute>
+        ),
         loader: lockerLoader,
       },
       {
@@ -61,10 +67,6 @@ const router = createBrowserRouter([
         path: "register",
         element: <Register />,
       },
-      // {
-      //   path: "contact",
-      //   element: <Contact />,
-      // },
       {
         path: "about-us",
         element: <About />,
@@ -73,13 +75,13 @@ const router = createBrowserRouter([
         path: "cart",
         element: <Cart />,
       },
-      // {
-      //   path: "wishlist",
-      //   element: <Wishlist />,
-      // },
       {
         path: "user-profile",
-        element: <Profile />,
+        element: (
+          <ProtectedRoute allowedRoles={['Usuario']}>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "search",
@@ -91,14 +93,64 @@ const router = createBrowserRouter([
       },
       {
         path: "order-history",
-        element: <OrderHistory />
+        element: (
+          <ProtectedRoute allowedRoles={['Usuario']}>
+            <OrderHistory />
+          </ProtectedRoute>
+        ),
       },
-      {
-        path: "new-product",
-        element: <NewProduct />
-      }
     ],
   },
+  {
+    path: "/admin",
+    element: (
+      <ProtectedRoute allowedRoles={['Admin']}>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/admin",
+        element: <Dashboard_admin />,
+      },
+      {
+        path: "/admin/product-list",
+        element: <ProductList />,
+      },
+      {
+        path: "/admin/new-product",
+        element: <NewProduct />
+      },
+      {
+        path: "/admin/edit-product/:id",
+        element: <EditProduct />,
+      },
+      // {
+      //   path: "order-list",
+      //   element: <OrderList />,
+      // },
+      // {
+      //   path: "edit-order/:id",
+      //   element: <EditOrder />,
+      // },
+      // {
+      //   path: "user-list",
+      //   element: <UserList />,
+      // },
+      // {
+      //   path: "new-user",
+      //   element: <NewUser />,
+      // },
+      // {
+      //   path: "edit-user/:id",
+      //   element: <EditUser />,
+      // },
+      // {
+      //   path: "supportChat",
+      //   element: <SupportChat />,
+      // }
+    ]
+  }
 ]);
 
 function App() {
