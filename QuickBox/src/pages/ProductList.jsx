@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export const productlistloader = async ({ request }) => {
     try {
@@ -73,16 +73,18 @@ export default function ProductList() {
             <section className="relative">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-                        <button onClick={handleCreate} className="btn btn-primary mb-4">Crear nuevo producto</button>
+                        <button onClick={handleCreate} className="btn btn-primary mb-4">
+                            <FontAwesomeIcon icon={faPlus} />Crear nuevo producto
+                        </button>
                         {products.length === 0 ? (
                             <p>No hay productos disponibles.</p>
                         ) : (
                             <table className="tabla-con-divisiones">
                                 <thead>
                                     <tr>
-                                        <th style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
-                                        <th style={{ width: '30%', textAlign: 'center'}}>Descripción</th>
-                                        <th style={{ width: '13%', textAlign: 'center'}}>Imagen</th>
+                                        <th className="table-header" style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
+                                        <th className="table-header" style={{ width: '27%', textAlign: 'center'}}>Descripción</th>
+                                        <th className="table-header" style={{ width: '16%', textAlign: 'center'}}>Imagen</th>
                                         <th style={{ width: '7%', textAlign: 'center'}}>Precio</th>
                                         <th style={{ width: '15%', textAlign: 'center'}}>Acciones</th>
                                     </tr>
@@ -105,7 +107,7 @@ export default function ProductList() {
                                                         onClick={() => toggleImageVisibility(product.id)}
                                                         className="btn btn-primary"
                                                     >
-                                                        Mostrar imagen
+                                                        <FontAwesomeIcon icon={faEye} />Mostrar imagen
                                                     </button>
                                                 )}
                                             </td>
