@@ -85,11 +85,11 @@ export default function ProductList() {
                                         <th className="table-header" style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
                                         <th className="table-header" style={{ width: '27%', textAlign: 'center'}}>Descripción</th>
                                         <th className="table-header" style={{ width: '16%', textAlign: 'center'}}>Imagen</th>
-                                        <th style={{ width: '7%', textAlign: 'center'}}>Precio</th>
-                                        <th style={{ width: '15%', textAlign: 'center'}}>Acciones</th>
+                                        <th className="table-header" style={{ width: '7%', textAlign: 'center'}}>Precio</th>
+                                        <th className="table-header" style={{ width: '15%', textAlign: 'center'}}>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="table-body">
                                     {products.map((product) => (
                                         <tr key={product.id}>
                                             <td>{product.name}</td>

@@ -75,16 +75,16 @@ export default function UserList() {
                             <table className="tabla-con-divisiones">
                                 <thead>
                                     <tr>
-                                        <th style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
-                                        <th style={{ width: '10%', textAlign: 'center'}}>Rol</th>
-                                        <th style={{ width: '20%', textAlign: 'center'}}>Correo electrónico</th>
-                                        <th style={{ width: '18%', textAlign: 'center'}}>Dirección</th>
-                                        <th style={{ width: '15%', textAlign: 'center' }}>Teléfono</th>
-                                        <th style={{ width: '25%', textAlign: 'center'}}>Acciones</th>
+                                        <th className="table-header" style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
+                                        <th className="table-header" style={{ width: '10%', textAlign: 'center'}}>Rol</th>
+                                        <th className="table-header" style={{ width: '20%', textAlign: 'center'}}>Correo electrónico</th>
+                                        <th className="table-header" style={{ width: '18%', textAlign: 'center'}}>Dirección</th>
+                                        <th className="table-header" style={{ width: '15%', textAlign: 'center' }}>Teléfono</th>
+                                        <th className="table-header" style={{ width: '25%', textAlign: 'center'}}>Acciones</th>
 
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="table-body">
                                     {users.map((user) => (
                                         <tr key={user.id}>
                                             <td>{user.name}</td>

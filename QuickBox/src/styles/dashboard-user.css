@@ -24,15 +24,15 @@
 }
 
 .table-header {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto Slab', serif;
     font-size: 20px;
     font-weight: 700; /* Negrita para títulos */
     text-align: center;
 }
 
 .table-body {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto Slab', serif;
     font-size: 14px;
-    font-weight: 400; /* Normal para el cuerpo del texto */
+    font-weight: 200; /* Normal para el cuerpo del texto */
     text-align: left;
 }
