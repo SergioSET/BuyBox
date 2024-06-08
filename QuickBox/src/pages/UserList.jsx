@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
 import '../../src/styles/margin.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 export const userlistloader = async ({ request }) => {
     try {
@@ -89,8 +92,12 @@ export default function UserList() {
                                             <td>{user.address}</td>
                                             <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{user.phone}</td>
                                             <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                                <button onClick={() => handleEdit(user.id)} className="btn btn-primary">Editar</button>
-                                                <button onClick={() => handleDelete(user.id)} className="btn btn-error" style={{ marginLeft: '10px' }}>Borrar</button>
+                                                <button onClick={() => handleEdit(user.id)} className="btn btn-primary" style={{ marginRight: '5px' }}>
+                                                    <FontAwesomeIcon icon={faEdit} /> Editar
+                                                </button>
+                                                <button onClick={() => handleDelete(user.id)} className="btn btn-error" style={{ marginLeft: '10px' }}>
+                                                <FontAwesomeIcon icon={faTrashAlt} /> Borrar
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}
