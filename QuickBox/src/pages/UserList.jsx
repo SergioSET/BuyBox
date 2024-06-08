@@ -3,7 +3,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
 import '../../src/styles/margin.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -68,7 +68,9 @@ export default function UserList() {
             <section className="relative">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-                        <button onClick={handleCreate} className="btn btn-primary mb-4">Crear nuevo usuario</button>
+                        <button onClick={handleCreate} className="btn btn-primary mb-4">
+                            <FontAwesomeIcon icon={faPlus} />Crear nuevo usuario
+                        </button>
                         {users.length === 0 ? (
                             <p>No hay usuarios disponibles.</p>
                         ) : (
