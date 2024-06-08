@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
+import '../../src/styles/margin.css';
 
 export const userlistloader = async ({ request }) => {
     try {
@@ -70,12 +71,13 @@ export default function UserList() {
                             <table className="tabla-con-divisiones">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Rol</th>
-                                        <th>Correo electronico</th>
-                                        <th>Dirreción</th>
-                                        <th>Telefono</th>
-                                        <th>Acciones</th>
+                                        <th style={{ width: '15%' }}>Nombre</th>
+                                        <th style={{ width: '10%' }}>Rol</th>
+                                        <th style={{ width: '22%' }}>Correo electrónico</th>
+                                        <th style={{ width: '20%' }}>Dirección</th>
+                                        <th style={{ width: '15%' }}>Teléfono</th>
+                                        <th style={{ width: '20%' }}>Acciones</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,9 +88,9 @@ export default function UserList() {
                                             <td>{user.email}</td>
                                             <td>{user.address}</td>
                                             <td>{user.phone}</td>
-                                            <td>
+                                            <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                 <button onClick={() => handleEdit(user.id)} className="btn btn-primary">Editar</button>
-                                                <button onClick={() => handleDelete(user.id, user.name)} className="btn btn-error">Borrar</button>
+                                                <button onClick={() => handleDelete(user.id)} className="btn btn-error" style={{ marginLeft: '10px' }}>Borrar</button>
                                             </td>
                                         </tr>
                                     ))}
