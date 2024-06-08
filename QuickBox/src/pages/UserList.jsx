@@ -71,12 +71,12 @@ export default function UserList() {
                             <table className="tabla-con-divisiones">
                                 <thead>
                                     <tr>
-                                        <th style={{ width: '15%' }}>Nombre</th>
-                                        <th style={{ width: '10%' }}>Rol</th>
-                                        <th style={{ width: '22%' }}>Correo electrónico</th>
-                                        <th style={{ width: '20%' }}>Dirección</th>
-                                        <th style={{ width: '15%' }}>Teléfono</th>
-                                        <th style={{ width: '20%' }}>Acciones</th>
+                                        <th style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
+                                        <th style={{ width: '10%', textAlign: 'center'}}>Rol</th>
+                                        <th style={{ width: '22%', textAlign: 'center'}}>Correo electrónico</th>
+                                        <th style={{ width: '20%', textAlign: 'center'}}>Dirección</th>
+                                        <th style={{ width: '15%', textAlign: 'center' }}>Teléfono</th>
+                                        <th style={{ width: '20%', textAlign: 'center'}}>Acciones</th>
 
                                     </tr>
                                 </thead>
@@ -84,10 +84,10 @@ export default function UserList() {
                                     {users.map((user) => (
                                         <tr key={user.id}>
                                             <td>{user.name}</td>
-                                            <td>{user.role}</td>
+                                            <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{user.role}</td>
                                             <td>{user.email}</td>
                                             <td>{user.address}</td>
-                                            <td>{user.phone}</td>
+                                            <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{user.phone}</td>
                                             <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                 <button onClick={() => handleEdit(user.id)} className="btn btn-primary">Editar</button>
                                                 <button onClick={() => handleDelete(user.id)} className="btn btn-error" style={{ marginLeft: '10px' }}>Borrar</button>
