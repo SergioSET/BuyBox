@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 export const productlistloader = async ({ request }) => {
     try {
@@ -78,19 +80,19 @@ export default function ProductList() {
                             <table className="tabla-con-divisiones">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Imagen</th>
-                                        <th>Precio</th>
-                                        <th>Acciones</th>
+                                        <th style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
+                                        <th style={{ width: '30%', textAlign: 'center'}}>Descripción</th>
+                                        <th style={{ width: '13%', textAlign: 'center'}}>Imagen</th>
+                                        <th style={{ width: '7%', textAlign: 'center'}}>Precio</th>
+                                        <th style={{ width: '15%', textAlign: 'center'}}>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {products.map((product) => (
                                         <tr key={product.id}>
                                             <td>{product.name}</td>
-                                            <td>{product.description}</td>
-                                            <td>
+                                            <td >{product.description}</td>
+                                            <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>
                                                 {visibleImages[product.id] ? (
                                                     <img
                                                         src={product.img}
@@ -107,10 +109,14 @@ export default function ProductList() {
                                                     </button>
                                                 )}
                                             </td>
-                                            <td>{product.price}</td>
-                                            <td>
-                                                <button onClick={() => handleEdit(product.id)} className="btn btn-primary">Editar</button>
-                                                <button onClick={() => handleDelete(product.id, product.name)} className="btn btn-danger">Borrar</button>
+                                            <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{product.price}</td>
+                                            <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                <button onClick={() => handleEdit(product.id)} className="btn btn-primary" style={{ marginRight: '5px' }}>
+                                                <FontAwesomeIcon icon={faEdit} /> Editar
+                                                </button>
+                                                <button onClick={() => handleDelete(product.id, product.name)} className="btn btn-danger" style={{ marginRight: '5px' }}>
+                                                <FontAwesomeIcon icon={faTrashAlt} /> Borrar
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}
