@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 
+
 export const userlistloader = async ({ request }) => {
     try {
         const response = await fetch(`http://localhost:3000/api/usuarios`, {
@@ -76,10 +77,10 @@ export default function UserList() {
                                     <tr>
                                         <th style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
                                         <th style={{ width: '10%', textAlign: 'center'}}>Rol</th>
-                                        <th style={{ width: '22%', textAlign: 'center'}}>Correo electrónico</th>
-                                        <th style={{ width: '20%', textAlign: 'center'}}>Dirección</th>
+                                        <th style={{ width: '20%', textAlign: 'center'}}>Correo electrónico</th>
+                                        <th style={{ width: '18%', textAlign: 'center'}}>Dirección</th>
                                         <th style={{ width: '15%', textAlign: 'center' }}>Teléfono</th>
-                                        <th style={{ width: '20%', textAlign: 'center'}}>Acciones</th>
+                                        <th style={{ width: '25%', textAlign: 'center'}}>Acciones</th>
 
                                     </tr>
                                 </thead>
@@ -96,7 +97,7 @@ export default function UserList() {
                                                     <FontAwesomeIcon icon={faEdit} /> Editar
                                                 </button>
                                                 <button onClick={() => handleDelete(user.id)} className="btn btn-error" style={{ marginLeft: '10px' }}>
-                                                <FontAwesomeIcon icon={faTrashAlt} /> Borrar
+                                                    <FontAwesomeIcon icon={faTrashAlt} /> Borrar
                                                 </button>
                                             </td>
                                         </tr>
