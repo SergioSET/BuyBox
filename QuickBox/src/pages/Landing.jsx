@@ -41,7 +41,7 @@ const Landing = () => {
 
       <div className="selected-products">
         <h2 className="TrendingP">
-          Trending Products
+          Productos en Tendencia
         </h2>
         <div className="selected-products-grid max-w-7xl mx-auto">
           {products.map((product) => (

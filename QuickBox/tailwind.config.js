@@ -5,8 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    themes: ["dark", "winter"],
+    extend: {
+      colors: {
+        '100': '#212830',
+        // Agrega más colores personalizados aquí si es necesario
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 }
-
