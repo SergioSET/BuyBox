@@ -75,6 +75,10 @@
     font-size: 18px;
     color: lightgrey;
     transition: color 0.3s ease; /* Transición suave de color durante 0.3 segundos */
+    font-family: 'Nunito Sans', sans-serif;
+    border: 2px solid #2563eb;
+    padding: 10px 20px; 
+    border-radius: 20px;
 }
 
 .Login:hover {
@@ -83,36 +87,91 @@
 
 .Login1 {
     font-size: 18px;
-    color: lightgrey;
+    color: white;
+    background-color: #2596be; /* Color de fondo del botón */
     transition: color 0.3s ease; /* Transición suave de color durante 0.3 segundos */
     margin-left: 10px;
+    border: 2px; /* Borde del botón */
+    font-family: 'Nunito Sans', sans-serif;
+    border-radius: 20px; /* Borde redondeado */
+    padding: 10px 20px; /* Padding para un mejor aspecto del botón */
 }
 
-.Login1:hover {
-    color: #2563eb; /* Cambia el color al pasar el mouse por encima */
-}
 
 
 .NavOp {
-    font-size: 20px;
+    display: block;
     position: relative;
-    text-decoration: none; /* Desactiva la subrayado predeterminado */
-    color: white; /* Cambia el color del texto según lo necesites */
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
 }
 
+.NavOp span {
+    display: block;
+    width: 100%;
+    transition: transform 0.5s;
+}
+
+.NavOp span:nth-child(1) {
+    color: #1abc9c;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 32px;
+}
+
+.NavOp span:nth-child(2) {
+    background-color: #1abc9c;
+    height: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+}
+
+.NavOp:hover span:nth-child(1) {
+    transform: translateY(-100%);
+}
+
+.NavOp:hover span:nth-child(2) {
+    transform: translateY(-100%);
+}
+
+.NavOp::before,
 .NavOp::after {
     content: '';
     position: absolute;
-    width: 0;
-    height: 2px;
-    display: block;
-    margin-top: 5px;
-    right: 0;
-    background: #2563eb; /* Cambia el color según lo necesites */
-    transition: width 0.3s ease, left 0.3s ease;
+    bottom: 0;
+    height: 4px;
+    background: #2563eb;
+    transition: all 0.5s ease;
 }
 
-.NavOp:hover::after {
-    width: 100%;
-    right: 0;
+.NavOp::before {
+    width: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
+
+.NavOp::after {
+    width: 0;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.NavOp:hover::before,
+.NavOp:hover::after {
+    width: 50%;
+}
+
+.gif-image {
+    display: none;
+   
+  }
+  
+  .btn:hover .gif-image {
+    display: inline-block;
+   
+  }
+  

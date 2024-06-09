@@ -15,6 +15,9 @@ import { changeMode } from "../features/auth/authSlice";
 import { store } from "../store";
 import axios from "axios";
 import { clearWishlist, updateWishlist } from "../features/wishlist/wishlistSlice";
+import logo from '../assets/box-open-solid.svg';  // Ajusta la ruta según donde hayas guardado el SVG
+import shopping_cart from '../assets/cart-shopping-solid.svg';  // Ajusta la ruta según donde hayas guardado el SVG
+
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,9 +64,10 @@ const Header = () => {
             to="/"
             className="btn btn-ghost normal-case text-2xl font-black text-accent-content"
           >
-            <AiFillShopping />
-            BuyBox
-          </Link>
+          <img src={logo} alt="Logo" className="h-8 w-8 mr-2" />
+
+          BuyBox
+        </Link>
         </div>
         <div className="flex-none">
           {/* <Link
@@ -100,20 +104,8 @@ const Header = () => {
           <div className="dropdown dropdown-end">
             <Link to="/cart" className="btn btn-ghost btn-circle">
               <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
+                
+              <img src={shopping_cart} alt="Logo" className="h- w-6 mr-0.7" />
               </div>
             </Link>
           </div>
@@ -150,10 +142,11 @@ const Header = () => {
             </div>
           )} {!isLoggedIn && (
             <div className="container text-2xl navlinks-container">
+
               <NavLink className="Login1" to="/login">
                 Iniciar sesión
               </NavLink>
-              <span className="Sbarra">/</span>
+              <span className="Sbarra"></span>
               <NavLink className="Login" to="/register">
                 Registrarse
               </NavLink>
@@ -229,7 +222,7 @@ const Header = () => {
 
         <div className="container text-2xl navlinks-container">
           <NavLink className="NavOp" to="/">
-            Página principal
+            Inicio
           </NavLink>
           <NavLink className="NavOp" to="/shop">
             Tienda
