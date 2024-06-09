@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 .bg-custom-color {
-    background-color: #1e1e1e; /* Ajusta el color basado en el color exacto del fondo de la imagen */
+    background-color: #1e1e1e; 
     padding: 24px; /* Padding del contenedor */
     border-radius: 8px; /* Bordes redondeados */
-    text-align: center; /* Centrar texto dentro del contenedor */
+    text-align: center; 
 }
 
-/* Estilos existentes */
 body {
     background-color: #121212; /* Fondo oscuro */
 }
@@ -18,29 +17,29 @@ body {
     overflow: hidden; /* Ocultar contenido que sobresale del contenedor redondeado */
     background-color: #1d232a; /* Fondo del contenedor */
     padding: 16px; /* Padding alrededor de la tabla */
-    margin-top: 16px; /* Añadir margen superior para la tabla */
+    margin-top: 16px; 
     border-radius: 16px; /* Bordes redondeados del contenedor */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra alrededor del contenedor */
 }
 
 .tabla-con-divisiones {
     width: 100%;
-    border-spacing: 0 10px; /* Espaciado entre filas /
-    text-align: center; / Centrar todo el contenido de la tabla */
+    border-spacing: 0 10px; /* Espaciado entre filas */
+    text-align: center; /* Centrar todo el contenido de la tabla */
     border-collapse: separate;
 }
 
-/* Estilos para los encabezados de la tabla */
+
 .tabla-con-divisiones th {
     border: none; /* Eliminar bordes */
-    padding: 16px; /* Padding para mejor apariencia */
+    padding: 16px; /* Padding */
     background-color: #000000; /* Fondo negro para los encabezados */
     color: #ffffff; /* Color del texto */
     text-align: center; /* Centrar el texto del encabezado */
     margin: 0; /* Eliminar márgenes */
 }
 
-/* Estilos para redondear los bordes de los encabezados */
+
 .tabla-con-divisiones th:first-child {
     border-top-left-radius: 8px; /* Redondear esquina superior izquierda */
 }
@@ -49,7 +48,7 @@ body {
     border-top-right-radius: 8px; /* Redondear esquina superior derecha */
 }
 
-/* Estilos para las celdas de la tabla */
+
 .tabla-con-divisiones td {
     border: none; /* Eliminar bordes */
     padding: 16px; /* Padding para mejor apariencia */
@@ -58,7 +57,7 @@ body {
     vertical-align: middle; /* Alineación vertical centrada */
 }
 
-/* Primer y último hijo de las celdas de la tabla para redondear los bordes */
+
 .tabla-con-divisiones td:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
@@ -69,7 +68,6 @@ body {
     border-bottom-right-radius: 8px;
 }
 
-/* Modificaciones para redondear las filas de la tabla */
 .tabla-con-divisiones tr {
     border-radius: 8px; /* Bordes redondeados de las filas */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra alrededor de cada fila */
@@ -99,7 +97,6 @@ body {
     background-color: darkred;
 }
 
-/* Ajustes para el input de filtro */
 input[type="text"] {
     background-color: #333333; /* Fondo del input */
     color: #ffffff; /* Color del texto del input */
