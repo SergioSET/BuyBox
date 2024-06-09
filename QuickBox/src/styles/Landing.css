@@ -1,36 +1,58 @@
-.selected-products-grid{
+/* Estilos para la grid de productos */
+.selected-products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
     row-gap: 10px;
+    text-align: center;
 }
 
-@media(max-width: 1200px){
-    .selected-products-grid{
+/* Media queries para ajustar la cantidad de columnas en la grid en diferentes tamaños de pantalla */
+@media (max-width: 1200px) {
+    .selected-products-grid {
         grid-template-columns: repeat(3, 1fr);
         row-gap: 20px;
     }
 }
 
-@media(max-width: 900px){
-    .selected-products-grid{
+@media (max-width: 900px) {
+    .selected-products-grid {
         padding: 0px 20px;
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media(max-width: 500px){
-    .selected-products-grid{
+@media (max-width: 500px) {
+    .selected-products-grid {
         grid-template-columns: repeat(1, 1fr);
         padding: 0px 10px;
     }
 
-    .selected-products-grid div{
+    /* Centrar las tarjetas de productos en pantallas pequeñas */
+    .selected-products-grid > div {
         margin: 0 auto;
     }
 }
 
-.TrendingP{
+/* Estilos para las tarjetas de productos */
+.selected-products-grid > div {
+    /* Aquí puedes añadir estilos específicos para las tarjetas de productos */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s, transform 0.3s;
+    
+}
+
+/* Efecto hover para las tarjetas de productos */
+.selected-products-grid > div:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    
+}
+
+/* Estilos para el título "TrendingP" */
+.TrendingP {
     text-align: center;
     font-size: 45px;
     color: white;
