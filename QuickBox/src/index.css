@@ -3,15 +3,12 @@
 @tailwind utilities;
 
 .bg-custom-color {
-    background-color: #1e1e1e; 
+    background-color: #d61818; 
     padding: 24px; /* Padding del contenedor */
     border-radius: 8px; /* Bordes redondeados */
     text-align: center; 
 }
 
-body {
-    background-color: #121212; /* Fondo oscuro */
-}
 
 .tabla-con-divisiones-container {
     overflow: hidden; /* Ocultar contenido que sobresale del contenedor redondeado */
