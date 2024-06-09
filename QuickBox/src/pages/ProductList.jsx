@@ -71,63 +71,66 @@ export default function ProductList() {
     return (
         <>
             <section className="relative">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                    <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-                        <button onClick={handleCreate} className="btn btn-primary mb-4">
-                            <FontAwesomeIcon icon={faPlus} />Crear nuevo producto
-                        </button>
-                        {products.length === 0 ? (
-                            <p>No hay productos disponibles.</p>
-                        ) : (
-                            <table className="tabla-con-divisiones">
-                                <thead>
-                                    <tr>
-                                        <th className="table-header" style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
-                                        <th className="table-header" style={{ width: '27%', textAlign: 'center'}}>Descripción</th>
-                                        <th className="table-header" style={{ width: '16%', textAlign: 'center'}}>Imagen</th>
-                                        <th className="table-header" style={{ width: '7%', textAlign: 'center'}}>Precio</th>
-                                        <th className="table-header" style={{ width: '15%', textAlign: 'center'}}>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="table-body">
-                                    {products.map((product) => (
-                                        <tr key={product.id}>
-                                            <td>{product.name}</td>
-                                            <td >{product.description}</td>
-                                            <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>
-                                                {visibleImages[product.id] ? (
-                                                    <img
-                                                        src={product.img}
-                                                        alt={product.name}
-                                                        onClick={() => toggleImageVisibility(product.id)}
-                                                        style={{ cursor: 'pointer' }}
-                                                    />
-                                                ) : (
-                                                    <button
-                                                        onClick={() => toggleImageVisibility(product.id)}
-                                                        className="btn btn-primary"
-                                                    >
-                                                        <FontAwesomeIcon icon={faEye} />Mostrar imagen
-                                                    </button>
-                                                )}
-                                            </td>
-                                            <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{product.price}</td>
-                                            <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                                <button onClick={() => handleEdit(product.id)} className="btn btn-primary" style={{ marginRight: '5px' }}>
-                                                <FontAwesomeIcon icon={faEdit} /> Editar
-                                                </button>
-                                                <button onClick={() => handleDelete(product.id, product.name)} className="btn btn-danger" style={{ marginRight: '5px' }}>
-                                                <FontAwesomeIcon icon={faTrashAlt} /> Borrar
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        )}
-                    </div>
-                </div>
-            </section>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+            <div className="tabla-con-divisiones-container"> {/* Línea agregada */}
+                <button onClick={handleCreate} className="btn btn-primary mb-4">
+                    <FontAwesomeIcon icon={faPlus} />Crear nuevo producto
+                </button>
+                {products.length === 0 ? (
+                    <p>No hay productos disponibles.</p>
+                ) : (
+                    <table className="tabla-con-divisiones">
+                        <thead>
+                            <tr>
+                                <th className="table-header" style={{ width: '15%', textAlign: 'center'}}>Nombre</th>
+                                <th className="table-header" style={{ width: '27%', textAlign: 'center'}}>Descripción</th>
+                                <th className="table-header" style={{ width: '16%', textAlign: 'center'}}>Imagen</th>
+                                <th className="table-header" style={{ width: '7%', textAlign: 'center'}}>Precio</th>
+                                <th className="table-header" style={{ width: '15%', textAlign: 'center'}}>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody className="table-body">
+                            {products.map((product) => (
+                                <tr key={product.id}>
+                                    <td>{product.name}</td>
+                                    <td>{product.description}</td>
+                                    <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>
+                                        {visibleImages[product.id] ? (
+                                            <img
+                                                src={product.img}
+                                                alt={product.name}
+                                                onClick={() => toggleImageVisibility(product.id)}
+                                                style={{ cursor: 'pointer' }}
+                                            />
+                                        ) : (
+                                            <button
+                                                onClick={() => toggleImageVisibility(product.id)}
+                                                className="btn btn-primary"
+                                            >
+                                                <FontAwesomeIcon icon={faEye} />Mostrar imagen
+                                            </button>
+                                        )}
+                                    </td>
+                                    <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{product.price}</td>
+                                    <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                        <button onClick={() => handleEdit(product.id)} className="btn btn-primary" style={{ marginRight: '5px' }}>
+                                            <FontAwesomeIcon icon={faEdit} /> Editar
+                                        </button>
+                                        <button onClick={() => handleDelete(product.id, product.name)} className="btn btn-red" style={{ marginRight: '5px' }}>
+                                            <FontAwesomeIcon icon={faTrashAlt} /> Borrar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+        </div>
+    </div>
+</section>
         </>
+        
     );
 }
