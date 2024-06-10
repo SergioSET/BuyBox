@@ -17,6 +17,7 @@ const Login = () => {
     if (loginState) {
       localStorage.clear();
       store.dispatch(logoutUser());
+      navigate("/login");
     }
   }, []);
 
