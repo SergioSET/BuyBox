@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SectionTitle } from "../components";
@@ -16,6 +15,8 @@ const Register = () => {
   const [adress, setAdress] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordTouched, setPasswordTouched] = useState(false);
+  const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,6 +48,9 @@ const Register = () => {
     }
 
     if (!isProceed) {
+      // Reset touched state when validation fails
+      setPasswordTouched(false);
+      setConfirmPasswordTouched(false);
       toast.warn(errorMessage);
     }
 
@@ -148,27 +152,33 @@ const Register = () => {
                 style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                Contraseña
+              Contraseña
               </label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordTouched(true);
+                  }}
                   required={true}
                   style={inputStyle}
                 />
-                <div style={iconContainerStyle} onClick={() => setShowPassword(!showPassword)}>
-                  <FontAwesomeIcon
-                    icon={showPassword ? faEyeSlash : faEye}
-                    style={{
-                      position: 'absolute',
-                      top: '70%',
-                      right: '1px', // Adjust right padding for centering
-                      transform: 'translateY( -100%)'}}
-                  />
-                </div>
+                {passwordTouched && (
+                  <div style={iconContainerStyle} onClick={() => setShowPassword(!showPassword)}>
+                    <FontAwesomeIcon
+                      icon={showPassword ? faEyeSlash : faEye}
+                      style={{
+                        position: 'absolute',
+                        top: '70%',
+                        right: '1px', // Adjust right padding for centering
+                        transform: 'translateY( -100%)'
+                      }}
+                    />
+                  </div>
+                )}
               </div>
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Repetir Contraseña
@@ -178,20 +188,26 @@ const Register = () => {
                   type={showConfirmPassword ? "text" : "password"}
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    setConfirmPasswordTouched(true);
+                  }}
                   required={true}
                   style={inputStyle}
                 />
-                <div style={iconContainerStyle} onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                  <FontAwesomeIcon
-                    icon={showConfirmPassword ? faEyeSlash : faEye}
-                    style={{
-                      position: 'absolute',
-                      top: '70%',
-                      right: '1px', // Adjust right padding for centering
-                      transform: 'translateY( -100%)'}}
-                  />
-                </div>
+                {confirmPasswordTouched && (
+                  <div style={iconContainerStyle} onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                    <FontAwesomeIcon
+                      icon={showConfirmPassword ? faEyeSlash : faEye}
+                      style={{
+                        position: 'absolute',
+                        top: '70%',
+                        right: '1px', // Adjust right padding for centering
+                        transform: 'translateY( -100%)'
+                      }}
+                    />
+                  </div>
+                )}
               </div>
               <button
                 type="submit"
