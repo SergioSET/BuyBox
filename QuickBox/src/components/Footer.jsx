@@ -5,48 +5,17 @@ import { FaSquareFacebook } from "react-icons/fa6";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaSquareYoutube } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import '../styles/Footer.css'
+import '../styles/Footer.css';
 
 const Footer = () => {
   const loginState = useSelector((state) => state.auth.isLoggedIn);
   return (
-    <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded mt-10 max-md:px-0">
-      <nav className="grid grid-flow-col max-sm:grid-flow-row gap-4">
-        <Link to="/" className="FooterLink" onClick={() => window.scrollTo(0, 0)}>
-          Página principal
-        </Link>
-        <Link to="/shop" className="FooterLink" onClick={() => window.scrollTo(0, 0)}>
-          Tienda
-        </Link>
-        <Link to="/locker" className="FooterLink" onClick={() => window.scrollTo(0, 0)}>
-          Casillero
-        </Link>
-        <Link to="/about" className="FooterLink" onClick={() => window.scrollTo(0, 0)}>
-        Acerca de nosotros
-        </Link>
-        {/* <Link to="/contact" className="link link-hover text-2xl max-md:text-xl text-accent-content" onClick={() => window.scrollTo(0, 0)}>
-          Contact
-        </Link> */}
-          {/* {!loginState && (
-            <>
-              <Link
-                to="/login"
-                className="link link-hover text-2xl max-md:text-xl text-accent-content"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="link link-hover text-2xl max-md:text-xl text-accent-content"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                Register
-              </Link>
-            </>
-          )} */}
+    <footer className="footer footer-center p-10 text-base-content rounded mt-10 max-md:px-0">
+      <div className="footer-overlay"></div> {/* Overlay para la imagen de fondo */}
+      <nav className="grid grid-flow-col max-sm:grid-flow-row gap-4 relative z-10">
+   
       </nav>
-      <nav>
+      <nav className="relative z-10">
         <div className="grid grid-flow-col gap-4">
           <FaSquareXTwitter className="text-6xl max-sm:text-4xl text-accent-content" />
           <FaSquareFacebook className="text-6xl max-sm:text-4xl text-accent-content" />
@@ -54,9 +23,9 @@ const Footer = () => {
           <FaSquareYoutube className="text-6xl max-sm:text-4xl text-accent-content" />
         </div>
       </nav>
-      <aside>
+      <aside className="relative z-10">
         <p className="copy">
-          Copyright © 2023 - All right reserved by BuyBox
+          Copyright © 2024 - All right reserved by BuyBox
         </p>
       </aside>
     </footer>
