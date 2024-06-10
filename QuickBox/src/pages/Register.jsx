@@ -47,8 +47,11 @@ const Register = () => {
 
     return isProceed;
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isValidate()) return;
 
     try {
       const response = await fetch('http://localhost:3000/api/usuarios', {
@@ -70,6 +73,11 @@ const Register = () => {
       // setError('An error occurred while signing in.');
     }
   };
+
+  const inputStyle = {
+    textAlign: 'left',
+  };
+
   return (
     <>
       <SectionTitle title="Registro" path="Home | Registro" />
@@ -86,6 +94,7 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required={true}
+                style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Correo Electrónico
@@ -106,6 +115,7 @@ const Register = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required={true}
+                style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Dirección
@@ -116,6 +126,7 @@ const Register = () => {
                 value={adress}
                 onChange={(e) => setAdress(e.target.value)}
                 required={true}
+                style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Contraseña
