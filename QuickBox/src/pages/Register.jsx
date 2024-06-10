@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("Usuario");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
@@ -56,7 +57,7 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, phone, adress, password }),
+        body: JSON.stringify({ name, email, role, phone, adress, password }),
       });
 
       if (response.ok) {
