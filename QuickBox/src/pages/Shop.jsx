@@ -29,8 +29,7 @@ const Shop = () => {
 
   return (
     <>
-      <h1 className="TitleShop">Shop</h1>
-      <h2 className="SubtitleShop">Home | Shop</h2>
+
       {/* <SectionTitle title="Shop" path="Home | Shop"/> */}
       <div className="max-w-7xl mx-auto mt-5">
         {/* <Filters /> */}

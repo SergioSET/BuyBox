@@ -1,4 +1,38 @@
-.copy{
+/* Footer.css */
+
+.footer {
+    position: relative;
+    overflow: hidden; /* Asegura que el pseudo-elemento no se desborde */
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('src/assets/wallpaper_footer.png'); /* Reemplaza 'ruta/a/tu/imagen.jpg' con la ruta real de tu imagen */
+    background-size: contain;
+    background-position: center;
+    opacity: 0.3; /* Ajusta la opacidad según sea necesario */
+    z-index: 1;
+}
+
+.footer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.copy, .FooterLink, .grid {
+    position: relative;
+}
+
+.copy {
     font-size: 14px;
     color: gray;
 }
@@ -6,7 +40,7 @@
 .FooterLink {
     font-size: 18px;
     position: relative;
-    text-decoration: none; /* Desactiva la subrayado predeterminado */
+    text-decoration: none; /* Desactiva el subrayado predeterminado */
     color: grey; /* Cambia el color del texto según lo necesites */
 }
 

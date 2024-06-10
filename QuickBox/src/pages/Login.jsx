@@ -62,7 +62,7 @@ const Login = () => {
         localStorage.setItem("isLoggedIn", true);
         store.dispatch(loginUser());
         if (foundUser.role === "Admin") {
-          navigate("/admin");
+          navigate("/admin/user-list");
         } else {
           navigate("/");
         }

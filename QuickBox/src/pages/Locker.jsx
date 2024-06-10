@@ -3,6 +3,10 @@ import { useLoaderData } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
 
 export const lockerLoader = async ({ request }) => {
+    if (localStorage.getItem("isLoggedIn") !== true) {
+        return null;
+    }
+
     const userId = JSON.parse(localStorage.getItem("user")).id || {};
 
     try {

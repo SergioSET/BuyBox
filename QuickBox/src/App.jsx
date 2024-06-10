@@ -98,14 +98,6 @@ const router = createBrowserRouter([
         path: "thank-you",
         element: <ThankYou />
       },
-      {
-        path: "order-history",
-        element: (
-          <ProtectedRoute allowedRoles={['Usuario']}>
-            <OrderHistory />
-          </ProtectedRoute>
-        ),
-      },
     ],
   },
   {

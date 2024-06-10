@@ -6,7 +6,11 @@ import { toast } from 'react-toastify';
 const Cart = () => {
   const navigate = useNavigate();
   const loginState = localStorage.getItem("isLoggedIn");
-  const userId = JSON.parse(localStorage.getItem("user")).id || {};
+  if (localStorage.getItem("user") !== null) {
+    const userId = JSON.parse(localStorage.getItem("user")).id || {};
+  } else {
+    const userId = -1;
+  }
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
   const tax = total / 5;
@@ -40,7 +44,11 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    getCartItems();
+    if (localStorage.getItem("isLoggedIn") !== true) {
+      navigate("/login");
+    } else {
+      getCartItems();
+    }
   }, []);
 
   const isCartEmpty = () => {
