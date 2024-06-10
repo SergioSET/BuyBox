@@ -84,7 +84,7 @@ const AdminHeader = () => {
         </div>
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">100</div>
-          <div className="stat-title text-sm">Ordenes</div>
+          <div className="stat-title text-sm">Órdenes</div>
           <Link
             to="/admin/order-list"
             className="btn btn-primary mt-2 btn-sm"
@@ -99,7 +99,7 @@ const AdminHeader = () => {
             className="btn btn-primary mt-2 btn-sm"
             onClick={handleContactClick}
           >
-            Contactanos
+            Contáctanos
           </button>
         </div>
       </div>
