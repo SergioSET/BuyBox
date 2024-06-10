@@ -60,7 +60,7 @@ const About = () => {
           internacionales.
         </p>
         <Link to="/contact" className="BtnContactUs">
-          Contact Us
+          Contactanos 
         </Link>
       </div>
     </div>
