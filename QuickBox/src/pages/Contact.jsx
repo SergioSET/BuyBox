@@ -5,7 +5,7 @@ import { SectionTitle } from "../components";
 const Contact = () => {
   return (
     <>
-      <SectionTitle title="Contact Us" path="Home | Contact" />
+      <SectionTitle title="Contactanos" path="Home | Contacto" />
       <div className="isolate px-6 lg:px-8">
         <Form
           action="#"

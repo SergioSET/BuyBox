@@ -67,39 +67,39 @@ const AdminHeader = () => {
       <div className="admin-stats grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 my-4">
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">150</div>
-          <div className="stat-title text-sm">Users</div>
+          <div className="stat-title text-sm">Usuarios</div>
           <Link to="/admin/user-list" className="btn btn-primary mt-2 btn-sm">
-            Manage
+            Gestionar
           </Link>
         </div>
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">250</div>
-          <div className="stat-title text-sm">Products</div>
+          <div className="stat-title text-sm">Productos</div>
           <Link
             to="/admin/product-list"
             className="btn btn-primary mt-2 btn-sm"
           >
-            Manage
+            Gestionar
           </Link>
         </div>
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">100</div>
-          <div className="stat-title text-sm">Orders</div>
+          <div className="stat-title text-sm">Órdenes</div>
           <Link
             to="/admin/order-list"
             className="btn btn-primary mt-2 btn-sm"
           >
-            Manage
+            Gestionar
           </Link>
         </div>
         <div className="stat-card bg-base-200 p-2 rounded shadow">
           <div className="stat-value text-xl">24/7</div>
-          <div className="stat-title text-sm">Support</div>
+          <div className="stat-title text-sm">Soporte</div>
           <button
             className="btn btn-primary mt-2 btn-sm"
             onClick={handleContactClick}
           >
-            Contact
+            Contáctanos
           </button>
         </div>
       </div>
