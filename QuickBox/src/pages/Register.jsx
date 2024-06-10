@@ -3,14 +3,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { SectionTitle } from "../components";
 import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("Usuario");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [adress, setAdress] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordTouched, setPasswordTouched] = useState(false);
+  const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
 
   const navigate = useNavigate();
 
@@ -42,13 +49,19 @@ const Register = () => {
     }
 
     if (!isProceed) {
+      // Reset touched state when validation fails
+      setPasswordTouched(false);
+      setConfirmPasswordTouched(false);
       toast.warn(errorMessage);
     }
 
     return isProceed;
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isValidate()) return;
 
     try {
       const response = await fetch('http://localhost:3000/api/usuarios', {
@@ -56,7 +69,7 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, phone, adress, password }),
+        body: JSON.stringify({ name, email, role, phone, adress, password }),
       });
 
       if (response.ok) {
@@ -70,15 +83,35 @@ const Register = () => {
       // setError('An error occurred while signing in.');
     }
   };
+
+  const inputStyle = {
+    textAlign: 'left',
+    backgroundColor: '#121212',
+    border: 'none',
+    color: 'white', 
+    paddingRight: '2.5rem',
+  };
+
+  const iconContainerStyle = {
+    position: 'absolute',
+    right: '0.75rem',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    cursor: 'pointer',
+    color: 'gray',
+    display: 'flex',
+    alignItems: 'center',
+  };
+
   return (
     <>
-      <SectionTitle title="Register" path="Home | Register" />
+      <SectionTitle title="Registro" path="Home | Registro" />
       <div className="flex flex-col justify-center sm:py-12">
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
           <div className="bg-dark border border-gray-600 shadow w-full rounded-lg divide-y divide-gray-200">
             <form className="px-5 py-7" onSubmit={handleSubmit}>
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                Name
+                Nombre
               </label>
               <input
                 type="text"
@@ -86,9 +119,10 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required={true}
+                style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                E-mail
+                Correo Electrónico
               </label>
               <input
                 type="email"
@@ -98,7 +132,7 @@ const Register = () => {
                 required={true}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                Phone
+                Número de Teléfono
               </label>
               <input
                 type="tel"
@@ -108,7 +142,7 @@ const Register = () => {
                 required={true}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                Adress
+                Dirección
               </label>
               <input
                 type="text"
@@ -116,32 +150,71 @@ const Register = () => {
                 value={adress}
                 onChange={(e) => setAdress(e.target.value)}
                 required={true}
+                style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                Password
+              Contraseña
               </label>
-              <input
-                type="password"
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required={true}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordTouched(true);
+                  }}
+                  required={true}
+                  style={inputStyle}
+                />
+                {passwordTouched && (
+                  <div style={iconContainerStyle} onClick={() => setShowPassword(!showPassword)}>
+                    <FontAwesomeIcon
+                      icon={showPassword ? faEyeSlash : faEye}
+                      style={{
+                        position: 'absolute',
+                        top: '70%',
+                        right: '1px', // Adjust right padding for centering
+                        transform: 'translateY( -100%)'
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                Repeat Password
+                Repetir Contraseña
               </label>
-              <input
-                type="password"
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required={true}
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  value={confirmPassword}
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    setConfirmPasswordTouched(true);
+                  }}
+                  required={true}
+                  style={inputStyle}
+                />
+                {confirmPasswordTouched && (
+                  <div style={iconContainerStyle} onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                    <FontAwesomeIcon
+                      icon={showConfirmPassword ? faEyeSlash : faEye}
+                      style={{
+                        position: 'absolute',
+                        top: '70%',
+                        right: '1px', // Adjust right padding for centering
+                        transform: 'translateY( -100%)'
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
               <button
                 type="submit"
                 className="transition duration-200 bg-blue-600 hover:bg-blue-500 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
               >
-                <span className="inline-block mr-2">Register</span>
+                <span className="inline-block mr-2">Registrarse</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -165,7 +238,7 @@ const Register = () => {
               className="btn btn-neutral text-white"
               onClick={() => window.scrollTo(0, 0)}
             >
-              Already have an account? Please login.
+              ¿Ya tienes una cuenta? Inicia sesión.
             </Link>
           </div>
         </div>
