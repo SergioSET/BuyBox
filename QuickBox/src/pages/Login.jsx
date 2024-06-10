@@ -82,7 +82,7 @@ const Login = () => {
           <div className="bg-dark border border-gray-600 shadow w-full rounded-lg divide-y divide-gray-200">
             <form className="px-5 py-7" onSubmit={proceedLogin}>
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                E-mail
+                Correo Electrónico
               </label>
               <input 
                 value={email}

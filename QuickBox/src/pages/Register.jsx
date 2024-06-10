@@ -88,7 +88,7 @@ const Register = () => {
                 required={true}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
-                E-mail
+                Correo Electrónico
               </label>
               <input
                 type="email"
