@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded mt-10 max-md:px-0">
       <nav className="grid grid-flow-col max-sm:grid-flow-row gap-4">
-        <Link to="/admin/" className="link link-hover text-2xl max-md:text-xl text-accent-content" onClick={() => window.scrollTo(0, 0)}>
+        <Link to="/admin/user-list" className="link link-hover text-2xl max-md:text-xl text-accent-content" onClick={() => window.scrollTo(0, 0)}>
           Dashboard
         </Link>
         <Link to="/admin/user-list" className="link link-hover text-2xl max-md:text-xl text-accent-content" onClick={() => window.scrollTo(0, 0)}>

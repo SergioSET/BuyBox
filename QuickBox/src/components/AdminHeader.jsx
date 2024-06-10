@@ -21,7 +21,7 @@ const AdminHeader = () => {
       <div className="navbar bg-base-100 max-w-7xl mx-auto">
         <div className="flex-1">
           <Link
-            to="/admin"
+            to="/admin/user-list"
             className="btn btn-ghost normal-case text-2xl font-black text-accent-content"
           >
             <AiFillShopping />
