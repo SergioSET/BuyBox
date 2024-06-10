@@ -130,7 +130,6 @@ const Cart = () => {
 
   return (
     <>
-      <SectionTitle title="Cart" path="Home | Cart" />
       {cartItems.length === 0 ? (
         <div className='text-center mt-8'>
           <h2 className='text-2xl font-semibold'>Your cart is empty</h2>

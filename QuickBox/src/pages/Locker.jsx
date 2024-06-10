@@ -81,7 +81,7 @@ export default function Locker() {
         <>
             <section className="relative">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                    <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+                    <div className="pt-22 pb-20 md:pt-20 md:pb-20">
                         {Object.keys(groupedOrders).length === 0 ? (
                             <p>No hay pedidos disponibles.</p>
                         ) : (

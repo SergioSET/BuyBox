@@ -12,7 +12,7 @@ const About = () => {
     <div>
       {/*<SectionTitle title="Login" path="Home | Login" />*/}
       <div className="about-content text-center max-w-2xl mx-auto mt-5">
-        <h2 className="LovC">¡Amamos nuestros clientes!</h2>
+        <h2 className="LovC">¡Descubre mas sobre BuyBox!</h2>
         <p className="TextContUs">
           En BuyBox, nos enorgullecemos de ofrecer una solución innovadora
           para la gestión de envíos internacionales. Nuestro proyecto nació con
