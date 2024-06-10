@@ -1,8 +1,11 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SectionTitle } from "../components";
 import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -11,6 +14,8 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [adress, setAdress] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -76,6 +81,21 @@ const Register = () => {
 
   const inputStyle = {
     textAlign: 'left',
+    backgroundColor: '#121212',
+    border: 'none',
+    color: 'white', 
+    paddingRight: '2.5rem',
+  };
+
+  const iconContainerStyle = {
+    position: 'absolute',
+    right: '0.75rem',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    cursor: 'pointer',
+    color: 'gray',
+    display: 'flex',
+    alignItems: 'center',
   };
 
   return (
@@ -115,7 +135,6 @@ const Register = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required={true}
-                style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Dirección
@@ -131,23 +150,49 @@ const Register = () => {
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Contraseña
               </label>
-              <input
-                type="password"
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required={true}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required={true}
+                  style={inputStyle}
+                />
+                <div style={iconContainerStyle} onClick={() => setShowPassword(!showPassword)}>
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye}
+                    style={{
+                      position: 'absolute',
+                      top: '70%',
+                      right: '1px', // Adjust right padding for centering
+                      transform: 'translateY( -100%)'}}
+                  />
+                </div>
+              </div>
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Repetir Contraseña
               </label>
-              <input
-                type="password"
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required={true}
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required={true}
+                  style={inputStyle}
+                />
+                <div style={iconContainerStyle} onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                  <FontAwesomeIcon
+                    icon={showConfirmPassword ? faEyeSlash : faEye}
+                    style={{
+                      position: 'absolute',
+                      top: '70%',
+                      right: '1px', // Adjust right padding for centering
+                      transform: 'translateY( -100%)'}}
+                  />
+                </div>
+              </div>
               <button
                 type="submit"
                 className="transition duration-200 bg-blue-600 hover:bg-blue-500 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
