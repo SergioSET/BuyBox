@@ -1,8 +1,19 @@
-import React, { useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
-import { Footer, Header } from '../components'
+import React, { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Footer, Header } from '../components';
+import loadingAnimation from '/buybox.webm'; // Ajusta la ruta al archivo .webm de tu animación de carga
 
 const HomeLayout = () => {
+  const [showLogo, setShowLogo] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLogo(false);
+    }, 2000); // Ocultar el logo después de 2 segundos
+
+    // Limpia el temporizador cuando el componente se desmonta
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const BASE_URL = "https://app.chatwoot.com/";
@@ -28,11 +39,20 @@ const HomeLayout = () => {
 
   return (
     <>
+    {showLogo && ( // Mostrar el video si showLogo es true
+      <div className="flex justify-center items-center min-h-screen bg-gray-900">
+        <video autoPlay loop muted className="w-64">
+          <source src={loadingAnimation} type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    )}
       <Header />
+      
       <Outlet />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default HomeLayout
+export default HomeLayout;

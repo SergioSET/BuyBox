@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ClipLoader } from "react-spinners"; // Importación del spinner
+import { SectionTitle } from "../components";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store";
@@ -9,8 +9,6 @@ import { loginUser, logoutUser } from "../features/auth/authSlice";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(true); // Estado para la carga inicial
-  const [submitting, setSubmitting] = useState(false); // Estado para el envío del formulario
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginState = localStorage.getItem("isLoggedIn");
@@ -21,13 +19,6 @@ const Login = () => {
       store.dispatch(logoutUser());
       navigate("/login");
     }
-  }, [loginState, navigate]);
-
-  useEffect(() => {
-    // Simular una carga inicial
-    setTimeout(() => {
-      setLoading(false);
-    }, 500); // Ajusta esta duración según tus necesidades (milisegundos)
   }, []);
 
   const isValidate = () => {
@@ -35,20 +26,16 @@ const Login = () => {
 
     if (email.length === 0) {
       isProceed = false;
-      toast.warn("Please enter a email");
+      toast.warn("Porfavor digita un correo electrónico");
     } else if (password.length < 6) {
       isProceed = false;
-      toast.warn("Password must be minimum 6 characters");
+      toast.warn("La contraseña debe ser de al menos 6 caracteres");
     }
     return isProceed;
   };
 
   const proceedLogin = async (e) => {
     e.preventDefault();
-
-    if (!isValidate()) return;
-
-    setSubmitting(true); // Mostrar spinner al enviar el formulario
 
     try {
       const response = await fetch("http://localhost:3000/api/login", {
@@ -58,8 +45,8 @@ const Login = () => {
         },
         body: JSON.stringify({
           email: email,
-          password: password,
-        }),
+          password: password
+        })
       });
 
       if (!response.ok) {
@@ -67,10 +54,11 @@ const Login = () => {
       }
 
       const data = await response.json();
+
       let foundUser = data.user;
 
       if (foundUser) {
-        toast.success("Login successful");
+        toast.success("Inicio de Sesión exitoso");
         localStorage.setItem("user", JSON.stringify(foundUser));
         localStorage.setItem("isLoggedIn", true);
         store.dispatch(loginUser());
@@ -82,18 +70,8 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error.message);
-    } finally {
-      setSubmitting(false); // Ocultar spinner al completar el envío
     }
   };
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <ClipLoader size={50} color={"#123abc"} />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -107,7 +85,7 @@ const Login = () => {
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Correo Electrónico
               </label>
-              <input
+              <input 
                 value={email}
                 required={true}
                 onChange={(e) => setEmail(e.target.value)}
@@ -128,27 +106,21 @@ const Login = () => {
                 type="submit"
                 className="transition duration-200 bg-blue-600 hover:bg-blue-500 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
               >
-                {submitting ? (
-                  <ClipLoader size={20} color={"#ffffff"} />
-                ) : (
-                  <>
-                    <span className="inline-block mr-2">Ingresar</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-4 h-4 inline-block"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </>
-                )}
+                <span className="inline-block mr-2">Ingresar</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="w-4 h-4 inline-block"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
               </button>
             </form>
           </div>
