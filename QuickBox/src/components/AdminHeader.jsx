@@ -25,7 +25,7 @@ const AdminHeader = () => {
             className="btn btn-ghost normal-case text-2xl font-black text-accent-content"
           >
             <AiFillShopping />
-            BuyBox
+            QuickBox
           </Link>
         </div>
         <div className="flex-none">

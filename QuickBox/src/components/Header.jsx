@@ -66,7 +66,7 @@ const Header = () => {
           >
           <img src={logo} alt="Logo" className="h-8 w-8 mr-2" />
 
-          BuyBox
+          QuickBox
         </Link>
         </div>
         <div className="flex-none">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { useLoaderData } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
 
@@ -87,7 +88,18 @@ export default function Locker() {
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <div className="pt-22 pb-20 md:pt-20 md:pb-20">
                         {Object.keys(groupedOrders).length === 0 ? (
-                            <p>No hay pedidos disponibles.</p>
+                            <div className="flex flex-col items-center text-center">
+                            <h1 className="text-2xl font-bold text-white mb-4">
+                                Parece ser que no tienes productos disponibles.
+                            </h1>
+                            <Link 
+                                to="/shop" 
+                                className="btn bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105"
+                            >
+                                ¡Compra ahora!
+                            </Link>
+                        </div>
+                            
                         ) : (
                             <table className="tabla-con-divisiones">
                                 <thead>
