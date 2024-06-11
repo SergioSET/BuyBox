@@ -60,7 +60,7 @@ const AdminHeader = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 p-4 justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 gap-4 p-20 justify-center">
         <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
           <div className="stat-value text-3xl font-semibold text-primary">150</div>
           <div className="stat-title text-lg text-gray-600">Usuarios</div>
