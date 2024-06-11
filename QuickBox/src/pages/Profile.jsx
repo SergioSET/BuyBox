@@ -60,7 +60,7 @@ const Profile = () => {
         <div className="grid grid-cols-3 max-lg:grid-cols-1">
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Your Name</span>
+              <span className="label-text">Tu nombre</span>
             </label>
             <input
               type="text"
@@ -74,7 +74,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Your Email</span>
+              <span className="label-text">Tu E-mail</span>
             </label>
             <input
               type="email"
@@ -88,7 +88,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Your Phone</span>
+              <span className="label-text">Tu teléfono</span>
             </label>
             <input
               type="tel"
@@ -102,7 +102,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Your Address</span>
+              <span className="label-text">Tu dirección</span>
             </label>
             <input
               type="text"
@@ -116,7 +116,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Your Password</span>
+              <span className="label-text">Tu contraseña</span>
             </label>
             <input
               type="password"
@@ -132,7 +132,7 @@ const Profile = () => {
           className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white mt-10"
           type="submit"
         >
-          Update Profile
+          Actualizar perfil
         </button>
       </form>
     </>

@@ -41,7 +41,7 @@ const OrderHistory = () => {
         {orders?.length === 0 ? (
           <div className="text-center">
             <h1 className="text-4xl text-accent-content">
-              No hay órdenes en el historial
+              No hay ordenes en el historial
             </h1>
             <Link
               to="/shop"

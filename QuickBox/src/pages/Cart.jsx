@@ -158,7 +158,7 @@ const Cart = () => {
             <CartTotals total={total} />
             {loginState ? (
               <button onClick={isCartEmpty} className='btn bg-blue-600 hover:bg-blue-500 text-white btn-block mt-8'>
-                Órdena ahora
+                Ordena ahora
               </button>
             ) : (
               <Link to='/login' className='btn bg-blue-600 hover:bg-blue-500 btn-block text-white mt-8'>
