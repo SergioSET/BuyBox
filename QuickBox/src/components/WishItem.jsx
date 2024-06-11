@@ -40,7 +40,7 @@ const WishItem = ({ item, counter }) => {
       <td>
         <button className="btn btn-xs btn-error text-sm" onClick={() => removeFromWishlistHandler(item)}>
           <FaHeartCrack />
-          remove from the wishlist
+          Remover de la lista de deseados
         </button>
       </td>
     </tr>

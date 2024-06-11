@@ -33,7 +33,7 @@ const CartItem = ({ cartItem, onDelete, onEdit }) => {
         {/* AMOUNT */}
         <div className="form-control max-w-xs">
           <label htmlFor="amount" className="label p-0">
-            <span className="label-text text-accent-content">Amount</span>
+            <span className="label-text text-accent-content">Cantidad</span>
           </label>
           <input
             name="number"

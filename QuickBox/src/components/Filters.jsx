@@ -129,10 +129,10 @@ const Filters = () => {
         type="submit"
         className="btn bg-blue-600 hover:bg-blue-500 text-white btn-sm"
       >
-        search
+        Buscar
       </button>
       <Link to="/shop?page=1" className="btn btn-primary btn-sm">
-        reset
+        Reiniciar
       </Link>
     </Form>
   );

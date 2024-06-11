@@ -16,7 +16,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            5 star
+            5 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -31,7 +31,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            4 star
+            4 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -46,7 +46,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            3 star
+            3 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -61,7 +61,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            2 star
+            2 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -76,7 +76,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            1 star
+            1 estrella
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -94,7 +94,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            5 star
+            5 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -109,7 +109,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            4 star
+            4 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -124,7 +124,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            3 star
+            3 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -139,7 +139,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            2 star
+            2 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -154,7 +154,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            1 star
+            1 estrella
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -172,7 +172,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            5 star
+            5 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -187,7 +187,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            4 star
+            4 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -202,7 +202,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            3 star
+            3 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -217,7 +217,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            2 star
+            2 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -232,7 +232,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            1 star
+            1 estrella
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -250,7 +250,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            5 star
+            5 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -265,7 +265,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            4 star
+            4 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -280,7 +280,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            3 star
+            3 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -295,7 +295,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            2 star
+            2 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -310,7 +310,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            1 star
+            1 estrella
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -328,7 +328,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            5 star
+            5 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -343,7 +343,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            4 star
+            4 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -358,7 +358,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            3 star
+            3 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -373,7 +373,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            2 star
+            2 estrellas
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div
@@ -388,7 +388,7 @@ const RatingPercentage = ({ rating, productData }) => {
             to="#"
             className="text-lg font-medium text-blue-500 hover:underline"
           >
-            1 star
+            1 estrella
           </Link>
           <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
             <div

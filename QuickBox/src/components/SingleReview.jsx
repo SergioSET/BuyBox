@@ -66,7 +66,7 @@ const SingleReview = ({ reviewObj }) => {
       </div>
       <footer className="mb-5 text-sm text-accent-content">
         <p>
-          Reviewed in the {reviewObj.location + " "}
+        Reseñado desde {reviewObj.location + " "}
           <time>{reviewObj.date}</time>
         </p>
       </footer>
