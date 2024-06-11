@@ -38,10 +38,10 @@ const Profile = () => {
       const updatedData = response.data.user[0];
       setUserData(updatedData);
       localStorage.setItem("user", JSON.stringify(updatedData));
-      toast.success("Profile updated successfully!");
+      toast.success("¡El perfil se ha actualizado exitosamente!");
     } catch (error) {
       console.error(error.response);
-      toast.error("Failed to update profile.");
+      toast.error("El perfil no se ha podido actualizar.");
     }
   };
 
