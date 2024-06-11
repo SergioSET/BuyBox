@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaSquareXTwitter } from "react-icons/fa6";
-import { FaSquareFacebook } from "react-icons/fa6";
-import { FaSquareInstagram } from "react-icons/fa6";
-import { FaSquareYoutube } from "react-icons/fa6";
+import { FaSquareXTwitter, FaSquareFacebook, FaSquareInstagram, FaSquareYoutube } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
 const Footer = () => {
@@ -23,27 +20,6 @@ const Footer = () => {
         <Link to="/order-list" className="link link-hover text-2xl max-md:text-xl text-accent-content" onClick={() => window.scrollTo(0, 0)}>
           Pedidos
         </Link>
-        {/* <Link to="/contact" className="link link-hover text-2xl max-md:text-xl text-accent-content" onClick={() => window.scrollTo(0, 0)}>
-          Contact
-        </Link> */}
-        {/* {!loginState && (
-            <>
-              <Link
-                to="/login"
-                className="link link-hover text-2xl max-md:text-xl text-accent-content"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="link link-hover text-2xl max-md:text-xl text-accent-content"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                Register
-              </Link>
-            </>
-          )} */}
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">
