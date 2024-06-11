@@ -25,7 +25,7 @@ const Footer = () => {
       </nav>
       <aside className="relative z-10">
         <p className="copy">
-          Copyright © 2024 - All right reserved by BuyBox
+          Copyright © 2024 - All right reserved by QuickBox
         </p>
       </aside>
     </footer>

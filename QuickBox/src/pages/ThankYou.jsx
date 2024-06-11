@@ -44,18 +44,18 @@ const ThankYou = () => {
 
   return (
     <>
-      <SectionTitle title="Thank You" path="Home | Cart | Thank you" />
+      <SectionTitle title="¡Gracias!"  />
       <div className="thankyou-content text-center text-accent-content px-10 max-w-7xl mx-auto">
         <h2 className="text-6xl max-sm:text-4xl">
-          Thank you for your purchase!
+          ¡Muchas gracias por tu compra!
         </h2>
 
         <h3 className="text-2xl mt-10 max-sm:text-xl">
-          We hope you love your new clothes and shoes! We appreciate your
-          business and look forward to seeing you again soon.
+          Esperamos que disfrutes de tus pedidos cuando lleguen
+          apreciamos mucho tu solicitud
         </h3>
         <h3 className="text-2xl mt-5 max-sm:text-xl">
-          Here are some things you can do next:
+          Aqui hay algunas cosas que puedes hacer ahora:
         </h3>
         <ul className="text-xl mt-5 text-blue-500 max-sm:text-lg">
           <li className="hover:text-blue-600 cursor-pointer">
@@ -70,10 +70,10 @@ const ThankYou = () => {
         </ul>
 
         <h4 className="text-xl mt-5 max-sm:text-lg">
-          Thank you again for your purchase!
+         De nuevo ¡gracias por tu compra!
         </h4>
         <h4 className="text-xl max-sm:text-lg">
-          Sincerely, The BuyBox team
+          De corazón, El equipo de QuickBox 
         </h4>
       </div>
     </>
