@@ -1,49 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
+import { useLoaderData } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
 
-const Locker = () => {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [expandedOrder, setExpandedOrder] = useState(null);
-    const [error, setError] = useState(null);
+export const lockerLoader = async ({ request }) => {
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+        return null;
+    }
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const userId = JSON.parse(localStorage.getItem("user")).id || {};
-                const response = await fetch(`http://localhost:3000/api/usuarios/${userId}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const userData = await response.json();
-                
-                const orderResponse = await fetch(`http://localhost:3000/order/list/${userId}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                if (!orderResponse.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const orderData = await orderResponse.json();
-                setOrders(orderData);
-                setLoading(false);
-            } catch (error) {
-                console.log(error.message);
-                setError(error.message);
-                setLoading(false);
-            }
-        };
-        fetchOrders();
-    }, []);
+    const userId = JSON.parse(localStorage.getItem("user")).id || {};
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/usuarios/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+    } catch (error) {
+        console.log(error.message);
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/order/list/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error.message);
+    }
+
+    return null;
+}
+
+export default function Locker() {
+    const orders = useLoaderData();
+    const [expandedOrder, setExpandedOrder] = useState(null);
 
     const handleDelete = (id, name) => {
         if (window.confirm("¿Estás seguro que deseas borrar la orden " + name + "?")) {
@@ -68,18 +73,7 @@ const Locker = () => {
         }
     };
 
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center min-h-screen">
-                <ClipLoader size={60} color={"#123abc"} />
-            </div>
-        );
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
+    // Agrupar órdenes por número de seguimiento
     const groupedOrders = orders.reduce((acc, order) => {
         if (!acc[order.tracking_number]) {
             acc[order.tracking_number] = [];
@@ -87,14 +81,7 @@ const Locker = () => {
         acc[order.tracking_number].push(order);
         return acc;
     }, {});
-    
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center min-h-screen">
-                <ClipLoader size={60} color={"#123abc"} />
-            </div>
-        );
-    }
+
     return (
         <>
             <section className="relative">
@@ -102,16 +89,17 @@ const Locker = () => {
                     <div className="pt-22 pb-20 md:pt-20 md:pb-20">
                         {Object.keys(groupedOrders).length === 0 ? (
                             <div className="flex flex-col items-center text-center">
-                                <h1 className="text-2xl font-bold text-white mb-4">
-                                    Parece ser que no tienes productos disponibles.
-                                </h1>
-                                <Link
-                                    to="/shop"
-                                    className="btn bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105"
-                                >
-                                    ¡Compra ahora!
-                                </Link>
-                            </div>
+                            <h1 className="text-2xl font-bold text-white mb-4">
+                                Parece ser que no tienes productos disponibles.
+                            </h1>   
+                            <Link 
+                                to="/shop" 
+                                className="btn bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105"
+                            >
+                                ¡Compra ahora!
+                            </Link>
+                        </div>
+                            
                         ) : (
                             <table className="tabla-con-divisiones">
                                 <thead>
@@ -161,6 +149,4 @@ const Locker = () => {
             </section>
         </>
     );
-};
-
-export default Locker;
+}
