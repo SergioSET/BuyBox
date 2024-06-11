@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 import { SectionTitle } from "../components";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +12,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true); // Estado para la carga inicial
   const loginState = localStorage.getItem("isLoggedIn");
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500); // Simula un retardo de 2 segundos
+
     if (loginState) {
       localStorage.clear();
       store.dispatch(logoutUser());
@@ -72,6 +78,14 @@ const Login = () => {
       console.log(error.message);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <ClipLoader size={60} color={"#123abc"} />
+      </div>
+    );
+  }
 
   return (
     <>
