@@ -55,7 +55,7 @@ const Profile = () => {
 
   return (
     <>
-      <SectionTitle title="Bienvenido a tu Perfil" path="Home | perfil" />
+      <SectionTitle title="Bienvenido a tu Perfil"/>
       <form className="max-w-7xl mx-auto text-center px-10" onSubmit={updateProfile}>
         <div className="grid grid-cols-3 max-lg:grid-cols-1">
           <div className="form-control w-full lg:max-w-xs">
