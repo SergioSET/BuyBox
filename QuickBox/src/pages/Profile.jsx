@@ -60,7 +60,7 @@ const Profile = () => {
         <div className="grid grid-cols-3 max-lg:grid-cols-1">
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu nombre</span>
+              <span className="label-text">Nombre</span>
             </label>
             <input
               type="text"
@@ -74,7 +74,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu E-mail</span>
+              <span className="label-text">E-mail</span>
             </label>
             <input
               type="email"
@@ -88,7 +88,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu teléfono</span>
+              <span className="label-text">Teléfono</span>
             </label>
             <input
               type="tel"
@@ -102,7 +102,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu dirección</span>
+              <span className="label-text">Dirección</span>
             </label>
             <input
               type="text"
@@ -116,7 +116,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu contraseña</span>
+              <span className="label-text">Contraseña</span>
             </label>
             <input
               type="password"
