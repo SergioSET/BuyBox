@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { SectionTitle } from "../components";
-import { nanoid } from "nanoid";
+import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -18,8 +17,17 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
   const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
+  const [loading, setLoading] = useState(true); // Estado para la carga inicial
+  const [submitting, setSubmitting] = useState(false); // Estado para el envío del formulario
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Simular una carga inicial
+    setTimeout(() => {
+      setLoading(false);
+    }, 500); // Simula un retardo de 2 segundos
+  }, []);
 
   const isValidate = () => {
     let isProceed = true;
@@ -63,6 +71,8 @@ const Register = () => {
 
     if (!isValidate()) return;
 
+    setSubmitting(true); // Mostrar spinner al enviar el formulario
+
     try {
       const response = await fetch('http://localhost:3000/api/usuarios', {
         method: 'POST',
@@ -76,11 +86,13 @@ const Register = () => {
         navigate('/login');
       } else {
         const data = await response.json();
-        // setError(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
-      // setError('An error occurred while signing in.');
+      toast.error('An error occurred while signing in.');
+    } finally {
+      setSubmitting(false); // Ocultar spinner al completar el envío
     }
   };
 
@@ -103,12 +115,21 @@ const Register = () => {
     alignItems: 'center',
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <ClipLoader size={60} color={"#123abc"} />
+      </div>
+    );
+  }
+
   return (
     <>
-      <SectionTitle title="Registro" path="Home | Registro" />
+      <h1 className="TitleShop">QuickBox</h1>
+      <h2 className="SubtitleShop">Registro</h2>
       <div className="flex flex-col justify-center sm:py-12">
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <div className="bg-dark border border-gray-600 shadow w-full rounded-lg divide-y divide-gray-200">
+          <div className="bg-gray-900 border border-gray-600 shadow w-full rounded-lg divide-y divide-gray-200">
             <form className="px-5 py-7" onSubmit={handleSubmit}>
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Nombre
@@ -119,7 +140,6 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required={true}
-                style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Correo Electrónico
@@ -150,7 +170,6 @@ const Register = () => {
                 value={adress}
                 onChange={(e) => setAdress(e.target.value)}
                 required={true}
-                style={inputStyle}
               />
               <label className="font-semibold text-sm pb-1 block text-accent-content">
               Contraseña
@@ -165,7 +184,6 @@ const Register = () => {
                     setPasswordTouched(true);
                   }}
                   required={true}
-                  style={inputStyle}
                 />
                 {passwordTouched && (
                   <div style={iconContainerStyle} onClick={() => setShowPassword(!showPassword)}>
@@ -194,7 +212,6 @@ const Register = () => {
                     setConfirmPasswordTouched(true);
                   }}
                   required={true}
-                  style={inputStyle}
                 />
                 {confirmPasswordTouched && (
                   <div style={iconContainerStyle} onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
@@ -214,21 +231,27 @@ const Register = () => {
                 type="submit"
                 className="transition duration-200 bg-blue-600 hover:bg-blue-500 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
               >
-                <span className="inline-block mr-2">Registrarse</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="w-4 h-4 inline-block"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
+                {submitting ? (
+                  <ClipLoader size={20} color={"#ffffff"} />
+                ) : (
+                  <>
+                    <span className="inline-block mr-2">Registrarse</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="w-4 h-4 inline-block"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </>
+                )}
               </button>
             </form>
           </div>
