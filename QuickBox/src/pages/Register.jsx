@@ -125,9 +125,8 @@ const Register = () => {
 
   return (
     <>
-      <h1 className="TitleShop">QuickBox</h1>
-      <h2 className="SubtitleShop">Registro</h2>
-      <div className="flex flex-col justify-center sm:py-12">
+      <h1 className="TitleShop">Registro</h1>
+      <div className="flex flex-col justify-center">
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
           <div className="bg-gray-900 border border-gray-600 shadow w-full rounded-lg divide-y divide-gray-200">
             <form className="px-5 py-7" onSubmit={handleSubmit}>
