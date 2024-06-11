@@ -10,14 +10,14 @@ const SingleProductReviews = ({ rating, productData }) => {
 
       <div className="product-reviews-comments mt-20 px-10">
         <h2 className="text-4xl text-accent-content text-center mb-5 max-sm:text-2xl">
-          Reviews
+          Reseñas
         </h2>
         {productData.reviews.map((item) => (
           <SingleReview key={nanoid()} reviewObj={item} />
         ))}
         {productData?.totalReviewCount > 3 && (
           <button className="btn bg-blue-600 hover:bg-blue-500 w-full text-white">
-            Load more reviews
+            Cargas mas reseñas
           </button>
         )}
       </div>
