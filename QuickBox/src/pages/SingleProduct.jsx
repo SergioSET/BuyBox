@@ -208,7 +208,7 @@ const SingleProduct = () => {
               }}
             >
               <FaCartShopping className="text-xl mr-1" />
-              Add to cart
+              Añadir al carrito
             </button>
 
             {/* {product?.isInWishList ? (
@@ -268,7 +268,7 @@ const SingleProduct = () => {
               Category: {productData?.category}
             </div> */}
             <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
-              Production Date:{" "}
+              Fecha de producción:{" "}
               {productData?.created_at?.substring(0, 10)}
             </div>
           </div>

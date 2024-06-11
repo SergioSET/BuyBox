@@ -15,9 +15,9 @@ const Wishlist = () => {
             <thead>
               <tr>
                 <th></th>
-                <th className="text-accent-content">Name</th>
-                <th className="text-accent-content">Size</th>
-                <th className="text-accent-content">Action</th>
+                <th className="text-accent-content">Nombre</th>
+                <th className="text-accent-content">Tamaño</th>
+                <th className="text-accent-content">Acciones</th>
               </tr>
             </thead>
             <tbody>

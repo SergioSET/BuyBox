@@ -41,13 +41,13 @@ const OrderHistory = () => {
         {orders?.length === 0 ? (
           <div className="text-center">
             <h1 className="text-4xl text-accent-content">
-              There are no orders in the order history
+              No hay órdenes en el historial
             </h1>
             <Link
               to="/shop"
               className="btn bg-blue-600 hover:bg-blue-500 text-white mt-10"
             >
-              Make your first order
+              Haz tu primer pedido
             </Link>
           </div>
         ) : (
@@ -59,7 +59,7 @@ const OrderHistory = () => {
               >
                 <input type="radio" name="my-accordion-3" />
                 <div className="collapse-title text-xl font-medium text-accent-content">
-                  Order {order.id} - {order.orderStatus}
+                  Pedido {order.id} - {order.orderStatus}
                 </div>
                 <div className="collapse-content">
                   <div className="overflow-x-auto">
@@ -68,11 +68,11 @@ const OrderHistory = () => {
                       <thead>
                         <tr className="text-accent-content">
                           <th>Order</th>
-                          <th>Image</th>
-                          <th>Name</th>
-                          <th>Size</th>
-                          <th>Amount</th>
-                          <th>Price</th>
+                          <th>Imagen</th>
+                          <th>Nombre</th>
+                          <th>Tamaño</th>
+                          <th>Cantidad</th>
+                          <th>Precio</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -96,21 +96,21 @@ const OrderHistory = () => {
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-md text-accent-content">
-                              Shipping: $50
+                              Envío: $50
                             </h3>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-md text-accent-content">
-                              Tax: 20%: ${ Math.round(order?.subtotal / 5) }
+                              Impuestos: 20%: ${ Math.round(order?.subtotal / 5) }
                             </h3>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-xl text-accent-content">
-                              - Order Total: ${ Math.round(order?.subtotal + 50 + (order?.subtotal / 5)) } -
+                              - Total pedido: ${ Math.round(order?.subtotal + 50 + (order?.subtotal / 5)) } -
                             </h3>
                           </td>
                         </tr>

@@ -55,7 +55,7 @@ const ThankYou = () => {
           apreciamos mucho tu solicitud
         </h3>
         <h3 className="text-2xl mt-5 max-sm:text-xl">
-          Aqui hay algunas cosas que puedes hacer ahora:
+          Aquí hay algunas cosas que puedes hacer ahora:
         </h3>
         <ul className="text-xl mt-5 text-blue-500 max-sm:text-lg">
           <li className="hover:text-blue-600 cursor-pointer">

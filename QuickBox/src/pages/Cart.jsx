@@ -139,9 +139,9 @@ const Cart = () => {
     <>
       {cartItems.length === 0 ? (
         <div className='text-center mt-8'>
-          <h2 className='text-2xl font-semibold'>Your cart is empty</h2>
+          <h2 className='text-2xl font-semibold'>Tu carrito está vacío</h2>
           <Link to='/shop' className='btn bg-blue-600 hover:bg-blue-500 text-white mt-4'>
-            Go to products
+            Ir a productos
           </Link>
         </div>
       ) : (
@@ -158,11 +158,11 @@ const Cart = () => {
             <CartTotals total={total} />
             {loginState ? (
               <button onClick={isCartEmpty} className='btn bg-blue-600 hover:bg-blue-500 text-white btn-block mt-8'>
-                order now
+                Órdena ahora
               </button>
             ) : (
               <Link to='/login' className='btn bg-blue-600 hover:bg-blue-500 btn-block text-white mt-8'>
-                please login
+                Por favor inicie sesión
               </Link>
             )}
           </div>
