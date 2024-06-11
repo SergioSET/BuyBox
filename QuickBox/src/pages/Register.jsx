@@ -90,7 +90,7 @@ const Register = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-      toast.error('An error occurred while signing in.');
+      toast.error('Ha ocurrido un error');
     } finally {
       setSubmitting(false); // Ocultar spinner al completar el envío
     }

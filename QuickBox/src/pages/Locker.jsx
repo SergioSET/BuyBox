@@ -91,7 +91,7 @@ export default function Locker() {
                             <div className="flex flex-col items-center text-center">
                             <h1 className="text-2xl font-bold text-white mb-4">
                                 Parece ser que no tienes productos disponibles.
-                            </h1>
+                            </h1>   
                             <Link 
                                 to="/shop" 
                                 className="btn bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105"
