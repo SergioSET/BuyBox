@@ -22,7 +22,7 @@ const AdminHeader = () => {
 
   return (
     <>
-      <div className="navbar bg-base-100 shadow-lg mb-4">
+      <div className="navbar bg-base-100 shadow-lg mb-1">
         <div className="flex-1">
           <Link
             to="/admin/user-list"
