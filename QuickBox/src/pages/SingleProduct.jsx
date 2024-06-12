@@ -74,7 +74,6 @@ const SingleProduct = () => {
   //     );
   //     const userObj = getResponse.data;
 
-
   //     userObj.userWishlist = userObj.userWishlist || [];
 
   //     userObj.userWishlist.push(product);
@@ -83,7 +82,6 @@ const SingleProduct = () => {
   //       `http://localhost:8080/user/${localStorage.getItem("id")}`,
   //       userObj
   //     );
-
 
   //     store.dispatch(updateWishlist({ userObj }));
   //     toast.success("Product added to the wishlist!");
@@ -111,13 +109,11 @@ const SingleProduct = () => {
   //     userObj
   //   );
 
-
   //   store.dispatch(removeFromWishlist({ userObj }));
   //   toast.success("Product removed from the wishlist!");
   // };
 
   const addToCartHandler = async () => {
-
     const itemCart = {
       id_user: userId,
       id_product: productData?.id,
@@ -136,42 +132,27 @@ const SingleProduct = () => {
       if (response.ok) {
         toast.success("¡Producto añadido al carrito!");
       }
-
     } catch (error) {
-      console.error('Error:', error
-      );
+      console.error('Error:', error);
     }
-  }
-
+  };
 
   return (
     <>
-      <SectionTitle title="Product page" path="Home | Shop | Product page" />
-      <div className="grid grid-cols-2 max-w-7xl mx-auto mt-5 max-lg:grid-cols-1 max-lg:mx-5">
-        <div className="product-images flex flex-col justify-center max-lg:justify-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 max-w-7xl mx-auto mt-5 gap-8">
+        <div className="product-images flex justify-center lg:justify-end">
           <img
             src={`http://localhost:5173${productData?.img}`}
-            className="w-96 text-center border border-gray-600 cursor-pointer"
+            className="w-64 lg:w-64 text-center border border-gray-600 cursor-pointer"
             alt={productData.name}
           />
-          {/* <div className="other-product-images mt-1 grid grid-cols-3 w-96 gap-y-1 gap-x-2 max-sm:grid-cols-2 max-sm:w-64">
-            {productData?.additionalImageUrls.map((imageObj, index) => (
-              <img
-                src={`https://${imageObj}`}
-                key={nanoid()}
-                onClick={() => setCurrentImage(index)}
-                alt={productData.name}
-                className="w-32 border border-gray-600 cursor-pointer"
-              />
-            ))}
-          </div> */}
         </div>
-        <div className="single-product-content flex flex-col gap-y-5 max-lg:mt-2">
+        <div className="single-product-content flex flex-col gap-y-5">
           <h2 className="text-5xl max-sm:text-3xl text-accent-content">
             {productData?.name}
           </h2>
           {/* <SingleProductRating rating={rating} productData={productData} /> */}
-          <p className="text-3xl text-error">
+          <p className="text-3xl text">
             {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(productData?.price)}
           </p>
           <div className="text-xl max-sm:text-lg text-accent-content">
