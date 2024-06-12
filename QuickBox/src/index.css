@@ -95,7 +95,6 @@
 }
 
 input[type="text"] {
-    background-color: #333333; /* Fondo del input */
     color: #ffffff; /* Color del texto del input */
     border: 1px solid #555555; /* Borde del input */
     border-radius: 8px; /* Bordes redondeados */

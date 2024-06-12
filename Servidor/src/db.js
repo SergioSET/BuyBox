@@ -3,6 +3,6 @@ export const pool = createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    port: '',
+    port: '3306',
     database: 'buyboxdb'
 })
