@@ -69,52 +69,55 @@ export const updateUsuario = async (req, res) => {
 
     try {
         // Verificar si el usuario existe
-        const [existingUsers] = await pool.query('SELECT id FROM user WHERE id = ?', [id]);
+        let [existingUsers] = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
+
+        existingUsers = existingUsers[0];
 
         // Si no existe un usuario con ese ID, enviar un código de error
         if (existingUsers.length === 0) {
             return res.status(404).send({ message: 'Usuario no encontrado' });
         }
-        if(role == null){
+
+        if (role == null) {
             if (password == '') {
                 await pool.query('UPDATE user SET name = ?, address = ?, phone = ?, email = ? WHERE id = ?', [name, address, phone, email, id]);
-    
+
             } else if (password == existingUsers.password) {
-    
+
                 await pool.query('UPDATE user SET name = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, address, phone, email, role, id]);
-    
+
             } else {
                 // Si el usuario existe, actualizar sus datos
                 const hashedPassword = await bcrypt.hash(password, 10);
-    
+
                 await pool.query('UPDATE user SET name = ?, password = ?,  address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, hashedPassword, address, phone, email, role, id]);
-    
+
             }
-    
+
             const [user] = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
-    
+
             res.json({ message: 'Usuario actualizado exitosamente', user: user });
-        }else{
+        } else {
             if (password == '') {
                 await pool.query('UPDATE user SET name = ?, role = ?, address = ?, phone = ?, email = ? WHERE id = ?', [name, role, address, phone, email, id]);
-    
+
             } else if (password == existingUsers.password) {
-    
+
                 await pool.query('UPDATE user SET name = ?, role = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, role, address, phone, email, role, id]);
-    
+
             } else {
                 // Si el usuario existe, actualizar sus datos
                 const hashedPassword = await bcrypt.hash(password, 10);
-    
+
                 await pool.query('UPDATE user SET name = ?, password = ?, role = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, hashedPassword, role, address, phone, email, role, id]);
-    
+
             }
-    
+
             const [user] = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
-    
+
             res.json({ message: 'Usuario actualizado exitosamente', user: user });
         }
-        
+
     } catch (error) {
         console.error('Error al actualizar usuario:', error);
         res.status(500).send({ message: 'Error al actualizar usuario' });
