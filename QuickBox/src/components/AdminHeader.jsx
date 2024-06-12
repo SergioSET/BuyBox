@@ -3,6 +3,10 @@ import { Link, NavLink } from "react-router-dom";
 import { AiFillShopping } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
+import '../../src/styles/grid.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faBox, faClipboardList, faHeadset } from '@fortawesome/free-solid-svg-icons';
+
 
 const AdminHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -18,7 +22,7 @@ const AdminHeader = () => {
 
   return (
     <>
-      <div className="navbar bg-base-100 shadow-lg">
+      <div className="navbar bg-base-100 shadow-lg mb-1">
         <div className="flex-1">
           <Link
             to="/admin/user-list"
@@ -59,35 +63,37 @@ const AdminHeader = () => {
           )}
         </div>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 gap-4 p-20 justify-center">
-        <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
-          <div className="stat-value text-3xl font-semibold text-primary">150</div>
-          <div className="stat-title text-lg text-gray-600">Usuarios</div>
-          <Link to="/admin/user-list" className="btn btn-primary mt-4">
-            Gestionar
-          </Link>
-        </div>
-        <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
-          <div className="stat-value text-3xl font-semibold text-primary">250</div>
-          <div className="stat-title text-lg text-gray-600">Productos</div>
-          <Link to="/admin/product-list" className="btn btn-primary mt-4">
-            Gestionar
-          </Link>
-        </div>
-        <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
-          <div className="stat-value text-3xl font-semibold text-primary">100</div>
-          <div className="stat-title text-lg text-gray-600">Órdenes</div>
-          <Link to="/admin/order-list" className="btn btn-primary mt-4">
-            Gestionar
-          </Link>
-        </div>
-        <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
-          <div className="stat-value text-3xl font-semibold text-primary">24/7</div>
-          <div className="stat-title text-lg text-gray-600">Soporte</div>
-          <button className="btn btn-primary mt-4" onClick={handleContactClick}>
-            Contáctanos
-          </button>
+      
+      <div className="grid-container">
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 gap-4 p-20 justify-center" style={{ paddingBottom: '0px' }}>
+          <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
+            <div className="stat-value text-3xl font-semibold text-primary">150</div>
+            <div className="stat-title text-lg text-gray-600">Usuarios</div>
+            <Link to="/admin/user-list" className="btn btn-primary mt-4">
+              <FontAwesomeIcon icon={faUsers} className="mr-2" /> Gestionar
+            </Link>
+          </div>
+          <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
+            <div className="stat-value text-3xl font-semibold text-primary">250</div>
+            <div className="stat-title text-lg text-gray-600">Productos</div>
+            <Link to="/admin/product-list" className="btn btn-primary mt-4">
+              <FontAwesomeIcon icon={faBox} className="mr-2" /> Gestionar
+            </Link>
+          </div>
+          <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
+            <div className="stat-value text-3xl font-semibold text-primary">100</div>
+            <div className="stat-title text-lg text-gray-600">Órdenes</div>
+            <Link to="/admin/order-list" className="btn btn-primary mt-4">
+              <FontAwesomeIcon icon={faClipboardList} className="mr-2" /> Gestionar
+            </Link>
+          </div>
+          <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
+            <div className="stat-value text-3xl font-semibold text-primary">24/7</div>
+            <div className="stat-title text-lg text-gray-600">Soporte</div>
+            <button className="btn btn-primary mt-4" onClick={handleContactClick}>
+              <FontAwesomeIcon icon={faHeadset } className="mr-2" /> Contactanos
+            </button>
+          </div>
         </div>
       </div>
     </>
