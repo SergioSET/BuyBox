@@ -9,7 +9,6 @@ import {
 } from "../components";
 import { FaHeart } from "react-icons/fa6";
 import { FaCartShopping } from "react-icons/fa6";
-
 import { Link, useLoaderData } from "react-router-dom";
 import parse from "html-react-parser";
 import { nanoid } from "nanoid";
@@ -31,7 +30,6 @@ export const singleProductLoader = async ({ params }) => {
 };
 
 const SingleProduct = () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(0);
@@ -41,6 +39,7 @@ const SingleProduct = () => {
     userId = JSON.parse(localStorage.getItem("user")).id || {};
   }
   const dispatch = useDispatch();
+  const loginState = localStorage.getItem("isLoggedIn") === "true";
   const [rating, setRating] = useState([
     "empty star",
     "empty star",
@@ -117,7 +116,7 @@ const SingleProduct = () => {
   // };
 
   const addToCartHandler = async () => {
-    if (!isLoggedIn) {
+    if (!loginState) {
       window.location.href = "/login";
       return;
     }
@@ -187,16 +186,8 @@ const SingleProduct = () => {
           <div className="flex flex-row gap-x-2 max-sm:flex-col max-sm:gap-x">
             <button
               className="btn bg-blue-600 hover:bg-blue-500 text-white"
-              onClick={() => {
-                if (loginState) {
-                  addToCartHandler();
-                } else {
-                  toast.error(
-                    "You must be logged in to add products to the cart"
-                  );
-                }
-              }}
-            >
+              onClick={addToCartHandler}
+              >
               <FaCartShopping className="text-xl mr-1" />
               Añadir al carrito
             </button>
