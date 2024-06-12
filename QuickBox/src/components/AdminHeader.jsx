@@ -4,6 +4,9 @@ import { AiFillShopping } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
 import '../../src/styles/grid.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faBox, faClipboardList, faHeadset } from '@fortawesome/free-solid-svg-icons';
+
 
 const AdminHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -67,28 +70,28 @@ const AdminHeader = () => {
             <div className="stat-value text-3xl font-semibold text-primary">150</div>
             <div className="stat-title text-lg text-gray-600">Usuarios</div>
             <Link to="/admin/user-list" className="btn btn-primary mt-4">
-              Gestionar
+              <FontAwesomeIcon icon={faUsers} className="mr-2" /> Gestionar
             </Link>
           </div>
           <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
             <div className="stat-value text-3xl font-semibold text-primary">250</div>
             <div className="stat-title text-lg text-gray-600">Productos</div>
             <Link to="/admin/product-list" className="btn btn-primary mt-4">
-              Gestionar
+              <FontAwesomeIcon icon={faBox} className="mr-2" /> Gestionar
             </Link>
           </div>
           <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
             <div className="stat-value text-3xl font-semibold text-primary">100</div>
             <div className="stat-title text-lg text-gray-600">Órdenes</div>
             <Link to="/admin/order-list" className="btn btn-primary mt-4">
-              Gestionar
+              <FontAwesomeIcon icon={faClipboardList} className="mr-2" /> Gestionar
             </Link>
           </div>
           <div className="stat-card bg-base-200 p-6 rounded-lg shadow-lg">
             <div className="stat-value text-3xl font-semibold text-primary">24/7</div>
             <div className="stat-title text-lg text-gray-600">Soporte</div>
             <button className="btn btn-primary mt-4" onClick={handleContactClick}>
-              Contáctanos
+              <FontAwesomeIcon icon={faHeadset } className="mr-2" /> Contactanos
             </button>
           </div>
         </div>
