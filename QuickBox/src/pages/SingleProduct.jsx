@@ -31,13 +31,16 @@ export const singleProductLoader = async ({ params }) => {
 };
 
 const SingleProduct = () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(0);
   const { wishItems } = useSelector((state) => state.wishlist);
-  const [userId, setUserId] = useState(JSON.parse(localStorage.getItem("user")).id || {});
+  let [userId, setUserId] = useState(-1);
+  if (localStorage.getItem("isLoggedIn") != null) {
+    userId = JSON.parse(localStorage.getItem("user")).id || {};
+  }
   const dispatch = useDispatch();
-  const loginState = useState(localStorage.getItem("isLoggedIn"));
   const [rating, setRating] = useState([
     "empty star",
     "empty star",
@@ -114,6 +117,11 @@ const SingleProduct = () => {
   // };
 
   const addToCartHandler = async () => {
+    if (!isLoggedIn) {
+      window.location.href = "/login";
+      return;
+    }
+
     const itemCart = {
       id_user: userId,
       id_product: productData?.id,
@@ -136,6 +144,7 @@ const SingleProduct = () => {
       console.error('Error:', error);
     }
   };
+
 
   return (
     <>

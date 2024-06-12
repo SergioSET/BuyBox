@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Landing.css";
 import { Hero, ProductElement, Stats } from "../components";
 import { useLoaderData, useNavigate } from "react-router-dom";
@@ -33,6 +33,17 @@ export const landingLoader = async () => {
 const Landing = () => {
   const { products } = useLoaderData();
   const navigate = useNavigate();
+  const [hasReloaded, setHasReloaded] = useState(false);
+
+  useEffect(() => {
+    const reloaded = localStorage.getItem("hasReloaded");
+    if (!reloaded) {
+      localStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    } else {
+      setHasReloaded(true);
+    }
+  }, []);
 
   return (
     <main>

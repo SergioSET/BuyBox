@@ -160,7 +160,7 @@ export default function ProductList() {
                                                     <button onClick={() => handleEdit(product.id)} className="btn btn-primary" style={{ marginRight: '5px' }}>
                                                         <FontAwesomeIcon icon={faEdit} /> Editar
                                                     </button>
-                                                    <button onClick={() => handleDelete(product.id, product.name)} className="btn btn-red" style={{ marginRight: '5px' }}>
+                                                    <button onClick={() => handleDelete(product.id, product.name)} className="btn btn-red" style={{ borderRadius: '0.50rem', marginRight: '5px' }}>
                                                         <FontAwesomeIcon icon={faTrashAlt} /> Borrar
                                                     </button>
                                                 </td>

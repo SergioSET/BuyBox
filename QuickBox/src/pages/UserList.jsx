@@ -98,7 +98,7 @@ export default function UserList() {
                                         <button onClick={() => handleEdit(user.id)} className="btn btn-primary" style={{ marginRight: '5px' }}>
                                             <FontAwesomeIcon icon={faEdit} /> Editar
                                         </button>
-                                        <button onClick={() => handleDelete(user.id)} className="btn btn-red" style={{ marginLeft: '5px' }}>
+                                        <button onClick={() => handleDelete(user.id)} className="btn btn-red" style={{ borderRadius: '0.50rem', marginLeft: '5px' }}>
                                             <FontAwesomeIcon icon={faTrashAlt} /> Borrar
                                         </button>
                                     </td>
