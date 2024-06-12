@@ -6,10 +6,13 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store";
 import { loginUser, logoutUser } from "../features/auth/authSlice";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Estado para controlar la visibilidad de la contraseña
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true); // Estado para la carga inicial
@@ -80,6 +83,15 @@ const Login = () => {
     }
   };
 
+  const iconContainerStyle = {
+    position: 'absolute', // Posición absoluta para posicionarlo dentro del contenedor relativo
+    right: '0.75rem', // Distancia desde el borde derecho del contenedor
+    top: '50%', // Centrado verticalmente
+    transform: 'translateY(-80%)', // Ajuste para centrar verticalmente
+    cursor: 'pointer', // Cambiar el cursor a puntero para indicar que es clickeable
+    color: 'white', // Color del icono
+  };
+  
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -90,7 +102,6 @@ const Login = () => {
 
   return (
     <>
-      {/*<SectionTitle title="Login" path="Home | Login" />*/}
       <h1 className="TitleShop">Inicio de Sesión</h1>
       <div className="flex flex-col justify-center ">
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
@@ -109,13 +120,20 @@ const Login = () => {
               <label className="font-semibold text-sm pb-1 block text-accent-content">
                 Contraseña
               </label>
-              <input
-                type="password"
-                required={true}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"} // Cambia el tipo de input para mostrar u ocultar la contraseña
+                  required={true}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                />
+                <div style={iconContainerStyle} onClick={() => setShowPassword(!showPassword)}>
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye} // Cambia el icono según el estado de visibilidad
+                  />
+                </div>
+              </div>
               <button
                 type="submit"
                 className="transition duration-200 bg-blue-600 hover:bg-blue-500 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
