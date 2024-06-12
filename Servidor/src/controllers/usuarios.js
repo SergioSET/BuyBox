@@ -66,7 +66,6 @@ export const updateUsuario = async (req, res) => {
     const { id } = req.params;
 
     const { name, email, phone, role, address, password } = req.body;
-    console.log("role : ",role,"s")
 
     try {
         // Verificar si el usuario existe
