@@ -11,11 +11,11 @@ export const createOrder = async (req, res) => {
     const formatted_date = `${shipping_date.getDate().toString().padStart(2, '0')}/${(shipping_date.getMonth() + 1).toString().padStart(2, '0')}/${shipping_date.getFullYear()}`;
     const status = 'En proceso';
     const tracking = Math.floor(Math.random() * 1000000000);
-
+    console.log(cartItems)
     try {
         const [rows] = await pool.query('INSERT INTO orden (id_user, tracking_number, cost, status, shipping_date) VALUES (?, ?, ?, ?, ?)', [userId, tracking, subtotal, status, formatted_date]);
         cartItems.forEach(element => {
-            pool.query('INSERT INTO orden_product (id_orden, id_product, quantity) VALUES (?, ?, ?)', [rows.insertId, element.id, element.quantity]);
+            pool.query('INSERT INTO orden_product (id_orden, id_product, quantity) VALUES (?, ?, ?)', [rows.insertId, element.id_product, element.quantity]);
         });
         pool.query('DELETE FROM cart WHERE id_user = ?', [userId]);
         res.send({ status: 'Orden_producto creada' });

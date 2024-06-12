@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { SectionTitle } from "../components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Animated } from "react-animated-css";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { store } from "../store";

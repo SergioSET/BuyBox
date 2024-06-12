@@ -16,7 +16,6 @@ export const getCarritoPersona = async (req, res) => {
         // const [rows] = await pool.query('SELECT * FROM cart WHERE id_user = ?', [id]);
 
         const [rows] = await pool.query('SELECT cart.*, product.name, product.price, product.img FROM cart JOIN product ON cart.id_product = product.id WHERE id_user = ?', [id]);
-
         res.json(rows);
     } catch (error) {
         console.error('Error al obtener el carrito:', error);
