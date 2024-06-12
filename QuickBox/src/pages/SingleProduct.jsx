@@ -30,14 +30,12 @@ export const singleProductLoader = async ({ params }) => {
   return { productData: response.data[0] };
 };
 
-
-
 const SingleProduct = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(0);
   const { wishItems } = useSelector((state) => state.wishlist);
-  const [userId, setUserId] = useState(null); // Cambiado para inicializar como null
+  const [userId, setUserId] = useState(JSON.parse(localStorage.getItem("user")).id || {});
   const dispatch = useDispatch();
   const loginState = useState(localStorage.getItem("isLoggedIn"));
   const [rating, setRating] = useState([
@@ -48,9 +46,7 @@ const SingleProduct = () => {
     "empty star",
   ]);
 
-  const { productData } = useLoaderData() || {}; // Asegúrate de que productData tenga un valor
-
-
+  const { productData } = useLoaderData();
 
   const product = {
     id: productData?.id,
