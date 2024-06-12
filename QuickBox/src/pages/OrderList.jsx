@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import '../../src/styles/dashboard-user.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export const orderlistloader = async ({ request }) => {
     try {
@@ -127,12 +129,14 @@ export default function OrderList() {
                                                 <td className="align-middle text-center">{groupedOrders[trackingNumber][0].address || "N/A"}</td>
                                                 <td className="align-middle text-center">{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(groupedOrders[trackingNumber][0].cost)}</td>
                                                 <td>
-                                                    <button onClick={() => setExpandedOrder(expandedOrder === trackingNumber ? null : trackingNumber)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-4">
-                                                        {expandedOrder === trackingNumber ? "Cerrar" : "Ver Productos"}
-                                                    </button>
-                                                    <button onClick={() => handleDelete(groupedOrders[trackingNumber][0].orderId, trackingNumber, groupedOrders[trackingNumber][0].name)} className="px-4 py-2 bg-red-500 text-white rounded-md ml-4">
-                                                        Borrar orden
-                                                    </button>
+                                                    <div className="button-container">
+                                                        <button onClick={() => setExpandedOrder(expandedOrder === trackingNumber ? null : trackingNumber)} className="btn btn-primary" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '30px' }}>
+                                                        <FontAwesomeIcon icon={faEye} />{expandedOrder === trackingNumber ? "Cerrar" : "Ver Productos"}
+                                                        </button>
+                                                        <button onClick={() => handleDelete(groupedOrders[trackingNumber][0].orderId, trackingNumber, groupedOrders[trackingNumber][0].name)} className="btn btn-red" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '80px' }}>
+                                                            <FontAwesomeIcon icon={faTrashAlt} />Borrar Orden
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             {expandedOrder === trackingNumber && groupedOrders[trackingNumber].map((order, i) => (

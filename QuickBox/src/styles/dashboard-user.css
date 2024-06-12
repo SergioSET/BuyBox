@@ -85,3 +85,8 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.button-container {
+    display: flex;
+    gap: 0px; /* Espacio entre los botones */
+}
