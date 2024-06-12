@@ -13,7 +13,7 @@ export const getUsuario = async (req, res) => {
 }
 
 export const createUsuario = async (req, res) => {
-    const { name, role, email, phone, address, password } = req.body;
+    const { name, role, email, phone, adress, password } = req.body;
 
     try {
         // Verificar si el usuario ya existe
@@ -27,7 +27,7 @@ export const createUsuario = async (req, res) => {
         // Si el usuario no existe, continuar con la creación
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const [rows] = await pool.query('INSERT INTO user (name, role, email, phone, address, password) VALUES (?, ?, ?, ?, ?, ?)', [name, role, email, phone, address, hashedPassword]);
+        const [rows] = await pool.query('INSERT INTO user (name, role, email, phone, address, password) VALUES (?, ?, ?, ?, ?, ?)', [name, role, email, phone, adress, hashedPassword]);
 
         res.send({
             id: rows.insertId,
@@ -66,6 +66,7 @@ export const updateUsuario = async (req, res) => {
     const { id } = req.params;
 
     const { name, email, phone, role, address, password } = req.body;
+    console.log("role : ",role,"s")
 
     try {
         // Verificar si el usuario existe
@@ -75,25 +76,46 @@ export const updateUsuario = async (req, res) => {
         if (existingUsers.length === 0) {
             return res.status(404).send({ message: 'Usuario no encontrado' });
         }
-
-        if (password == '') {
-            await pool.query('UPDATE user SET name = ?, role = ?, address = ?, phone = ?, email = ? WHERE id = ?', [name, role, address, phone, email, id]);
-
-        } else if (password == existingUsers.password) {
-
-            await pool.query('UPDATE user SET name = ?, role = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, role, address, phone, email, role, id]);
-
-        } else {
-            // Si el usuario existe, actualizar sus datos
-            const hashedPassword = await bcrypt.hash(password, 10);
-
-            await pool.query('UPDATE user SET name = ?, password = ?, role = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, hashedPassword, role, address, phone, email, role, id]);
-
+        if(role == null){
+            if (password == '') {
+                await pool.query('UPDATE user SET name = ?, address = ?, phone = ?, email = ? WHERE id = ?', [name, address, phone, email, id]);
+    
+            } else if (password == existingUsers.password) {
+    
+                await pool.query('UPDATE user SET name = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, address, phone, email, role, id]);
+    
+            } else {
+                // Si el usuario existe, actualizar sus datos
+                const hashedPassword = await bcrypt.hash(password, 10);
+    
+                await pool.query('UPDATE user SET name = ?, password = ?,  address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, hashedPassword, address, phone, email, role, id]);
+    
+            }
+    
+            const [user] = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
+    
+            res.json({ message: 'Usuario actualizado exitosamente', user: user });
+        }else{
+            if (password == '') {
+                await pool.query('UPDATE user SET name = ?, role = ?, address = ?, phone = ?, email = ? WHERE id = ?', [name, role, address, phone, email, id]);
+    
+            } else if (password == existingUsers.password) {
+    
+                await pool.query('UPDATE user SET name = ?, role = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, role, address, phone, email, role, id]);
+    
+            } else {
+                // Si el usuario existe, actualizar sus datos
+                const hashedPassword = await bcrypt.hash(password, 10);
+    
+                await pool.query('UPDATE user SET name = ?, password = ?, role = ?, address = ?, phone = ?, email = ?, role=? WHERE id = ?', [name, hashedPassword, role, address, phone, email, role, id]);
+    
+            }
+    
+            const [user] = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
+    
+            res.json({ message: 'Usuario actualizado exitosamente', user: user });
         }
-
-        const [user] = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
-
-        res.json({ message: 'Usuario actualizado exitosamente', user: user });
+        
     } catch (error) {
         console.error('Error al actualizar usuario:', error);
         res.status(500).send({ message: 'Error al actualizar usuario' });
