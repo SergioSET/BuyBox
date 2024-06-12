@@ -130,10 +130,10 @@ export default function OrderList() {
                                                 <td className="align-middle text-center">{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(groupedOrders[trackingNumber][0].cost)}</td>
                                                 <td>
                                                     <div className="button-container">
-                                                        <button onClick={() => setExpandedOrder(expandedOrder === trackingNumber ? null : trackingNumber)} className="btn btn-primary" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '30px' }}>
+                                                        <button onClick={() => setExpandedOrder(expandedOrder === trackingNumber ? null : trackingNumber)} className="btn btn-primary" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '20px' }}>
                                                         <FontAwesomeIcon icon={faEye} />{expandedOrder === trackingNumber ? "Cerrar" : "Ver Productos"}
                                                         </button>
-                                                        <button onClick={() => handleDelete(groupedOrders[trackingNumber][0].orderId, trackingNumber, groupedOrders[trackingNumber][0].name)} className="btn btn-red" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '80px' }}>
+                                                        <button onClick={() => handleDelete(groupedOrders[trackingNumber][0].orderId, trackingNumber, groupedOrders[trackingNumber][0].name)} className="btn btn-red" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '70px' }}>
                                                             <FontAwesomeIcon icon={faTrashAlt} />Borrar Orden
                                                         </button>
                                                     </div>
