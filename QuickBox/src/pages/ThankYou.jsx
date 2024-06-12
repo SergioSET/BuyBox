@@ -7,7 +7,6 @@ import { toast, ToastContainer } from "react-toastify";
 import { store } from "../store";
 import { calculateTotals, clearCart } from "../features/cart/cartSlice";
 import 'react-toastify/dist/ReactToastify.css';
-import { Animated } from "react-animated-css";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import imagen1 from "/productImages/producto1.jpg";

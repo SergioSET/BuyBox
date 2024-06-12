@@ -61,7 +61,7 @@ const Profile = () => {
 
   return (
     <>
-      <SectionTitle title="Bienvenido a tu Perfil"/>
+      <h1 className="text-center TitleShop">Bienvenido a tu Perfil</h1>
       <form className="max-w-7xl mx-auto text-center px-10" onSubmit={updateProfile}>
         <div className="max-w-md mx-auto">
           <div className="form-control mb-4">
@@ -71,7 +71,7 @@ const Profile = () => {
             <input
               type="text"
               name="name"
-              placeholder="Type here"
+              placeholder="Escribe un nombre"
               className="input input-bordered w-full"
               value={userFormData.name}
               onChange={handleInputChange}
