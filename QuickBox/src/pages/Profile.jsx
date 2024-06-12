@@ -53,12 +53,18 @@ const Profile = () => {
     }));
   };
 
+  // Verificar los datos iniciales del usuario
+  console.log("Datos iniciales de usuario:", userData);
+
+  // Verificar los datos del estado actual
+  console.log("Datos actuales del estado:", userFormData);
+
   return (
     <>
       <SectionTitle title="Bienvenido a tu Perfil"/>
       <form className="max-w-7xl mx-auto text-center px-10" onSubmit={updateProfile}>
-        <div className="grid grid-cols-3 max-lg:grid-cols-1">
-          <div className="form-control w-full lg:max-w-xs">
+        <div className="max-w-md mx-auto">
+          <div className="form-control mb-4">
             <label className="label">
               <span className="label-text">Nombre</span>
             </label>
@@ -66,13 +72,13 @@ const Profile = () => {
               type="text"
               name="name"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.name}
               onChange={handleInputChange}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control mb-4">
             <label className="label">
               <span className="label-text">E-mail</span>
             </label>
@@ -80,13 +86,13 @@ const Profile = () => {
               type="email"
               name="email"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.email}
               onChange={handleInputChange}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control mb-4">
             <label className="label">
               <span className="label-text">Teléfono</span>
             </label>
@@ -94,13 +100,13 @@ const Profile = () => {
               type="tel"
               name="phone"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.phone}
               onChange={handleInputChange}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control mb-4">
             <label className="label">
               <span className="label-text">Dirección</span>
             </label>
@@ -108,13 +114,13 @@ const Profile = () => {
               type="text"
               name="address"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.address}
               onChange={handleInputChange}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control mb-4">
             <label className="label">
               <span className="label-text">Contraseña</span>
             </label>
@@ -122,18 +128,19 @@ const Profile = () => {
               type="password"
               name="password"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.password}
               onChange={handleInputChange}
             />
           </div>
+
+          <button
+            className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white mt-6"
+            type="submit"
+          >
+            Actualizar perfil
+          </button>
         </div>
-        <button
-          className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white mt-10"
-          type="submit"
-        >
-          Actualizar perfil
-        </button>
       </form>
     </>
   );
