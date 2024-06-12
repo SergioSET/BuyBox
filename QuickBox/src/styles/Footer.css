@@ -1,4 +1,3 @@
-/* Footer.css */
 body {
     margin: 0;
     padding-bottom: 400px; /* Altura del footer */
@@ -22,8 +21,9 @@ body {
     width: 100%;
     height: 100%;
     background-image: url('src/assets/wallpaper_footer.png'); /* Reemplaza 'ruta/a/tu/imagen.jpg' con la ruta real de tu imagen */
-    background-size: contain;
+    background-size: cover; /* Ajusta el tamaño de la imagen */
     background-position: center;
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
     opacity: 0.3; /* Ajusta la opacidad según sea necesario */
     z-index: 1;
 }
