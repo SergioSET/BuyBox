@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         '100': '#212830',
+        '200': '#263249',
         // Agrega más colores personalizados aquí si es necesario
       },
     },

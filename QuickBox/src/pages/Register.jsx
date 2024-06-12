@@ -110,7 +110,7 @@ const Register = () => {
     top: '50%',
     transform: 'translateY(-50%)',
     cursor: 'pointer',
-    color: 'gray',
+    color: 'white',
     display: 'flex',
     alignItems: 'center',
   };
@@ -130,7 +130,7 @@ const Register = () => {
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
           <div className="bg-gray-900 border border-gray-600 shadow w-full rounded-lg divide-y divide-gray-200">
             <form className="px-5 py-7" onSubmit={handleSubmit}>
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
+              <label className="font-semibold pb-1 block text-accent-content">
                 Nombre
               </label>
               <input
@@ -140,7 +140,7 @@ const Register = () => {
                 onChange={(e) => setName(e.target.value)}
                 required={true}
               />
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
+              <label className="font-semibold  pb-1 block text-accent-content">
                 Correo Electrónico
               </label>
               <input
@@ -150,7 +150,7 @@ const Register = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required={true}
               />
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
+              <label className="font-semibold pb-1 block text-accent-content">
                 Número de Teléfono
               </label>
               <input
@@ -160,7 +160,7 @@ const Register = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 required={true}
               />
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
+              <label className="font-semibold  pb-1 block text-accent-content">
                 Dirección
               </label>
               <input
@@ -170,7 +170,7 @@ const Register = () => {
                 onChange={(e) => setAdress(e.target.value)}
                 required={true}
               />
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
+              <label className="font-semibold  pb-1 block text-accent-content">
               Contraseña
               </label>
               <div className="relative">
@@ -198,8 +198,8 @@ const Register = () => {
                   </div>
                 )}
               </div>
-              <label className="font-semibold text-sm pb-1 block text-accent-content">
-                Repetir Contraseña
+              <label className="font-semibold  pb-1 block text-accent-content">
+                Confirmar Contraseña
               </label>
               <div className="relative">
                 <input
@@ -235,20 +235,7 @@ const Register = () => {
                 ) : (
                   <>
                     <span className="inline-block mr-2">Registrarse</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-4 h-4 inline-block"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
+                    
                   </>
                 )}
               </button>
@@ -260,7 +247,7 @@ const Register = () => {
               className="btn btn-neutral text-white"
               onClick={() => window.scrollTo(0, 0)}
             >
-              ¿Ya tienes una cuenta? Inicia sesión.
+              ¿Ya tienes una cuenta? Inicia sesión ahora
             </Link>
           </div>
         </div>

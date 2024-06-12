@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import {
   Filters,
   Pagination,
@@ -23,6 +23,11 @@ export const shopLoader = async () => {
 
 const Shop = () => {
   const productLoaderData = useLoaderData();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
+
 
   return (
     <>

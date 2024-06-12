@@ -64,15 +64,15 @@ const Profile = () => {
       <h1 className="text-center TitleShop">Bienvenido a tu Perfil</h1>
       <form className="max-w-7xl mx-auto text-center px-10" onSubmit={updateProfile}>
         <div className="max-w-md mx-auto">
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Nombre</span>
+          <div className="form-control mb-4 ">
+            <label className="label ">
+              <span className="label-text font-semibold text-accent-content">Nombre</span>
             </label>
             <input
               type="text"
               name="name"
               placeholder="Escribe un nombre"
-              className="input  w-full"
+              className="input  w-full bg-100"
               value={userFormData.name}
               onChange={handleInputChange}
             />
@@ -80,13 +80,13 @@ const Profile = () => {
 
           <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">E-mail</span>
+              <span className="label-text   font-semibold text-accent-content">E-mail</span>
             </label>
             <input
               type="email"
               name="email"
               placeholder="Escribe un correo"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-100 text-white"
               value={userFormData.email}
               onChange={handleInputChange}
             />
@@ -94,13 +94,13 @@ const Profile = () => {
 
           <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Teléfono</span>
+              <span className="label-text text-accent-content  font-semibold ">Teléfono</span>
             </label>
             <input
               type="tel"
               name="phone"
               placeholder="Escribe tu numero de teléfono"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-100 text-white"
               value={userFormData.phone}
               onChange={handleInputChange}
             />
@@ -108,13 +108,13 @@ const Profile = () => {
 
           <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Dirección</span>
+              <span className="label-text text-accent-content  font-semibold ">Dirección</span>
             </label>
             <input
               type="text"
               name="address"
               placeholder="Escribe una dirección"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-100"
               value={userFormData.address}
               onChange={handleInputChange}
             />
@@ -122,13 +122,13 @@ const Profile = () => {
 
           <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Contraseña</span>
+              <span className="label-text text-accent-content  font-semibold ">Contraseña</span>
             </label>
             <input
               type="password"
               name="password"
               placeholder="Escribe tu contraseña"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-100 text"
               value={userFormData.password}
               onChange={handleInputChange}
             />
