@@ -72,7 +72,7 @@ const Profile = () => {
               type="text"
               name="name"
               placeholder="Escribe un nombre"
-              className="input input-bordered w-full"
+              className="input  w-full"
               value={userFormData.name}
               onChange={handleInputChange}
             />
@@ -85,7 +85,7 @@ const Profile = () => {
             <input
               type="email"
               name="email"
-              placeholder="Type here"
+              placeholder="Escribe un correo"
               className="input input-bordered w-full"
               value={userFormData.email}
               onChange={handleInputChange}
@@ -99,7 +99,7 @@ const Profile = () => {
             <input
               type="tel"
               name="phone"
-              placeholder="Type here"
+              placeholder="Escribe tu numero de teléfono"
               className="input input-bordered w-full"
               value={userFormData.phone}
               onChange={handleInputChange}
@@ -113,7 +113,7 @@ const Profile = () => {
             <input
               type="text"
               name="address"
-              placeholder="Type here"
+              placeholder="Escribe una dirección"
               className="input input-bordered w-full"
               value={userFormData.address}
               onChange={handleInputChange}
@@ -127,7 +127,7 @@ const Profile = () => {
             <input
               type="password"
               name="password"
-              placeholder="Type here"
+              placeholder="Escribe tu contraseña"
               className="input input-bordered w-full"
               value={userFormData.password}
               onChange={handleInputChange}

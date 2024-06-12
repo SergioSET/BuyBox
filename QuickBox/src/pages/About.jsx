@@ -59,9 +59,6 @@ const About = () => {
           herramientas a su disposición para gestionar sus envíos
           internacionales.
         </p>
-        <Link to="/contact" className="BtnContactUs">
-          Contactanos 
-        </Link>
       </div>
     </div>
   );
