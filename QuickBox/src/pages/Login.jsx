@@ -149,7 +149,7 @@ const Login = () => {
               className="btn bg-blue-800 hover:bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105"
               onClick={() => window.scrollTo(0, 0)}
             >
-              ¿No tienes una cuenta? Regístrate.
+              ¿No tienes una cuenta? Regístrate
             </Link>
           </div>
         </div>
