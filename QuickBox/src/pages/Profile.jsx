@@ -38,10 +38,10 @@ const Profile = () => {
       const updatedData = response.data.user[0];
       setUserData(updatedData);
       localStorage.setItem("user", JSON.stringify(updatedData));
-      toast.success("Profile updated successfully!");
+      toast.success("¡El perfil se ha actualizado exitosamente!");
     } catch (error) {
       console.error(error.response);
-      toast.error("Failed to update profile.");
+      toast.error("El perfil no se ha podido actualizar.");
     }
   };
 
@@ -53,87 +53,94 @@ const Profile = () => {
     }));
   };
 
+  // Verificar los datos iniciales del usuario
+  console.log("Datos iniciales de usuario:", userData);
+
+  // Verificar los datos del estado actual
+  console.log("Datos actuales del estado:", userFormData);
+
   return (
     <>
-      <SectionTitle title="User Profile" path="Home | User Profile" />
+      <SectionTitle title="Bienvenido a tu Perfil"/>
       <form className="max-w-7xl mx-auto text-center px-10" onSubmit={updateProfile}>
-        <div className="grid grid-cols-3 max-lg:grid-cols-1">
-          <div className="form-control w-full lg:max-w-xs">
+        <div className="max-w-md mx-auto">
+          <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Tu nombre</span>
+              <span className="label-text">Nombre</span>
             </label>
             <input
               type="text"
               name="name"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.name}
               onChange={handleInputChange}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Tu E-mail</span>
+              <span className="label-text">E-mail</span>
             </label>
             <input
               type="email"
               name="email"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.email}
               onChange={handleInputChange}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Tu teléfono</span>
+              <span className="label-text">Teléfono</span>
             </label>
             <input
               type="tel"
               name="phone"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.phone}
               onChange={handleInputChange}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Tu dirección</span>
+              <span className="label-text">Dirección</span>
             </label>
             <input
               type="text"
               name="address"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.address}
               onChange={handleInputChange}
             />
           </div>
 
-          <div className="form-control w-full lg:max-w-xs">
+          <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Tu contraseña</span>
+              <span className="label-text">Contraseña</span>
             </label>
             <input
               type="password"
               name="password"
               placeholder="Type here"
-              className="input input-bordered w-full lg:max-w-xs"
+              className="input input-bordered w-full"
               value={userFormData.password}
               onChange={handleInputChange}
             />
           </div>
+
+          <button
+            className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white mt-6"
+            type="submit"
+          >
+            Actualizar perfil
+          </button>
         </div>
-        <button
-          className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white mt-10"
-          type="submit"
-        >
-          Actualizar perfil
-        </button>
       </form>
     </>
   );

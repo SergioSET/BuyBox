@@ -1,3 +1,8 @@
+.tabla-contenedora {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Para una mejor experiencia en dispositivos táctiles */
+}
+
 .tabla-con-divisiones {
     width: 100%;
     border-collapse: collapse;

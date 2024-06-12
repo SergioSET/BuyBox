@@ -101,48 +101,50 @@ export default function Locker() {
                         </div>
                             
                         ) : (
-                            <table className="tabla-con-divisiones">
-                                <thead>
-                                    <tr>
-                                        <th>Tracking</th>
-                                        <th>Estado de pedido</th>
-                                        <th>Fecha de entrega del pedido</th>
-                                        <th>Dirección de entrega</th>
-                                        <th>Costo de pedido</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(groupedOrders).map((trackingNumber, index) => (
-                                        <React.Fragment key={index}>
-                                            <tr>
-                                                <td className="align-middle text-center">{trackingNumber}</td>
-                                                <td className="align-middle text-center">{groupedOrders[trackingNumber][0].status}</td>
-                                                <td className="align-middle text-center">{groupedOrders[trackingNumber][0].shipping_date}</td>
-                                                <td className="align-middle text-center">{groupedOrders[trackingNumber][0].address || "N/A"}</td>
-                                                <td className="align-middle text-center">{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(groupedOrders[trackingNumber][0].cost)}</td>
-                                                <td>
-                                                    <button onClick={() => setExpandedOrder(expandedOrder === trackingNumber ? null : trackingNumber)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-4">
-                                                        {expandedOrder === trackingNumber ? "Cerrar" : "Ver Productos"}
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            {expandedOrder === trackingNumber && groupedOrders[trackingNumber].map((order, i) => (
-                                                <tr key={`expanded_${i}`}>
-                                                    <td colSpan="7">
-                                                        <div className="mt-4">
-                                                            <h3>Productos de la orden:</h3>
-                                                            <ul>
-                                                                <li>{order.product_name} - Cantidad: {order.quantity}</li>
-                                                            </ul>
-                                                        </div>
+                            <div className="tabla-contenedora">
+                                <table className="tabla-con-divisiones">
+                                    <thead>
+                                        <tr>
+                                            <th>Tracking</th>
+                                            <th>Estado de pedido</th>
+                                            <th>Fecha de entrega del pedido</th>
+                                            <th>Dirección de entrega</th>
+                                            <th>Costo de pedido</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {Object.keys(groupedOrders).map((trackingNumber, index) => (
+                                            <React.Fragment key={index}>
+                                                <tr>
+                                                    <td className="align-middle text-center">{trackingNumber}</td>
+                                                    <td className="align-middle text-center">{groupedOrders[trackingNumber][0].status}</td>
+                                                    <td className="align-middle text-center">{groupedOrders[trackingNumber][0].shipping_date}</td>
+                                                    <td className="align-middle text-center">{groupedOrders[trackingNumber][0].address || "N/A"}</td>
+                                                    <td className="align-middle text-center">{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(groupedOrders[trackingNumber][0].cost)}</td>
+                                                    <td>
+                                                        <button onClick={() => setExpandedOrder(expandedOrder === trackingNumber ? null : trackingNumber)} className="px-4 py-2 bg-blue-500 text-white rounded-md ml-4">
+                                                            {expandedOrder === trackingNumber ? "Cerrar" : "Ver Productos"}
+                                                        </button>
                                                     </td>
                                                 </tr>
-                                            ))}
-                                        </React.Fragment>
-                                    ))}
-                                </tbody>
-                            </table>
+                                                {expandedOrder === trackingNumber && groupedOrders[trackingNumber].map((order, i) => (
+                                                    <tr key={`expanded_${i}`}>
+                                                        <td colSpan="7">
+                                                            <div className="mt-4">
+                                                                <h3>Productos de la orden:</h3>
+                                                                <ul>
+                                                                    <li>{order.product_name} - Cantidad: {order.quantity}</li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </React.Fragment>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         )}
                     </div>
                 </div>
