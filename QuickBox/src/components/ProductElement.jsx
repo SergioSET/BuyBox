@@ -2,11 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductElement = ({ id, title, image, price }) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
   return (
     <div className="max-w-2xl bg-100">
-      <Link to={isLoggedIn ? `/shop/product/${id}` : "/login"}>
+      <Link to={`/shop/product/${id}`}>
         <div className="rounded-lg max-w-sm bg-100">
           <div className="image-container">
             <img
@@ -20,7 +18,7 @@ const ProductElement = ({ id, title, image, price }) => {
               {title}
             </h3>
             <div className="flex items-center justify-between">
-              <span className=" text-3xl font-bold text-accent-content">
+              <span className="text-3xl font-bold text-accent-content">
                 {new Intl.NumberFormat("es-CO", {
                   style: "currency",
                   currency: "COP",
@@ -36,4 +34,3 @@ const ProductElement = ({ id, title, image, price }) => {
 };
 
 export default ProductElement;
-
