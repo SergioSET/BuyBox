@@ -5,6 +5,7 @@ import loadingAnimation from '/buybox.webm'; // Ajusta la ruta al archivo .webm 
 
 const HomeLayout = () => {
   const [showLogo, setShowLogo] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,13 +23,18 @@ const HomeLayout = () => {
     script.src = BASE_URL + "/packs/js/sdk.js";
     script.defer = true;
     script.async = true;
+    
+    console.log(loggedIn)
 
-    script.onload = () => {
-      window.chatwootSDK.run({
-        websiteToken: "qm8XhwyAvgUrkxo4RAKBY5gF",
-        baseUrl: BASE_URL,
-      });
-    };
+    if (loggedIn) {
+      script.onload = () => {
+        window.chatwootSDK.run({
+          websiteToken: "qm8XhwyAvgUrkxo4RAKBY5gF",
+          baseUrl: BASE_URL,
+          showLauncher: true,
+        });
+      };
+    }
 
     document.body.appendChild(script);
 
