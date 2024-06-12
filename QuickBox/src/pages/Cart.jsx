@@ -147,7 +147,7 @@ const Cart = () => {
       ) : (
         <div className='mt-8 grid gap-8 lg:grid-cols-12 max-w-7xl mx-auto px-10'>
           <div className='lg:col-span-8'>
-            <CartItemsList
+            <CartItemsList className="rounded-full bg-slate-300"
               cartItems={cartItems}
               handleRemoveItem={handleRemoveItem}
               handleUpdateCartAmount={handleUpdateCartAmount}

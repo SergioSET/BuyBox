@@ -1,7 +1,16 @@
 /* Footer.css */
+body {
+    margin: 0;
+    padding-bottom: 400px; /* Altura del footer */
+    position: relative;
+    min-height: 100vh; /* Establece la altura mínima del viewport */
+}
 
 .footer {
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     overflow: hidden; /* Asegura que el pseudo-elemento no se desborde */
 }
 
