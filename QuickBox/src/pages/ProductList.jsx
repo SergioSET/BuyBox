@@ -74,7 +74,6 @@ export default function ProductList() {
         setModalImage(null);
     };
 
-
     const modalStyles = {
         display: 'flex', // Usa flexbox para el modal
         justifyContent: 'center', // Centra horizontalmente
@@ -122,6 +121,41 @@ export default function ProductList() {
 
     return (
         <>
+            <style>
+                {`
+                    .table-scroll-container {
+                        max-height: 400px;
+                        overflow-y: auto;
+                    }
+
+                    .btn-small {
+                        padding: 5px 10px;
+                        font-size: 12px;
+                        width: auto;
+                    }
+
+                    .btn-container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 7px;
+                    }
+
+                    @media (max-width: 768px) {
+                        .btn-container {
+                            flex-direction: column;
+                            gap: 8px;
+                        }
+
+                        .btn-container button {
+                            width: 100%;
+                            margin: 7px 0;
+
+                        }
+                    }
+                `}
+            </style>
+
             <section className="relative">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <div className="pt-32 pb-12 md:pt-40 md:pb-20">
@@ -132,49 +166,50 @@ export default function ProductList() {
                             {products.length === 0 ? (
                                 <p>No hay productos disponibles.</p>
                             ) : (
-                                <table className="tabla-con-divisiones">
-                                    <thead>
-                                        <tr>
-                                            <th className="table-header" style={{ width: '15%', textAlign: 'center' }}>Nombre</th>
-                                            <th className="table-header" style={{ width: '27%', textAlign: 'center' }}>Descripción</th>
-                                            <th className="table-header" style={{ width: '16%', textAlign: 'center' }}>Imagen</th>
-                                            <th className="table-header" style={{ width: '7%', textAlign: 'center' }}>Precio</th>
-                                            <th className="table-header" style={{ width: '15%', textAlign: 'center' }}>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="table-body">
-                                        {products.map((product) => (
-                                            <tr key={product.id}>
-                                                <td>{product.name}</td>
-                                                <td>{product.description}</td>
-                                                <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>
-                                                    <button
-                                                        onClick={() => toggleImageVisibility(product.id, product.img)}
-                                                        className="btn btn-primary"
-                                                    >
-                                                        <FontAwesomeIcon icon={faEye} /> Mostrar imagen
-                                                    </button>
-                                                </td>
-                                                <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{product.price}</td>
-                                                <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                                    <button onClick={() => handleEdit(product.id)} className="btn btn-primary" style={{ marginRight: '5px' }}>
-                                                        <FontAwesomeIcon icon={faEdit} /> Editar
-                                                    </button>
-                                                    <button onClick={() => handleDelete(product.id, product.name)} className="btn btn-red" style={{ borderRadius: '0.50rem', marginRight: '5px' }}>
-                                                        <FontAwesomeIcon icon={faTrashAlt} /> Borrar
-                                                    </button>
-                                                </td>
+                                <div className="table-scroll-container">
+                                    <table className="tabla-con-divisiones">
+                                        <thead>
+                                            <tr>
+                                                <th className="table-header" style={{ width: '15%', textAlign: 'center' }}>Nombre</th>
+                                                <th className="table-header" style={{ width: '27%', textAlign: 'center' }}>Descripción</th>
+                                                <th className="table-header" style={{ width: '16%', textAlign: 'center' }}>Imagen</th>
+                                                <th className="table-header" style={{ width: '7%', textAlign: 'center' }}>Precio</th>
+                                                <th className="table-header" style={{ width: '15%', textAlign: 'center' }}>Acciones</th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody className="table-body">
+                                            {products.map((product) => (
+                                                <tr key={product.id}>
+                                                    <td>{product.name}</td>
+                                                    <td>{product.description}</td>
+                                                    <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>
+                                                        <button
+                                                            onClick={() => toggleImageVisibility(product.id, product.img)}
+                                                            className="btn btn-primary btn-small"
+                                                        >
+                                                            <FontAwesomeIcon icon={faEye} /> Mostrar imagen
+                                                        </button>
+                                                    </td>
+                                                    <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>{product.price}</td>
+                                                    <td className="btn-container">
+                                                        <button onClick={() => handleEdit(product.id)} className="btn btn-primary btn-small">
+                                                            <FontAwesomeIcon icon={faEdit} /> Editar
+                                                        </button>
+                                                        <button onClick={() => handleDelete(product.id, product.name)} className="btn btn-red btn-small">
+                                                            <FontAwesomeIcon icon={faTrashAlt} /> Borrar
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             )}
                         </div>
                     </div>
                 </div>
             </section>
 
-          
             {modalImage && (
                 <div id="myModal" style={modalStyles} onClick={closeModal}>
                     <div style={modalContentStyles} onClick={e => e.stopPropagation()}>
