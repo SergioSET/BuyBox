@@ -7,14 +7,10 @@ import {
 } from "../components";
 import "../styles/Shop.css";
 import axios from "axios";
-import { useLoaderData, redirect } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { nanoid } from "nanoid";
 
 export const shopLoader = async () => {
-  if (localStorage.getItem("isLoggedIn") !== "true") {
-    return redirect("/login");
-  }
-
   try {
     const response = await axios.get("http://localhost:3000/api/product");
     const data = response.data;
@@ -30,14 +26,16 @@ const Shop = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+}, []);
+
 
   return (
     <>
+
       <div className="max-w-7xl mx-auto mt-5">
         {productLoaderData.productsData.length === 0 && (
           <h2 className="text-accent-content text-center text-4xl my-10">
-            No se encontraron productos con este filtro
+              No se encontraron productos con este filtro
           </h2>
         )}
         <div className="shop-products-grid">
