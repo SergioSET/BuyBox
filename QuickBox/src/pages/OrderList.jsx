@@ -133,7 +133,7 @@ export default function OrderList() {
                                                         <button onClick={() => setExpandedOrder(expandedOrder === trackingNumber ? null : trackingNumber)} className="btn btn-primary" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '20px' }}>
                                                         <FontAwesomeIcon icon={faEye} />{expandedOrder === trackingNumber ? "Cerrar" : "Ver Productos"}
                                                         </button>
-                                                        <button onClick={() => handleDelete(groupedOrders[trackingNumber][0].orderId, trackingNumber, groupedOrders[trackingNumber][0].name)} className="btn btn-red" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '70px' }}>
+                                                        <button onClick={() => handleDelete(groupedOrders[trackingNumber][0].orderId, trackingNumber, groupedOrders[trackingNumber][0].name)} className="btn btn-red" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem',borderRadius: '0.55rem', marginRight: '70px' }}>
                                                             <FontAwesomeIcon icon={faTrashAlt} />Borrar Orden
                                                         </button>
                                                     </div>
