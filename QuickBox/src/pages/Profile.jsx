@@ -38,10 +38,10 @@ const Profile = () => {
       const updatedData = response.data.user[0];
       setUserData(updatedData);
       localStorage.setItem("user", JSON.stringify(updatedData));
-      toast.success("Profile updated successfully!");
+      toast.success("¡El perfil se ha actualizado exitosamente!");
     } catch (error) {
       console.error(error.response);
-      toast.error("Failed to update profile.");
+      toast.error("El perfil no se ha podido actualizar.");
     }
   };
 
@@ -55,12 +55,12 @@ const Profile = () => {
 
   return (
     <>
-      <SectionTitle title="User Profile" path="Home | User Profile" />
+      <SectionTitle title="Bienvenido a tu Perfil"/>
       <form className="max-w-7xl mx-auto text-center px-10" onSubmit={updateProfile}>
         <div className="grid grid-cols-3 max-lg:grid-cols-1">
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu nombre</span>
+              <span className="label-text">Nombre</span>
             </label>
             <input
               type="text"
@@ -74,7 +74,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu E-mail</span>
+              <span className="label-text">E-mail</span>
             </label>
             <input
               type="email"
@@ -88,7 +88,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu teléfono</span>
+              <span className="label-text">Teléfono</span>
             </label>
             <input
               type="tel"
@@ -102,7 +102,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu dirección</span>
+              <span className="label-text">Dirección</span>
             </label>
             <input
               type="text"
@@ -116,7 +116,7 @@ const Profile = () => {
 
           <div className="form-control w-full lg:max-w-xs">
             <label className="label">
-              <span className="label-text">Tu contraseña</span>
+              <span className="label-text">Contraseña</span>
             </label>
             <input
               type="password"
