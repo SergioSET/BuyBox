@@ -1,28 +1,42 @@
 import { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 const CartItem = ({ cartItem, onDelete, onEdit }) => {
   const [item, setItem] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setItem({
-      id: cartItem.id,
-      title: cartItem.name,
-      price: cartItem.price,
-      image: cartItem.img,
-      amount: cartItem.quantity,
-    });
+    // Simulate a delay for loading the item
+    setTimeout(() => {
+      setItem({
+        id: cartItem.id,
+        title: cartItem.name,
+        price: cartItem.price,
+        image: cartItem.img,
+        amount: cartItem.quantity,
+      });
+      setLoading(false); // Set loading to false after the item is set
+    }, 1000); // Adjust the timeout as needed
   }, [cartItem]);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-24 w-24">
+        <ClipLoader size={60} color={"#123abc"} loading={loading} />
+      </div>
+    );
+  }
+
   return (
-    <article
+    <div
       key={item.id}
-      className="mb-12 flex flex-col gap-y-4 sm:flex-row flex-wrap border-b border-base-300 pb-6 last:border-b-0"
+      className="mb-6 p-4 bg-gray-800 rounded-lg flex flex-col gap-y-4 sm:flex-row flex-wrap"
     >
       {/* IMAGE */}
       <img
         src={`http://localhost:5173${item.image}`}
         alt={item.title}
-        className="h-24 w-24 rounded-lg sm:h-32 sm:w-32 object-cover"
+        className="h-24 w-24 rounded-lg sm:h-32 sm:w-32 object-fill"
       />
       {/* INFO */}
       <div className="sm:ml-16 sm:w-48">
@@ -52,8 +66,10 @@ const CartItem = ({ cartItem, onDelete, onEdit }) => {
         </button>
       </div>
       {/* PRICE */}
-      <p className="font-medium sm:ml-auto text-accent-content">{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(item.price * item.amount)}</p>
-    </article>
+      <p className="font-medium sm:ml-auto text-accent-content">
+        {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(item.price * item.amount)}
+      </p>
+    </div>
   );
 };
 
