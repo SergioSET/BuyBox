@@ -27,6 +27,7 @@ const Login = () => {
       localStorage.clear();
       store.dispatch(logoutUser());
       navigate("/login");
+      window.location.reload();
     }
   }, []);
 
