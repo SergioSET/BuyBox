@@ -108,7 +108,7 @@ const ThankYou = () => {
             <li className="btn bg-blue-800 hover:bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105">
               <Link to="/locker">&rarr; Ver listado de ordenes &larr;</Link>
             </li>
-            <h1 className="text-center TitleShop">Mira nuestros otros productos</h1>
+            <h1 className="text-center">Mira nuestros otros productos</h1>
           </ul>
         </Animated>
         <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
