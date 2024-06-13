@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-custom-color {
+    background-color: #d61818; 
+    padding: 24px; /* Padding del contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    text-align: center; 
+}
+
+
+.tabla-con-divisiones-container {
+    overflow: hidden; /* Ocultar contenido que sobresale del contenedor redondeado */
+    background-color: #1d232a; /* Fondo del contenedor */
+    padding: 16px; /* Padding alrededor de la tabla */
+    margin-top: 16px; 
+    border-radius: 16px; /* Bordes redondeados del contenedor */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra alrededor del contenedor */
+}
+
+.tabla-con-divisiones {
+    width: 100%;
+    border-spacing: 0 10px; /* Espaciado entre filas */
+    text-align: center; /* Centrar todo el contenido de la tabla */
+    border-collapse: separate;
+}
+
+
+.tabla-con-divisiones th {
+    border: none; /* Eliminar bordes */
+    padding: 16px; /* Padding */
+    background-color: #000000; /* Fondo negro para los encabezados */
+    color: #ffffff; /* Color del texto */
+    text-align: center; /* Centrar el texto del encabezado */
+    margin: 0; /* Eliminar márgenes */
+}
+
+
+.tabla-con-divisiones th:first-child {
+    border-top-left-radius: 8px; /* Redondear esquina superior izquierda */
+}
+
+.tabla-con-divisiones th:last-child {
+    border-top-right-radius: 8px; /* Redondear esquina superior derecha */
+}
+
+
+.tabla-con-divisiones td {
+    border: none; /* Eliminar bordes */
+    padding: 16px; /* Padding para mejor apariencia */
+    background-color: #2d2d2d; /* Fondo de la celda */
+    color: #ffffff; /* Color del texto de las celdas */
+    vertical-align: middle; /* Alineación vertical centrada */
+}
+
+
+.tabla-con-divisiones td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.tabla-con-divisiones td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.tabla-con-divisiones tr {
+    border-radius: 8px; /* Bordes redondeados de las filas */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra alrededor de cada fila */
+}
+
+.actions-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions-cell button {
+    margin-right: 5px;
+}
+
+.btn-red {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-red:hover {
+    background-color: darkred;
+}
+
+input[type="text"] {
+    color: #ffffff; /* Color del texto del input */
+    border: 1px solid #555555; /* Borde del input */
+    border-radius: 8px; /* Bordes redondeados */
+    text-align: center; /* Centrar texto en el input */
+}
+
+input[type="text"]::placeholder {
+    color: #aaaaaa; /* Color del placeholder */
+}
+
+/* Contenedor gris */
+.bg-gray-800 {
+    background-color: #2d2d2d; /* Fondo gris oscuro */
+    padding: 24px; /* Padding del contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    text-align: center; /* Centrar texto dentro del contenedor */
+}

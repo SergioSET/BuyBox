@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    padding-bottom: 400px; /* Altura del footer */
+    position: relative;
+    min-height: 100vh; /* Establece la altura mínima del viewport */
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden; /* Asegura que el pseudo-elemento no se desborde */
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('src/assets/wallpaper_footer.png'); /* Reemplaza 'ruta/a/tu/imagen.jpg' con la ruta real de tu imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen */
+    background-position: center;
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    opacity: 0.3; /* Ajusta la opacidad según sea necesario */
+    z-index: 1;
+}
+
+.footer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.copy, .FooterLink, .grid {
+    position: relative;
+}
+
+.copy {
+    font-size: 14px;
+    color: gray;
+}
+
+.FooterLink {
+    font-size: 18px;
+    position: relative;
+    text-decoration: none; /* Desactiva el subrayado predeterminado */
+    color: grey; /* Cambia el color del texto según lo necesites */
+}
+
+.FooterLink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: grey; /* Cambia el color según lo necesites */
+    transition: width 0.3s ease, right 0.3s ease;
+}
+
+.FooterLink:hover::after {
+    width: 100%;
+    right: 0;
+}

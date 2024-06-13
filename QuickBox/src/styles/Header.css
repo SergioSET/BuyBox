@@ -1,0 +1,177 @@
+.navbar-bottom-menu{
+    padding: 20px 0px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.navbar-bottom-menu .container{
+    display: flex;
+    justify-content: center;
+    column-gap: 30px;
+
+}
+
+.topbar ul{
+    display: flex;
+    justify-content: center;
+    column-gap: 30px;
+}
+
+.topbar ul li{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    justify-content: center;
+    padding: 5px 0px;
+}
+
+.topbar{
+    padding: 20px 0px;
+}
+
+@media(max-width: 4000px){
+    .drawer-content{
+        display: none;
+    }
+
+    .drawer{
+        display: none !important;
+    }
+}
+
+@media(max-width: 650px){
+    .drawer-content{
+        display: block;
+    }
+
+    .drawer{
+        display: grid !important;
+    }
+
+    .navlinks-container{
+        display: none !important;
+    }
+
+}
+
+@media(max-width: 550px){
+    .topbar ul {
+        flex-direction: column;
+    }
+
+    .navbar{
+        flex-direction: column;
+    }
+
+}
+
+.Sbarra{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.Login {
+    font-size: 18px;
+    color: lightgrey;
+    transition: color 0.3s ease; /* Transición suave de color durante 0.3 segundos */
+    font-family: 'Nunito Sans', sans-serif;
+    border: 2px solid #2563eb;
+    padding: 10px 20px; 
+    border-radius: 20px;
+}
+
+.Login:hover {
+    color: #2563eb; /* Cambia el color al pasar el mouse por encima */
+}
+
+.Login1 {
+    font-size: 18px;
+    color: white;
+    background-color: #2596be; /* Color de fondo del botón */
+    transition: color 0.3s ease; /* Transición suave de color durante 0.3 segundos */
+    margin-left: 10px;
+    border: 2px; /* Borde del botón */
+    font-family: 'Nunito Sans', sans-serif;
+    border-radius: 20px; /* Borde redondeado */
+    padding: 10px 20px; /* Padding para un mejor aspecto del botón */
+}
+
+
+
+.NavOp {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
+}
+
+.NavOp span {
+    display: block;
+    width: 100%;
+    transition: transform 0.5s;
+}
+
+.NavOp span:nth-child(1) {
+    color: #1abc9c;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 32px;
+}
+
+.NavOp span:nth-child(2) {
+    background-color: #1abc9c;
+    height: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+}
+
+.NavOp:hover span:nth-child(1) {
+    transform: translateY(-100%);
+}
+
+.NavOp:hover span:nth-child(2) {
+    transform: translateY(-100%);
+}
+
+.NavOp::before,
+.NavOp::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    background: #2563eb;
+    transition: all 0.5s ease;
+}
+
+.NavOp::before {
+    width: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.NavOp::after {
+    width: 0;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.NavOp:hover::before,
+.NavOp:hover::after {
+    width: 50%;
+}
+
+.gif-image {
+    display: none;
+   
+  }
+  
+  .btn:hover .gif-image {
+    display: inline-block;
+   
+  }
+  

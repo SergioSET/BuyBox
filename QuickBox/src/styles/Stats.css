@@ -1,0 +1,26 @@
+/* Estilo para los contenedores individuales */
+.stat-container {
+    background-color: #212830; /* Color de fondo de cada contenedor */
+    border-radius: 8px;        /* Bordes redondeados */
+    padding: 24px;             /* Espacio interior para cada contenedor */
+    margin: 8px;               /* Espacio exterior para separar los contenedores */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para los contenedores */
+    transition: background-color 0.3s; /* Transición suave al cambiar el color */
+  }
+  
+  .stat-container:hover {
+    background-color: #181E25; /* Color de fondo al pasar el cursor */
+  }
+  
+  /* Estilo para el texto principal */
+
+  
+  /* Estilo para el texto secundario */
+  .stat {
+    color: #64748b; /* Color del texto secundario */
+    text-align: center;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size:larger;
+    font-weight: bold;
+
+  }
